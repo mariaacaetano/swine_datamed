@@ -1,0 +1,72 @@
+html, body {
+  height: 100%;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main,
+.footer {
+  margin-left: 0;
+}
+
+.app-main {
+  flex: 1;
+}
+
+#root :is(p, dd, li) {
+  font-size: 17px !important;
+}
+
+#root :is(small, dt, label) {
+  font-size: 17px !important;
+}
+
+#root :is(input, textarea, select) {
+  font-size: 17px !important;
+}
+
+#root :is(a, button) {
+  font-size: max(17px, 1em);
+}
+
+#root :is(h2, h3, strong) {
+  text-wrap: balance;
+}
+
+.footer {
+  background-color: #19381f;
+  color: white;
+  padding: 40px 80px;
+  margin-top: auto; /* empurra o footer para o bottom */
+}
+
+@media (max-width: 760px) {
+  .app-main,
+  .footer {
+    margin-left: 0;
+  }
+
+  .footer {
+    padding-bottom: 100px;
+  }
+
+  #root :is(p, dd, li) {
+    font-size: 14px !important;
+  }
+
+  #root :is(small, dt, label) {
+    font-size: 14px !important;
+  }
+
+  #root :is(input, textarea, select) {
+    font-size: 14px !important;
+  }
+
+  #root :is(a, button) {
+    font-size: max(14px, 1em);
+  }
+}

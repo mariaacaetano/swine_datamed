@@ -1,0 +1,114 @@
+Cadastro de Doenças,,,,,
+TIPO,ID,DOENÇA PADRONIZADA,AGENTE ETIOLÓGICO,SINTOMAS PADRONIZADOS,FASE COMUM
+Bacteriana,0,Brucelose,Brucella suis,Abortos; Infertilidade; Retenção de placenta; Leitões fracos ao nascimento; Perda de apetite,Reprodutores (adultos)
+Bacteriana,1,Colibacilose pós-desmame,"Escherichia coli (ETEC, EPEC, STEC)",Diarreia aquosa; Desidratação; Perda de peso; Apatia; Letargia; Perda de apetite; Diarreia,Creche (pós-desmame)
+Bacteriana,2,Disenteria suína,Brachyspira hyodysenteriae,Diarreia muco-hemorrágica; Fezes escuras; Hemorragia; Perda de peso; Desidratação; Letargia; Diarreia,Crescimento e terminação
+Bacteriana,3,Ileíte,Lawsonia intracellularis,Diarreia hemorrágica; Retardo de crescimento; Perda de peso; Letargia; Morte súbita,Crescimento e terminação
+Bacteriana,4,Leptospirose,Leptospira interrogans (diversos sorovares),Abortos; Natimortos; Febre; Icterícia; Perda de apetite; Letargia; Falhas reprodutivas,Reprodutores (adultos)
+Bacteriana,5,Meningite estreptocócica,Streptococcus suis,Tremores musculares; Convulsões; Ataxia; Desorientação; Rigidez muscular; Morte súbita,Creche
+Bacteriana,6,Salmonelose,Salmonella enterica (principalmente sorovar Typhimurium e Choleraesuis),Diarreia hemorrágica; Febre; Apatia; Desidratação; Vômito; Perda de apetite; Letargia; Pneumonia; Diarreia,Crescimento e terminação
+Bacteriana,7,Tuberculose,Mycobacterium bovis e Mycobacterium avium complex,Emagrecimento; Fraqueza; Assintomático,Terminação (adultos)
+Bacteriana,8,Pleuropneumonia,Actinobacillus pleuropneumoniae,Dispneia; Tosse; Febre alta; Letargia; Morte súbita; Pneumonia; Epistaxe,Crescimento e terminação
+Bacteriana,9,Pneumonia bacteriana secundária,"Pasteurella multocida, Trueperella pyogenes, Streptococcus suis e outras bactérias oportunistas",Tosse; Dispneia; Febre; Secreção nasal; Secreção ocular; Letargia; Baixo desempenho,Crescimento
+Bacteriana,10,Rinite atrófica,Bordetella bronchiseptica e Pasteurella multocida toxigênica,Espirros; Secreção nasal; Secreção ocular; Deformação do focinho; Retardo de crescimento; Rinite,Maternidade e creche
+Bacteriana,11,Pneumonia enzoótica suína,Mycoplasma hyopneumoniae,Tosse crônica; Dispneia; Retardo de crescimento; Letargia; Pneumonia; Sinais respiratórios,Crescimento e terminação
+Infecciosas,12,Doença de Glässer,Glaesserella parasuis (antigo Haemophilus parasuis),Febre; Dispneia; Claudicação; Artrite; Edema articular; Letargia,Creche
+Infecciosas,13,Meningite,"Diversos agentes (Streptococcus suis, Glaesserella parasuis, Escherichia coli, entre outros)",Convulsões; Desorientação; Rigidez muscular; Sinais neurológicos; Morte súbita,Creche
+Infecciosas,14,Septicemia,"Diversos agentes bacterianos (Streptococcus suis, Escherichia coli, Salmonella spp., Glaesserella parasuis, entre outros)",Morte súbita; Febre alta; Apatia intensa; Letargia; Extremidades cianóticas,Maternidade e creche
+Infecciosas,15,Artrite,"Streptococcus suis, Mycoplasma hyosynoviae, Erysipelothrix rhusiopathiae, Glaesserella parasuis",Edema articular; Claudicação,Creche e crescimento
+Infecciosas,16,Endocardite,"Erysipelothrix rhusiopathiae, Streptococcus suis, Trueperella pyogenes",Dispneia; Fraqueza; Retardo de crescimento; Letargia; Assintomático,Terminação
+Virais,17,Circovirose suína,Circovírus suíno tipo 2 (Porcine circovirus type 2 – PCV2),Emagrecimento; Diarreia; Palidez; Linfonodos aumentados; Letargia; Perda de apetite; Dermatite,Creche e crescimento
+Virais,18,Doença de Aujeszky,Herpesvírus suíno tipo 1 (Suid herpesvirus 1 – SuHV-1),Sinais neurológicos; Tremores musculares; Convulsões; Desorientação; Alta mortalidade em leitões,Todas as fases
+Virais,19,Parvovirose suína,Parvovírus suíno (Porcine parvovirus – PPV1),Falhas reprodutivas; Fetos mumificados; Retorno ao cio; Abortos,Reprodutores (gestação)
+Virais,20,Peste suína clássica,Vírus da Peste Suína Clássica (Classical swine fever virus – CSFV),Febre alta; Hemorragias cutâneas; Apatia; Letargia; Perda de apetite; Alta mortalidade,Todas as fases
+Virais,21,Rotavirose suína,"Rotavírus (principalmente grupos A, B e C)",Diarreia; Desidratação; Fraqueza; Letargia,Maternidade
+Parasitárias,22,Cisticercose,Taenia solium (forma larval: Cysticercus cellulosae),Assintomático; Leve perda de peso,Terminação
+Parasitárias,23,Sarna,Sarcoptes scabiei var. suis,Coceira intensa; Lesões cutâneas; Baixo desempenho; Inquietação; Edema,Todas as fases
+Parasitárias,24,Toxoplasmose,Toxoplasma gondii,Abortos; Leitões fracos ao nascimento; Letargia; Assintomático,Todas as fases
+Outros,25,Coccidiose suína,Cystoisospora suis (antigo Isospora suis),Diarreia; Desidratação; Retardo de crescimento; Letargia,Maternidade
+Outros,26,Febre aftosa,Vírus da Febre Aftosa (Foot-and-mouth disease virus – Aphthovirus),Febre; Vesículas orais e podais; Claudicação; Salivação intensa; Lesões cutâneas; Perda de apetite,Todas as fases
+Bacteriana,27,Actinobacilose,Actinobacillus suis,Artrite; Pneumonia,Todas as fases
+Bacteriana,28,Antraz/Carbúnculo Hemático,Bacillus anthracis,Morte súbita,Não informado no documento
+Bacteriana,29,Artrite por Mycoplasma,Mycoplasma hyosynoviae e Mycoplasma hyorhinis,Artrite,Não informado no documento
+Bacteriana,30,Bordetelose,Bordetella bronchiseptica,Pneumonia; Rinite,Não informado no documento
+Bacteriana,31,Botulismo,Clostridium botulinum (toxina botulínica),Paralisia flácida,Não informado no documento
+Bacteriana,32,Campylobacter,Campylobacter spp.,Diarreia,Não informado no documento
+Bacteriana,33,Clostridium difficile,Clostridioides difficile,Diarreia,Não informado no documento
+Bacteriana,34,Clostridium novyi,Clostridium novyi,Morte súbita; Gangrena; Celulite,Não informado no documento
+Bacteriana,35,Clostridium perfringens,Clostridium perfringens,Morte súbita; Gangrena; Celulite,Crescimento e terminação
+Bacteriana,36,Colite,Brachyspira pilosicoli (frequente),Diarreia hemorrágica; Diarreia,Creche e crescimento
+Bacteriana,37,Doença do Edema,Escherichia coli enterotoxigênica F4/F18,Morte súbita; Edema; Sinais neurológicos,Creche
+Bacteriana,38,Dermatite exsudativa,Staphylococcus hyicus,Dermatite,Maternidade
+Bacteriana,39,Erisipela,Erysipelothrix rhusiopathiae,Artrite; Lesões cutâneas,Não informado no documento
+Bacteriana,40,Infecção por Yersinia,Yersinia enterocolitica,Diarreia,Creche
+Bacteriana,41,Infecções por streptococcus,Streptococcus suis,Artrite; Pneumonia,Não informado no documento
+Bacteriana,42,Listeriose,Listeria monocytogenes,Falhas reprodutivas; Septicemia,Não informado no documento
+Bacteriana,43,MMA,Síndrome multifatorial; agentes bacterianos oportunistas,Agalaxia,Não informado no documento
+Bacteriana,44,Mycoplasma suis,Mycoplasma suis,Anemia; Agalaxia,Reprodutores
+Bacteriana,45,Pasteurelose,Pasteurella multocida,Pneumonia,Não informado no documento
+Bacteriana,46,Tétano,Clostridium tetani,Não informado no documento,Não informado no documento
+Viral,47,Citomegalovírus suíno,Suid betaherpesvirus 2,Espirros; Rinite,Não informado no documento
+Viral,48,Coronavirus respiratório suíno,Não informado no documento,Não informado no documento,Não informado no documento
+Viral,49,Deltacoronavírus,Porcine deltacoronavirus (PDCoV),Diarreia,Não informado no documento
+Viral,50,Diarreia Epidêmica Suína,Porcine epidemic diarrhea virus (PEDV),Diarreia; Vômito,Não informado no documento
+Viral,51,Diarreia viral bovina,Não informado no documento,Falhas reprodutivas,Não informado no documento
+Viral,52,Doença Vesicular do Suíno,Swine vesicular disease virus (SVDV),Não informado no documento,Não informado no documento
+Viral,53,Doença de Teschen,Teschovirus A,Não informado no documento,Não informado no documento
+Viral,54,Doença do Olho Azul,Porcine orthorubulavirus,Opacidade da córnea,Não informado no documento
+Viral,55,Ebola,Reston ebolavirus,Não informado no documento,Não informado no documento
+Viral,56,Encefalite Japonesa B,Japanese encephalitis virus,Não informado no documento,Não informado no documento
+Viral,57,Encefalomielite hemaglutinante,Porcine hemagglutinating encephalomyelitis virus,Vômito,Não informado no documento
+Viral,58,Encefalomiocardite,Encephalomyocarditis virus,Falhas reprodutivas; Miocardite,Não informado no documento
+Viral,59,Enterovirus,Não informado no documento,Não informado no documento,Não informado no documento
+Viral,60,Estomatite vesicular,Vesicular stomatitis virus,Não informado no documento,Não informado no documento
+Viral,61,Exantema Vesicular,Vesicular exanthema of swine virus,Não informado no documento,Não informado no documento
+Viral,62,Gastroenterite transmissível,Transmissible gastroenteritis virus (TGEV),Diarreia,Não informado no documento
+Viral,63,Hepatite E,Hepatitis E virus (HEV),Não informado no documento,Não informado no documento
+Viral,64,Infecção pelo vírus Nipah,Nipah virus,Sinais respiratórios,Não informado no documento
+Viral,65,Influenza Suína,Influenza A virus,Sinais respiratórios,Não informado no documento
+Viral,66,PRRS,Porcine reproductive and respiratory syndrome virus (PRRSV),Falhas reprodutivas,Não informado no documento
+Viral,67,Parainfluenza,Porcine parainfluenza virus 1,Sinais respiratórios,Não informado no documento
+Viral,68,Peste Suína Africana,African swine fever virus (ASFV),Não informado no documento,Não informado no documento
+Viral,69,Raiva,Rabies lyssavirus,Não informado no documento,Não informado no documento
+Viral,70,Senecavirus A,Senecavirus A,Não informado no documento,Não informado no documento
+Viral,71,Torque Teno Virus (TTV),Torque teno sus virus,Não informado no documento,Não informado no documento
+Viral,72,Varíola suína,Swinepox virus,Não informado no documento,Não informado no documento
+Parasitárias,73,Ascaridíase,Ascaris suum,Não informado no documento,Não informado no documento
+Parasitárias,74,Criptosporidiose,Cryptosporidium spp.,Diarreia,Não informado no documento
+Parasitárias,75,Hyostrongilose,Hyostrongylus rubidus,Não informado no documento,Não informado no documento
+Parasitárias,76,Infestação por piolhos,Haematopinus suis,Anemia,Não informado no documento
+Parasitárias,77,Metastrongilose,Metastrongylus spp.,Pneumonia,Não informado no documento
+Parasitárias,78,Tricuríase,Trichuris suis,Diarreia,Não informado no documento
+Parasitárias,79,Triquinelose,Trichinella spp.,Não informado no documento,Não informado no documento
+Deficiência Nutricional,80,Anemia Ferropriva,Não informado no documento,Anemia; Palidez,Não informado no documento
+Deficiência Nutricional,81,Deficiência de biotina,Não informado no documento,Claudicação; Alopecia; Fissuras nos cascos,Não informado no documento
+Deficiência Nutricional,82,Deficiência de vitamina E e selênio,Não informado no documento,Morte súbita,Creche
+Deficiência Nutricional,83,"Osteoporose, raquitismo, deficiência Vitamina D",Não informado no documento,Fragilidade óssea; Fraturas,Não informado no documento
+Intoxicação,84,Aflatoxicose,Não informado no documento,Não informado no documento,Não informado no documento
+Intoxicação,85,Ergotismo,Não informado no documento,Gangrena,Não informado no documento
+Intoxicação,86,Intoxicação por fumonisina,Não informado no documento,Edema; Edema pulmonar,Não informado no documento
+Intoxicação,87,Intoxicação por ionóforos,Não informado no documento,Não informado no documento,Não informado no documento
+Intoxicação,88,Intoxicação por sal,Não informado no documento,Não informado no documento,Não informado no documento
+Intoxicação,89,Intoxicação por zearalenona,Não informado no documento,Não informado no documento,Não informado no documento
+Intoxicação,90,Vomitoxicose (DON),Não informado no documento,Vômito; Retardo de crescimento; Perda de apetite,Não informado no documento
+Outros,91,Síndrome do fracasso do desenvolvimento pós-desmame,Não informado no documento,Perda de apetite; Letargia,Creche
+Outros,92,Atresia anal,Não informado no documento,Distensão abdominal,Não informado no documento
+Outros,93,Epiteliogênese imperfeita,Não informado no documento,Não informado no documento,Não informado no documento
+Outros,94,Estenose retal,Não informado no documento,Prolapso,Não informado no documento
+Outros,95,Hérnias,Não informado no documento,Não informado no documento,Não informado no documento
+Outros,96,Osteocondrose,Não informado no documento,Claudicação,Não informado no documento
+Outros,97,Pitiriase rósea,Não informado no documento,Dermatite,Não informado no documento
+Outros,98,Prolapso retal,Não informado no documento,Não informado no documento,Não informado no documento
+Outros,99,Prolapso retal e/ou vaginal,Não informado no documento,Prolapso,Reprodutores (gestação)
+Outros,100,Prolapso uterino,Não informado no documento,Não informado no documento,Não informado no documento
+Outros,101,Queimadura por baixas temperaturas,Não informado no documento,Não informado no documento,Não informado no documento
+Outros,102,Queimaduras solares,Não informado no documento,Não informado no documento,Não informado no documento
+Outros,103,Splay leg,Não informado no documento,Não informado no documento,Não informado no documento
+Outros,104,Síndrome do estresse suíno,Não informado no documento,Morte súbita,Não informado no documento
+Outros,105,Síndrome hemorrágica intestinal,Não informado no documento,Morte súbita,Não informado no documento
+Outros,106,Torção de estômago e intestino,Não informado no documento,Morte súbita,Não informado no documento
+Outros,107,Tremor congênito,Não informado no documento,Tremores musculares,Não informado no documento
+Outros,108,Trombocitopenia púrpura,Não informado no documento,Não informado no documento,Não informado no documento
+Outros,109,Vícios,Não informado no documento,Não informado no documento,Não informado no documento
+Outros,110,Úlceras gástricas,Não informado no documento,Palidez,Não informado no documento
+Outros,111,Úlceras nas articulações,Não informado no documento,Não informado no documento,Reprodutores

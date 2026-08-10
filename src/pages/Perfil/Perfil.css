@@ -1,0 +1,461 @@
+.perfil-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 64px;
+  color: white;
+  background:
+    linear-gradient(90deg, rgba(3, 6, 4, 0.96), rgba(3, 6, 4, 0.76)),
+    url("/swine_pinterest/service_diagnostico.jpg") center / cover;
+}
+
+.perfil-card {
+  width: min(920px, 100%);
+  border: 1px solid rgba(216, 111, 148, 0.16);
+  border-radius: 8px;
+  padding: 38px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 34px 70px rgba(0, 0, 0, 0.36), 0 14px 30px rgba(216, 111, 148, 0.1);
+  backdrop-filter: blur(14px);
+}
+
+.perfil-header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.perfil-avatar {
+  display: flex;
+  width: 66px;
+  height: 66px;
+  flex: 0 0 66px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(238, 243, 226, 0.38);
+  border-radius: 50%;
+  color: #f3bacb;
+  background: rgba(25, 56, 31, 0.42);
+  overflow: hidden;
+}
+
+.perfil-avatar img,
+.perfil-photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.perfil-kicker {
+  color: #d86f94;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.perfil-header h1 {
+  margin: 6px 0 4px;
+  color: white;
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1;
+}
+
+.perfil-header p,
+.perfil-loading,
+.perfil-message {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 17px;
+}
+
+.perfil-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.perfil-tabs {
+  display: inline-flex;
+  gap: 8px;
+  margin: 0 0 22px;
+  padding: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.perfil-tab {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 8px;
+  padding: 0 14px;
+  color: rgba(255, 255, 255, 0.7);
+  background: transparent;
+  font-size: 17px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.perfil-tab-active {
+  color: #19381f;
+  background: #d86f94;
+}
+
+.perfil-dashboard {
+  display: grid;
+  gap: 16px;
+}
+
+.perfil-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.perfil-dashboard-grid article,
+.perfil-dashboard-panel,
+.perfil-recent-list article {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.perfil-dashboard-grid article {
+  display: grid;
+  gap: 7px;
+  padding: 16px;
+}
+
+.perfil-dashboard-grid svg {
+  color: #f3bacb;
+}
+
+.perfil-dashboard-grid span,
+.perfil-recent-list span,
+.perfil-dashboard-panel p {
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 17px;
+}
+
+.perfil-dashboard-grid strong {
+  color: white;
+  font-size: 30px;
+}
+
+.perfil-dashboard-panel {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  padding: 18px;
+}
+
+.perfil-dashboard-panel h2 {
+  margin: 0 0 6px;
+  color: white;
+  font-size: 24px;
+}
+
+.perfil-dashboard-panel p {
+  margin: 0;
+}
+
+.perfil-recent-list {
+  display: grid;
+  gap: 10px;
+}
+
+.perfil-recent-list article {
+  display: grid;
+  gap: 5px;
+  padding: 14px;
+}
+
+.perfil-recent-list strong {
+  color: white;
+  font-size: 18px;
+}
+
+.perfil-public-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  padding: 34px 52px 36px;
+  color: white;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 58px rgba(0, 0, 0, 0.24);
+}
+
+.perfil-public-card::before {
+  content: "";
+  position: absolute;
+  left: -120px;
+  bottom: -132px;
+  width: 310px;
+  height: 220px;
+  opacity: 0.12;
+  background:
+    linear-gradient(115deg, transparent 0 46%, #f3bacb 47% 48%, transparent 49%),
+    linear-gradient(62deg, transparent 0 52%, #f3bacb 53% 54%, transparent 55%);
+  background-size: 38px 38px;
+  transform: rotate(-10deg);
+}
+
+.perfil-public-lines {
+  position: relative;
+  display: grid;
+  gap: 18px;
+  width: min(640px, 100%);
+  margin: 0;
+}
+
+.perfil-public-lines div {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.perfil-public-lines strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  font-size: 17px;
+}
+
+.perfil-public-lines strong svg {
+  color: #d86f94;
+}
+
+.perfil-public-lines span {
+  min-width: 0;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 17px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.perfil-editor {
+  display: grid;
+  gap: 18px;
+}
+
+.perfil-photo-field {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 86px;
+  border: 1px dashed rgba(243, 186, 203, 0.42);
+  border-radius: 8px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+}
+
+.perfil-photo-preview {
+  display: flex;
+  width: 58px;
+  height: 58px;
+  flex: 0 0 58px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+  color: #f3bacb;
+  background: rgba(25, 56, 31, 0.52);
+}
+
+.perfil-photo-field strong,
+.perfil-photo-field small {
+  display: block;
+}
+
+.perfil-photo-field strong {
+  color: white;
+  font-size: 18px;
+}
+
+.perfil-photo-field small {
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.64);
+  font-size: 17px;
+}
+
+.perfil-photo-field input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.perfil-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.perfil-field {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.perfil-field span {
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.perfil-field input,
+.perfil-field select {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid rgba(216, 111, 148, 0.18);
+  border-radius: 8px;
+  outline: 0;
+  padding: 0 14px;
+  color: #19381f;
+  background: rgba(255, 255, 255, 0.92);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.perfil-field input:focus,
+.perfil-field select:focus {
+  border-color: #d86f94;
+  box-shadow: 0 0 0 3px rgba(216, 111, 148, 0.16);
+}
+
+.perfil-field-small {
+  max-width: 140px;
+}
+
+.perfil-item {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.perfil-item svg {
+  color: #f3bacb;
+}
+
+.perfil-item span {
+  color: rgba(255, 255, 255, 0.64);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.perfil-item strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: white;
+  font-size: 18px;
+}
+
+.perfil-message {
+  margin-top: 18px;
+  color: #f3bacb;
+  font-weight: 800;
+}
+
+.perfil-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 28px;
+}
+
+.perfil-secondary,
+.perfil-logout {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 8px;
+  padding: 0 18px;
+  font-size: 17px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.perfil-secondary {
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.perfil-logout {
+  border: 0;
+  color: #19381f;
+  background: #d86f94;
+  cursor: pointer;
+}
+
+.perfil-logout:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+@media (max-width: 820px) {
+  .perfil-page {
+    padding: 28px 18px 96px;
+  }
+
+  .perfil-card {
+    padding: 28px;
+  }
+
+  .perfil-header {
+    align-items: flex-start;
+  }
+
+  .perfil-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .perfil-dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .perfil-dashboard-panel {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .perfil-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .perfil-photo-field {
+    align-items: flex-start;
+  }
+
+  .perfil-public-card {
+    padding: 32px 24px;
+  }
+
+  .perfil-public-lines div {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 560px) {
+  .perfil-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}

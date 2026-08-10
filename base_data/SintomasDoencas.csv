@@ -1,0 +1,81 @@
+Si,,
+ID,SINTOMA PADRONIZADO,DOENÇAS ASSOCIADAS PADRONIZADAS
+1,Abortos,"Brucelose, Leptospirose, Parvovirose suína, Toxoplasmose"
+2,Agalaxia,"MMA, Mycoplasma suis"
+3,Alopecia,Deficiência de biotina
+4,Alta mortalidade,Peste suína clássica
+5,Alta mortalidade em leitões,Doença de Aujeszky
+6,Anemia,"Anemia Ferropriva, Infestação por piolhos, Mycoplasma suis"
+7,Apatia,"Colibacilose pós-desmame, Peste suína clássica, Salmonelose"
+8,Apatia intensa,Septicemia
+9,Artrite,"Actinobacilose, Artrite por Mycoplasma, Doença de Glässer, Erisipela, Infecções por streptococcus"
+10,Assintomático,"Cisticercose, Endocardite, Toxoplasmose, Tuberculose"
+11,Ataxia,Meningite estreptocócica
+12,Baixo desempenho,"Pneumonia bacteriana secundária, Sarna"
+13,Celulite,"Clostridium novyi, Clostridium perfringens"
+14,Claudicação,"Artrite, Deficiência de biotina, Doença de Glässer, Febre aftosa, Osteocondrose"
+15,Coceira intensa,Sarna
+16,Convulsões,"Doença de Aujeszky, Meningite, Meningite estreptocócica"
+17,Deformação do focinho,Rinite atrófica
+18,Dermatite,"Circovirose suína, Dermatite exsudativa, Pitiriase rósea"
+19,Desidratação,"Coccidiose suína, Colibacilose pós-desmame, Disenteria suína, Rotavirose suína, Salmonelose"
+20,Desorientação,"Doença de Aujeszky, Meningite, Meningite estreptocócica"
+21,Diarreia,"Campylobacter, Circovirose suína, Clostridium difficile, Coccidiose suína, Colibacilose pós-desmame, Colite, Criptosporidiose, Deltacoronavírus, Diarreia Epidêmica Suína, Disenteria suína, Gastroenterite transmissível, Infecção por Yersinia, Rotavirose suína, Salmonelose, Tricuríase"
+22,Diarreia aquosa,Colibacilose pós-desmame
+23,Diarreia hemorrágica,"Colite, Ileíte, Salmonelose"
+24,Diarreia muco-hemorrágica,Disenteria suína
+25,Dispneia,"Doença de Glässer, Endocardite, Pleuropneumonia, Pneumonia bacteriana secundária, Pneumonia enzoótica suína"
+26,Distensão abdominal,Atresia anal
+27,Edema,"Doença do Edema, Intoxicação por fumonisina, Sarna"
+28,Edema articular,"Artrite, Doença de Glässer"
+29,Edema pulmonar,Intoxicação por fumonisina
+30,Emagrecimento,"Circovirose suína, Tuberculose"
+31,Epistaxe,Pleuropneumonia
+32,Espirros,"Citomegalovírus suíno, Rinite atrófica"
+33,Extremidades cianóticas,Septicemia
+34,Falhas reprodutivas,"Diarreia viral bovina, Encefalomiocardite, Leptospirose, Listeriose, PRRS, Parvovirose suína"
+35,Febre,"Doença de Glässer, Febre aftosa, Leptospirose, Pneumonia bacteriana secundária, Salmonelose"
+36,Febre alta,"Peste suína clássica, Pleuropneumonia, Septicemia"
+37,Fetos mumificados,Parvovirose suína
+38,Fezes escuras,Disenteria suína
+39,Fissuras nos cascos,Deficiência de biotina
+40,Fragilidade óssea,"Osteoporose, raquitismo, deficiência Vitamina D"
+41,Fraqueza,"Endocardite, Rotavirose suína, Tuberculose"
+42,Fraturas,"Osteoporose, raquitismo, deficiência Vitamina D"
+43,Gangrena,"Clostridium novyi, Clostridium perfringens, Ergotismo"
+44,Hemorragia,Disenteria suína
+45,Hemorragias cutâneas,Peste suína clássica
+46,Icterícia,Leptospirose
+47,Infertilidade,Brucelose
+48,Inquietação,Sarna
+49,Leitões fracos ao nascimento,"Brucelose, Toxoplasmose"
+50,Lesões cutâneas,"Erisipela, Febre aftosa, Sarna"
+51,Letargia,"Circovirose suína, Coccidiose suína, Colibacilose pós-desmame, Disenteria suína, Doença de Glässer, Endocardite, Ileíte, Leptospirose, Peste suína clássica, Pleuropneumonia, Pneumonia bacteriana secundária, Pneumonia enzoótica suína, Rotavirose suína, Salmonelose, Septicemia, Síndrome do fracasso do desenvolvimento pós-desmame, Toxoplasmose"
+52,Leve perda de peso,Cisticercose
+53,Linfonodos aumentados,Circovirose suína
+54,Miocardite,Encefalomiocardite
+55,Morte súbita,"Antraz/Carbúnculo Hemático, Clostridium novyi, Clostridium perfringens, Deficiência de vitamina E e selênio, Doença do Edema, Ileíte, Meningite, Meningite estreptocócica, Pleuropneumonia, Septicemia, Síndrome do estresse suíno, Síndrome hemorrágica intestinal, Torção de estômago e intestino"
+56,Natimortos,Leptospirose
+57,Opacidade da córnea,Doença do Olho Azul
+58,Palidez,"Anemia Ferropriva, Circovirose suína, Úlceras gástricas"
+59,Paralisia flácida,Botulismo
+60,Perda de apetite,"Brucelose, Circovirose suína, Colibacilose pós-desmame, Febre aftosa, Leptospirose, Peste suína clássica, Salmonelose, Síndrome do fracasso do desenvolvimento pós-desmame, Vomitoxicose (DON)"
+61,Perda de peso,"Colibacilose pós-desmame, Disenteria suína, Ileíte"
+62,Pneumonia,"Actinobacilose, Bordetelose, Infecções por streptococcus, Metastrongilose, Pasteurelose, Pleuropneumonia, Pneumonia enzoótica suína, Salmonelose"
+63,Prolapso,"Estenose retal, Prolapso retal e/ou vaginal"
+64,Retardo de crescimento,"Coccidiose suína, Endocardite, Ileíte, Pneumonia enzoótica suína, Rinite atrófica, Vomitoxicose (DON)"
+65,Retenção de placenta,Brucelose
+66,Retorno ao cio,Parvovirose suína
+67,Rigidez muscular,"Meningite, Meningite estreptocócica"
+68,Rinite,"Bordetelose, Citomegalovírus suíno, Rinite atrófica"
+69,Salivação intensa,Febre aftosa
+70,Secreção nasal,"Pneumonia bacteriana secundária, Rinite atrófica"
+71,Secreção ocular,"Pneumonia bacteriana secundária, Rinite atrófica"
+72,Septicemia,Listeriose
+73,Sinais neurológicos,"Doença de Aujeszky, Doença do Edema, Meningite"
+74,Sinais respiratórios,"Infecção pelo vírus Nipah, Influenza Suína, Parainfluenza, Pneumonia enzoótica suína"
+75,Tosse,"Pleuropneumonia, Pneumonia bacteriana secundária"
+76,Tosse crônica,Pneumonia enzoótica suína
+77,Tremores musculares,"Doença de Aujeszky, Meningite estreptocócica, Tremor congênito"
+78,Vesículas orais e podais,Febre aftosa
+79,Vômito,"Diarreia Epidêmica Suína, Encefalomielite hemaglutinante, Salmonelose, Vomitoxicose (DON)"

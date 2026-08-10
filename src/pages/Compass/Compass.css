@@ -1,0 +1,251 @@
+.compass {
+  min-height: 100%;
+  padding: 0 0 80px;
+  background: #000000;
+  color: white;
+}
+
+.compass-stage {
+  display: block;
+}
+
+.compass-card {
+  width: 100%;
+  min-height: 100vh;
+  --compass-mobile-copy-offset: 0px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+  padding: 34px 56px 22vh clamp(126px, 11vw, 166px);
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, #000000 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.72) 38%, rgba(0, 0, 0, 0.18) 72%);
+  box-shadow: 0 42px 82px rgba(0, 0, 0, 0.54);
+  isolation: isolate;
+}
+
+.compass-card::before {
+  content: "";
+  position: absolute;
+  inset: -14% -10% -10%;
+  z-index: -2;
+  background: url("/swine_pinterest/pig_compass.jpg") center 42% / cover;
+  filter: saturate(0.76) brightness(0.72);
+  transform: translateY(var(--compass-shift, 0));
+  will-change: transform;
+}
+
+.compass-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 82% 24%, rgba(244, 245, 238, 0.08), transparent 26%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.56)),
+    rgba(0, 0, 0, calc(0.16 + var(--compass-fade, 0)));
+  pointer-events: none;
+}
+
+.compass-card__fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  z-index: 1;
+  height: 64vh;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.12) 16%,
+      rgba(0, 0, 0, 0.34) 34%,
+      rgba(0, 0, 0, 0.68) 56%,
+      rgba(0, 0, 0, 0.92) 74%,
+      #000000 100%
+    );
+  pointer-events: none;
+}
+
+.compass-copy {
+  position: relative;
+  z-index: 3;
+  width: min(520px, 58%);
+  margin-top: 24vh;
+  text-align: left;
+  transform: translateY(calc(var(--compass-copy-shift, 0) + var(--compass-mobile-copy-offset, 0px)));
+  will-change: transform;
+}
+
+.compass-copy span {
+  display: block;
+  margin-bottom: 12px;
+  color: #f4f5ee;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.compass-copy h1 {
+  margin: 0;
+  color: white;
+  font-size: clamp(48px, 6vw, 82px);
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+.compass-copy p {
+  max-width: 430px;
+  margin: 22px 0 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.compass-main-action {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 30px;
+  border: 0;
+  border-bottom: 4px solid white;
+  color: white;
+  background: transparent;
+  font-size: 17px;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.compass-main-action svg {
+  color: #f4f5ee;
+}
+
+.compass-info {
+  width: min(1120px, 100%);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin: 48px auto 0;
+}
+
+.compass-info article {
+  position: relative;
+  overflow: hidden;
+  min-height: 190px;
+  padding: 24px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(244, 245, 238, 0.12);
+  box-shadow: 0 24px 46px rgba(0, 0, 0, 0.42);
+}
+
+.compass-info article::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: linear-gradient(180deg, #f3bacb 0%, #658f6d 100%);
+}
+
+.compass-info article::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 92px;
+  height: 92px;
+  background: radial-gradient(circle at 100% 0%, rgba(243, 186, 203, 0.18), rgba(101, 143, 109, 0.1) 38%, transparent 70%);
+  pointer-events: none;
+}
+
+.compass-info svg {
+  color: #f3bacb;
+  filter: drop-shadow(0 8px 14px rgba(243, 186, 203, 0.16));
+}
+
+.compass-info article:nth-child(even) svg {
+  color: #658f6d;
+  filter: drop-shadow(0 8px 14px rgba(101, 143, 109, 0.18));
+}
+
+.compass-info article:nth-child(even)::before {
+  background: linear-gradient(180deg, #658f6d 0%, #f3bacb 100%);
+}
+
+.compass-info h2 {
+  margin: 18px 0 10px;
+  color: white;
+  font-size: 17px;
+}
+
+.compass-info p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 1024px) {
+  .compass {
+    padding: 0 0 64px;
+  }
+
+  .compass-card {
+    min-height: 100vh;
+    padding: 34px 30px 20vh 116px;
+  }
+
+  .compass-copy {
+    width: min(500px, 66%);
+  }
+
+  .compass-info {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .compass {
+    padding: 0 0 48px;
+  }
+
+  .compass-card {
+    min-height: 820px;
+    --compass-mobile-copy-offset: 280px;
+    padding: 34px 18px 150px;
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.72) 48%, rgba(0, 0, 0, 0.24) 100%),
+      url("/swine_pinterest/pig_compass.jpg");
+    background-size: cover;
+    background-position: center 42%;
+  }
+
+  .compass-copy {
+    width: 100%;
+    margin-top: 86px;
+    text-align: left;
+  }
+
+  .compass-copy h1 {
+    font-size: 42px;
+  }
+
+  .compass-info {
+    width: calc(100% - 36px);
+    grid-template-columns: 1fr;
+  }
+}

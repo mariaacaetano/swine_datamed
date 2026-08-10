@@ -1,0 +1,32 @@
+Variáveis para avaliação clínica,,,
+MEDICAMENTO,DOENÇA/INDICAÇÃO PADRONIZADA,TIPO,PRIORIDADE
+Draxxin,Pleuropneumonia,Tratamento,1
+Draxxin,Pneumonia enzoótica suína,Tratamento,1
+Draxxin,Pasteurelose,Tratamento,1
+Draxxin,Doenças respiratórias suínas,Tratamento,1
+Resolutor,Pneumonia enzoótica suína,Tratamento,1
+Resolutor,Doença de Glässer,Tratamento,1
+Resolutor,Colibacilose,Tratamento,1
+Resolutor,Salmonelose,Tratamento,1
+Resolutor,Erisipela,Tratamento,1
+Resolutor,Meningite estreptocócica,Tratamento,1
+Solucef PPU,Pasteurelose,Tratamento,1
+Solucef PPU,Salmonelose,Tratamento,1
+Solucef PPU,Infecção por Streptococcus suis,Tratamento,1
+Roflin,Pneumonias,Tratamento,1
+Roflin,Pododermatites,Tratamento,1
+Roflin,Metrites,Tratamento,1
+Agroplus,Infecções respiratórias,Tratamento,1
+Agroplus,Infecções gastrointestinais,Tratamento,1
+Agroplus,Infecções geniturinárias,Tratamento,1
+Agroplus,Infecções articulares,Tratamento,1
+Agroplus,Infecções cutâneas,Tratamento,1
+Dornil,Febre,Tratamento,1
+Dornil,Dor muscular,Tratamento,1
+Dornil,Dor articular,Tratamento,1
+Dornil,Dor visceral,Tratamento,1
+Dornil,Cólicas,Tratamento,1
+Pulmodrazin Plus,Infecções bacterianas (conforme protocolo),Tratamento,1
+Flusure Pandemic,Influenza suína (prevenção),Prevenção,
+Fostera Gold,Circovirose suína (prevenção),Prevenção,
+Fostera Gold,Pneumonia enzoótica suína (prevenção),Prevenção,

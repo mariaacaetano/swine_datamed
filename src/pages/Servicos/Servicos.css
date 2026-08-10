@@ -1,0 +1,217 @@
+.services-page {
+  min-height: 100%;
+  padding: 0 0 78px;
+  background: #000000;
+  color: #f4f5ee;
+}
+
+.services-dashboard {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.08fr 0.9fr 0.82fr;
+  gap: 24px;
+  margin: 0;
+  align-items: start;
+  transform: translateY(var(--cards-shift, 0));
+  will-change: transform;
+}
+
+.services-feature,
+.services-cards a {
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(244, 245, 238, 0.12);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.42);
+}
+
+.services-feature {
+  grid-column: span 3;
+  min-height: 100vh;
+  --services-mobile-copy-offset: 0px;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 28px;
+  padding: 34px 56px 22vh clamp(126px, 11vw, 166px);
+  border-radius: 0;
+  border: 0;
+  color: white;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0%, #000000 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.56)),
+    url("/swine_pinterest/service_diagnostico.jpg");
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: normal, multiply;
+  transform: translateY(var(--feature-shift, 0));
+  will-change: transform;
+}
+
+.services-feature > div {
+  transform: translateY(var(--services-mobile-copy-offset, 0px));
+}
+
+.services-feature span {
+  display: block;
+  margin-bottom: 16px;
+  color: #f3bacb;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.services-feature h1 {
+  max-width: 760px;
+  margin: 0;
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 0.96;
+}
+
+.services-feature p {
+  max-width: 610px;
+  margin: 22px 0 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.services-feature a {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 18px;
+  border-radius: 8px;
+  color: #19381f;
+  background: #f3bacb;
+  font-weight: 900;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.services-cards svg {
+  color: #d86f94;
+  filter: drop-shadow(0 8px 14px rgba(216, 111, 148, 0.2));
+}
+
+.services-cards strong {
+  margin: 0 0 6px;
+  color: #f4f5ee;
+  font-size: 17px;
+}
+
+.services-cards p {
+  margin: 0;
+  color: rgba(244, 245, 238, 0.7);
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+.services-cards {
+  grid-column: span 3;
+  width: min(1120px, calc(100% - 128px));
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 48px auto 0;
+}
+
+.services-cards a {
+  position: relative;
+  overflow: hidden;
+  min-height: 238px;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 24px;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.services-cards a::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: linear-gradient(180deg, #f3bacb 0%, #658f6d 100%);
+}
+
+.services-cards a::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 92px;
+  height: 92px;
+  background: radial-gradient(circle at 100% 0%, rgba(243, 186, 203, 0.18), rgba(101, 143, 109, 0.1) 38%, transparent 70%);
+  pointer-events: none;
+}
+
+.services-cards a:nth-child(even)::before {
+  background: linear-gradient(180deg, #658f6d 0%, #f3bacb 100%);
+}
+
+.services-cards a:nth-child(even) svg {
+  color: #658f6d;
+  filter: drop-shadow(0 8px 14px rgba(101, 143, 109, 0.18));
+}
+
+.services-cards a:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 50px rgba(0, 0, 0, 0.24), 0 12px 26px rgba(216, 111, 148, 0.16);
+}
+
+.services-cards a > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  color: #f3bacb;
+  font-weight: 900;
+}
+
+@media (max-width: 1100px) {
+  .services-dashboard {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .services-feature,
+  .services-cards {
+    grid-column: span 2;
+  }
+
+}
+
+@media (max-width: 760px) {
+  .services-page {
+    padding: 0 0 96px;
+  }
+
+  .services-dashboard,
+  .services-feature,
+  .services-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .services-feature,
+  .services-cards {
+    grid-column: auto;
+  }
+
+  .services-feature {
+    min-height: 760px;
+    --services-mobile-copy-offset: 180px;
+    padding: 34px 18px 150px;
+  }
+
+  .services-cards {
+    width: calc(100% - 36px);
+  }
+
+  .services-feature a {
+    width: fit-content;
+  }
+}

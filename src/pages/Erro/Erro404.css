@@ -1,0 +1,159 @@
+.error-page {
+  min-height: 100vh;
+  padding: 54px 46px 54px 112px;
+  display: grid;
+  place-items: center;
+  color: white;
+  background:
+    linear-gradient(90deg, rgba(3, 6, 4, 0.96), rgba(3, 6, 4, 0.72)),
+    url("/swine_pinterest/service_bulario.jpg") center / cover;
+}
+
+.error-shell {
+  width: min(1040px, 100%);
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.75fr);
+  gap: 26px;
+  align-items: center;
+  border: 1px solid rgba(216, 111, 148, 0.16);
+  border-radius: 8px;
+  padding: 28px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 58px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(14px);
+}
+
+.error-copy {
+  min-width: 0;
+}
+
+.error-kicker {
+  color: #d86f94;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.error-copy h1 {
+  margin: 12px 0 12px;
+  font-size: clamp(42px, 6vw, 76px);
+  line-height: 0.98;
+}
+
+.error-copy p {
+  width: min(620px, 100%);
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 18px;
+  font-weight: 750;
+  line-height: 1.6;
+}
+
+.error-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.error-primary,
+.error-secondary {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 8px;
+  padding: 0 18px;
+  font-size: 17px;
+  font-weight: 900;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.error-primary {
+  border: 0;
+  color: #19381f;
+  background: #d86f94;
+}
+
+.error-secondary {
+  border: 1px solid rgba(243, 186, 203, 0.34);
+  color: #f3bacb;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.error-visual {
+  position: relative;
+  min-height: 330px;
+  overflow: hidden;
+  border: 1px solid rgba(216, 111, 148, 0.18);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.24);
+}
+
+.error-visual img {
+  width: 100%;
+  height: 100%;
+  min-height: 330px;
+  display: block;
+  object-fit: cover;
+}
+
+.error-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 20%, rgba(0, 0, 0, 0.62));
+}
+
+.error-visual div {
+  position: absolute;
+  z-index: 1;
+  right: 18px;
+  bottom: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(243, 186, 203, 0.24);
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: #f3bacb;
+  background: rgba(3, 6, 4, 0.76);
+}
+
+.error-visual strong {
+  color: white;
+  font-size: 36px;
+  line-height: 1;
+}
+
+@media (max-width: 900px) {
+  .error-page {
+    padding: 28px 18px 96px;
+  }
+
+  .error-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .error-visual {
+    min-height: 240px;
+    order: -1;
+  }
+
+  .error-visual img {
+    min-height: 240px;
+  }
+}
+
+@media (max-width: 520px) {
+  .error-shell {
+    padding: 20px;
+  }
+
+  .error-actions {
+    display: grid;
+  }
+}

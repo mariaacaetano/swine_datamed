@@ -1,0 +1,22 @@
+Cadastro de Vacinas,,,,,,,,,,,,,,,,,,
+ID,Nome comercial,Tipo,Doenças prevenidas,Agente(s)-alvo,Categoria,Fase indicada,Idade recomendada,Dose,Via,Número de doses,Intervalo/Reforço,Início da imunidade,Duração da imunidade,Carência,Armazenamento,Contraindicações,Reações adversas,Observações
+1,Flusure Pandemic,Vacina inativada,Influenza suína,Influenza A,Viral,"Matrizes, Reprodutores",Conforme protocolo,Conforme bula,IM,2,3-4 semanas (quando aplicável),Conforme bula,Conforme bula,Conforme bula,2–8 °C,Animais doentes ou febris,"Edema local, reação transitória",Seguir protocolo da granja
+2,Fostera Gold,Vacina,Circovirose suína + Micoplasmose,PCV2; Mycoplasma hyopneumoniae,Viral/Bacteriana,Leitões e reposição,Conforme protocolo,Conforme bula,IM,1 ou 2,Conforme fabricante,Conforme bula,Conforme bula,Conforme bula,2–8 °C,Animais doentes ou febris,Dor local leve,Não congelar
+3,,,,,,,,,,,,,,,,,,
+4,,,,,,,,,,,,,,,,,,
+5,,,,,,,,,,,,,,,,,,
+6,,,,,,,,,,,,,,,,,,
+7,,,,,,,,,,,,,,,,,,
+8,,,,,,,,,,,,,,,,,,
+9,,,,,,,,,,,,,,,,,,
+10,,,,,,,,,,,,,,,,,,
+11,,,,,,,,,,,,,,,,,,
+12,,,,,,,,,,,,,,,,,,
+13,,,,,,,,,,,,,,,,,,
+14,,,,,,,,,,,,,,,,,,
+15,,,,,,,,,,,,,,,,,,
+16,,,,,,,,,,,,,,,,,,
+17,,,,,,,,,,,,,,,,,,
+18,,,,,,,,,,,,,,,,,,
+19,,,,,,,,,,,,,,,,,,
+20,,,,,,,,,,,,,,,,,,
