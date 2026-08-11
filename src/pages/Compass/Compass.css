@@ -118,6 +118,18 @@
   cursor: pointer;
 }
 
+.compass-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+}
+
+.compass-main-action--secondary {
+  border-bottom-color: #658f6d;
+  color: rgba(255, 255, 255, 0.86);
+}
+
 .compass-main-action svg {
   color: #f4f5ee;
 }

@@ -17,6 +17,7 @@ import Servicos from "./pages/Servicos/Servicos.jsx"
 import Calc from "./pages/Calc/Calc.jsx"
 import Sobre from "./pages/Sobre/Sobre.jsx"
 import Chat from "./pages/Chat/Chat.jsx"
+import Comparacao from "./pages/Comparacao/Comparacao.jsx"
 import Error404 from "./pages/Erro/Erro404.jsx"
 
 function ScrollToTop() {
@@ -94,6 +95,7 @@ function App() {
           <Route path="/bulario/:slug" element={<Bulario />} />
           <Route path="/compass" element={<Compass />} />
           <Route path="/chat" element={<Chat />} />
+          <Route path="/comparacao" element={<Comparacao />} />
           <Route path="/calc" element={<Calc />} />
           <Route path="/sobre" element={<Sobre />} />
           <Route path="*" element={<Error404 />} />

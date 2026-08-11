@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
-import { Activity, ChevronRight, ClipboardList, HeartPulse, ShieldCheck } from "lucide-react"
+import { Activity, BarChart3, ChevronRight, ClipboardList, HeartPulse, ShieldCheck } from "lucide-react"
 import "./Compass.css"
 
 function Compass() {
@@ -75,10 +75,16 @@ function Compass() {
               Uma jornada guiada para observar sintomas, organizar sinais clínicos e
               encontrar possíveis caminhos de cuidado para suínos.
             </p>
-            <Link to="/chat" className="compass-main-action">
-              Começar triagem
-              <ChevronRight size={22} />
-            </Link>
+            <div className="compass-actions">
+              <Link to="/chat" className="compass-main-action">
+                Começar triagem
+                <ChevronRight size={22} />
+              </Link>
+              <Link to="/comparacao" className="compass-main-action compass-main-action--secondary">
+                Painel comparativo
+                <BarChart3 size={20} />
+              </Link>
+            </div>
           </div>
 
           <div className="compass-card__fade" aria-hidden="true" />
