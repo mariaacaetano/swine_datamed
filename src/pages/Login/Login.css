@@ -17,7 +17,7 @@
   z-index: -2;
   background:
     linear-gradient(90deg, rgba(3, 6, 4, 0.98), rgba(3, 6, 4, 0.76)),
-    url("/swine_pinterest/service_diagnostico.jpg") center / cover;
+    url("/swine_pinterest/auth_profile_background.png") center / cover;
   filter: saturate(0.72) brightness(0.72);
   transform: translateY(var(--auth-bg-shift, 0));
   will-change: transform;

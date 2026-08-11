@@ -7,7 +7,7 @@
   color: white;
   background:
     linear-gradient(90deg, rgba(3, 6, 4, 0.96), rgba(3, 6, 4, 0.76)),
-    url("/swine_pinterest/service_diagnostico.jpg") center / cover;
+    url("/swine_pinterest/auth_profile_background.png") center / cover;
 }
 
 .perfil-card {

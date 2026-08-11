@@ -23,7 +23,7 @@
   z-index: -2;
   background:
     linear-gradient(90deg, rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.52)),
-    url("/swine_pinterest/about_pig.png") center / cover;
+    url("/swine_pinterest/about_hero.png") center / cover;
   filter: saturate(0.86) brightness(0.72);
   transform: translateY(var(--about-hero-shift, 0));
   will-change: transform;

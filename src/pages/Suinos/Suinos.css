@@ -4,7 +4,7 @@
   color: white;
   background:
     linear-gradient(90deg, rgba(3, 6, 4, 0.96), rgba(3, 6, 4, 0.78)),
-    url("/swine_pinterest/service_bulario.jpg") center / cover;
+    url("/swine_pinterest/services_hero.png") center / cover;
 }
 
 .suinos-shell {

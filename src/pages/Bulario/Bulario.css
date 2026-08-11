@@ -28,7 +28,7 @@
   position: absolute;
   inset: -14% -10% -10%;
   z-index: -2;
-  background: url("/swine_pinterest/service_bulario.jpg") center / cover;
+  background: url("/swine_pinterest/package_hero.png") center / cover;
   filter: saturate(0.76) brightness(0.72);
   transform: translateY(var(--package-shift, 0));
   will-change: transform;

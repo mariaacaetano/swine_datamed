@@ -45,7 +45,6 @@ function Home() {
     let revealFrame = 0
     const current = {
       heroShift: 0,
-      heroSwineShift: 0,
       heroDepthShift: 0,
       heroCopyShift: 0,
       heroFade: 0,
@@ -90,7 +89,6 @@ function Home() {
         const rect = hero.getBoundingClientRect()
         const progress = Math.min(1, Math.max(-1, (viewport / 2 - rect.top) / viewport))
         target.heroShift = progress * 42
-        target.heroSwineShift = progress * -72
         target.heroDepthShift = progress * 28
         target.heroCopyShift = progress * -26
         target.heroFade = Math.max(0, progress) * 0.34
@@ -119,7 +117,6 @@ function Home() {
 
       if (hero) {
         hero.style.setProperty("--hero-shift", `${current.heroShift.toFixed(2)}px`)
-        hero.style.setProperty("--hero-swine-shift", `${current.heroSwineShift.toFixed(2)}px`)
         hero.style.setProperty("--hero-depth-shift", `${current.heroDepthShift.toFixed(2)}px`)
         hero.style.setProperty("--hero-copy-shift", `${current.heroCopyShift.toFixed(2)}px`)
         hero.style.setProperty("--hero-fade", current.heroFade.toFixed(3))
@@ -157,7 +154,6 @@ function Home() {
     <main className="home">
       <section className="swine-hero reveal" id="sobre">
         <div className="swine-hero__layer swine-hero__layer--fundo" aria-hidden="true" />
-        <div className="swine-hero__layer swine-hero__layer--swine" aria-hidden="true" />
         <div className="swine-hero__depth" aria-hidden="true" />
 
         <div className="swine-hero__center">

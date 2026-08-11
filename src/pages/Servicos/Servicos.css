@@ -41,7 +41,7 @@
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0%, #000000 100%),
     linear-gradient(90deg, rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.56)),
-    url("/swine_pinterest/service_diagnostico.jpg");
+    url("/swine_pinterest/services_hero.png");
   background-size: cover;
   background-position: center;
   background-blend-mode: normal, multiply;
