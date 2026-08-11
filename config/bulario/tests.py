@@ -6,6 +6,7 @@ from django.conf import settings
 from django.test import TestCase
 
 from .data_pipeline import generate_clinical_dataset, generate_dataset, generate_ml_dataset, import_base_data
+from .clinical_input import extract_clinical_case
 from .models import CasoClinico, Doenca, Farmaco, Indicacao, Sintoma, Vacina, Variavel
 from .utils import clean_text, normalize, split_list
 
@@ -30,6 +31,74 @@ class DataPipelineTests(TestCase):
         self.assertEqual(Farmaco.objects.count(), 7)
         self.assertEqual(Vacina.objects.count(), 2)
         self.assertEqual(Indicacao.objects.count(), 30)
+
+    def test_comparison_endpoint_runs_all_inference_engines(self):
+        response = self.client.post(
+            "/api/comparacao-inferencia/",
+            {"texto": "tosse e febre"},
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertEqual(
+            {item["mecanismo"] for item in payload["resultados"]},
+            {"regras", "semantica", "machine_learning"},
+        )
+        self.assertTrue(all(item["metricas_sistema"]["tempo_resposta_s"] >= 0 for item in payload["resultados"]))
+
+    def test_extracts_clinical_variables_and_tolerates_small_typos(self):
+        case = extract_clinical_case(
+            "Suínco macho adulto terminacao com febre 41, vomito e diarrei 24h"
+        )
+        symptoms = {item.nome for item in case["sintomas"]}
+        self.assertIn("Febre alta", symptoms)
+        self.assertIn("Vômito", symptoms)
+        self.assertIn("Diarreia", symptoms)
+        self.assertEqual(case["variaveis"]["temperatura_corporal_c"], 41)
+        self.assertEqual(case["variaveis"]["fase_reprodutiva"], "Terminação")
+        self.assertEqual(case["variaveis"]["genero"], "Macho inteiro")
+        self.assertEqual(case["variaveis"]["duracao_categoria"], "1–3 dias")
+
+    def test_understands_common_language_expressions(self):
+        case = extract_clinical_case(
+            "Ele ficou meio caidinho, não quis a ração, parece estar puxando o ar "
+            "e as fezes ficaram bem aguadas."
+        )
+        symptoms = {item.nome for item in case["sintomas"]}
+        self.assertIn("Apatia", symptoms)
+        self.assertIn("Perda de apetite", symptoms)
+        self.assertIn("Dispneia", symptoms)
+        self.assertIn("Diarreia aquosa", symptoms)
+        self.assertIn("Dispneia", case["sintomas_incertos"])
+
+    def test_negated_symptom_is_not_used_as_positive_evidence(self):
+        case = extract_clinical_case("O suíno não está com febre e não apresentou vômito.")
+        symptoms = {item.nome for item in case["sintomas"]}
+        self.assertNotIn("Febre", symptoms)
+        self.assertNotIn("Vômito", symptoms)
+        self.assertIn("Febre", case["sintomas_negados"])
+        self.assertIn("Vômito", case["sintomas_negados"])
+
+    def test_triage_asks_discriminative_question_and_understands_short_answer(self):
+        first = self.client.post(
+            "/api/triagem/",
+            {"texto": "leitão macho não quis a ração há 2 dias, febre de 40 e está caidinho",
+             "mecanismo": "regras"},
+            content_type="application/json",
+        ).json()
+        self.assertIsNotNone(first["pergunta_complementar"])
+        asked = first["pergunta_complementar"]["sintoma"]
+
+        second_response = self.client.post(
+            "/api/triagem/",
+            {"texto": "não", "mecanismo": "regras", "contexto_clinico": first["contexto_clinico"],
+             "sintoma_perguntado": asked},
+            content_type="application/json",
+        )
+        self.assertEqual(second_response.status_code, 200)
+        second = second_response.json()
+        self.assertIn(asked, second["sintomas_negados"])
+        self.assertIn(f"não apresenta {asked}", second["contexto_clinico"])
 
     def test_generates_all_unique_symptom_combinations(self):
         with tempfile.TemporaryDirectory() as directory:

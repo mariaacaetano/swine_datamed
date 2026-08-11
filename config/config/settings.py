@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'bulario',
     'users.apps.UsersConfig',
     'suinos.apps.SuinosConfig',
+    'semantica.apps.SemanticaConfig',
+    'regras.apps.RegrasConfig',
+    'machine.apps.MachineConfig',
 ]
 
 MIDDLEWARE = [

@@ -19,6 +19,7 @@ config/db.sqlite3
 config/media/
 config/config/local_email_settings.py
 generated_data/
+config/machine/artifacts/*.joblib
 
 # Editor directories and files
 .vscode/*

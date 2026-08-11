@@ -21,6 +21,9 @@ from django.urls import include, path
 
 urlpatterns = [
     path('api/', include('bulario.urls')),
+    path('api/regras/', include('regras.urls')),
+    path('api/semantica/', include('semantica.urls')),
+    path('api/machine-learning/', include('machine.urls')),
     path('api/auth/', include('users.urls')),
     path('api/', include('suinos.urls')),
     path('admin/', admin.site.urls),
