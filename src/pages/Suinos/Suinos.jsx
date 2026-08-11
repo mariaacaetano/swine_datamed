@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { ArrowLeft, CalendarDays, ClipboardList, ImagePlus, Pencil, Plus, Save, Syringe, UserRound, X } from "lucide-react"
-import { buildData, normalize } from "../../data/swineKnowledge"
+import { buildData, normalize } from "../../data/catalog"
 import { getAuth } from "../../services/auth"
 import { createMedication, createPig, listMedications, listPigs, updatePig } from "../../services/suinos"
 import "./Suinos.css"

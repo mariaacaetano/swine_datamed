@@ -1,10 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from "react"
-import { Bot, Check, Clock3, Mic, Pencil, Plus, Send, ShieldCheck, Sparkles, Trash2, UserRound, X } from "lucide-react"
-import { buildData, makeReply } from "../../data/swineKnowledge"
+import { Link } from "react-router-dom"
+import { BarChart3, Bot, Check, Clock3, Mic, Pencil, Plus, Send, ShieldCheck, Sparkles, Trash2, UserRound, X } from "lucide-react"
+import InferenceModelSwitch from "../../components/InferenceModelSwitch/InferenceModelSwitch"
+import { useInferenceModel } from "../../components/InferenceModelSwitch/useInferenceModel"
+import { inferir } from "../../services/inferencia"
 import "./Chat.css"
 
 const storageKey = "swine-datamed-chats"
-const replyDelayMs = 2000
+const minimumThinkingTimeMs = 1200
 const initialMessage = {
   role: "assistant",
   text: "Olá, eu sou o Swine DataMed. Descreva os sintomas, fase produtiva, idade, temperatura e evolução do caso para eu organizar uma triagem assistida.",
@@ -43,12 +46,15 @@ function titleFromMessage(text) {
   return text.trim().slice(0, 42) || "Nova triagem"
 }
 
+function minimumThinkingTime() {
+  return new Promise((resolve) => window.setTimeout(resolve, minimumThinkingTimeMs))
+}
+
 function Chat() {
-  const data = useMemo(() => buildData(), [])
+  const [inferenceModel, setInferenceModel] = useInferenceModel()
   const initialChats = useMemo(() => loadChats(), [])
   const recognitionRef = useRef(null)
   const messagesRef = useRef(null)
-  const replyTimeoutsRef = useRef([])
   const [chats, setChats] = useState(initialChats)
   const [activeChatId, setActiveChatId] = useState(initialChats[0]?.id)
   const [input, setInput] = useState("")
@@ -58,17 +64,12 @@ function Chat() {
   const [mobileHistoryOpen, setMobileHistoryOpen] = useState(false)
   const activeChat = chats.find((chat) => chat.id === activeChatId) || chats[0]
   const messages = activeChat?.messages || [initialMessage]
+  const chatStarted = messages.some((message) => message.role === "user")
+  const activeInferenceModel = activeChat?.inferenceModel || (chatStarted ? "regras" : inferenceModel)
 
   useEffect(() => {
     localStorage.setItem(storageKey, JSON.stringify(chats))
   }, [chats])
-
-  useEffect(() => {
-    return () => {
-      replyTimeoutsRef.current.forEach((timeoutId) => clearTimeout(timeoutId))
-      replyTimeoutsRef.current = []
-    }
-  }, [])
 
   useEffect(() => {
     const list = messagesRef.current
@@ -87,42 +88,67 @@ function Chat() {
     )
   }
 
-  const sendMessage = (text = input) => {
+  const sendMessage = async (text = input) => {
     const content = text.trim()
     const chatId = activeChat?.id
     if (!content || !chatId) return
     const pendingMessage = createPendingMessage()
+    const selectedModel = activeInferenceModel
+    const clinicalContext = activeChat?.clinicalContext || ""
+    const askedSymptom = messages[messages.length - 1]?.followUpSymptom || ""
 
     updateActiveChat((chat) => {
       const shouldRename = chat.title === "Nova triagem" && chat.messages.length === 1
       return {
         ...chat,
+        inferenceModel: chat.inferenceModel || selectedModel,
         title: shouldRename ? titleFromMessage(content) : chat.title,
         messages: [...chat.messages, { role: "user", text: content }, pendingMessage],
       }
     })
     setInput("")
 
-    const timeoutId = setTimeout(() => {
+    try {
+      const [resultado] = await Promise.all([
+        inferir(content, selectedModel, { context: clinicalContext, askedSymptom }),
+        minimumThinkingTime(),
+      ])
       setChats((current) =>
         current.map((chat) =>
           chat.id === chatId
             ? {
                 ...chat,
                 updatedAt: new Date().toISOString(),
+                clinicalContext: resultado.contexto_clinico,
                 messages: chat.messages.map((message) =>
                   message.id === pendingMessage.id
-                    ? { role: "assistant", text: makeReply(content, data) }
+                    ? {
+                        role: "assistant",
+                        text: resultado.resposta,
+                        followUpSymptom: resultado.pergunta_complementar?.sintoma || "",
+                      }
                     : message
                 ),
               }
             : chat
         )
       )
-      replyTimeoutsRef.current = replyTimeoutsRef.current.filter((id) => id !== timeoutId)
-    }, replyDelayMs)
-
-    replyTimeoutsRef.current.push(timeoutId)
+    } catch (error) {
+      setChats((current) =>
+        current.map((chat) =>
+          chat.id === chatId
+            ? {
+                ...chat,
+                messages: chat.messages.map((message) =>
+                  message.id === pendingMessage.id
+                    ? { role: "assistant", text: `Não foi possível consultar o servidor: ${error.message}` }
+                    : message
+                ),
+              }
+            : chat
+        )
+      )
+    }
   }
 
   const createNewChat = () => {
@@ -225,6 +251,11 @@ function Chat() {
             Nova conversa
           </button>
 
+          <Link to="/comparacao" className="chat-compare">
+            <BarChart3 size={18} />
+            Painel comparativo
+          </Link>
+
           <div className="chat-history">
             <span>Conversas</span>
             {chats.map((chat) => (
@@ -282,6 +313,11 @@ function Chat() {
               <span>Swine Compass AI</span>
               <h1>{activeChat?.title || "Chat de apoio diagnóstico"}</h1>
             </div>
+            <InferenceModelSwitch
+              value={activeInferenceModel}
+              onChange={setInferenceModel}
+              disabled={chatStarted}
+            />
             <button
               type="button"
               className="chat-history-toggle"

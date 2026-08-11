@@ -12,7 +12,7 @@ import {
   ShieldCheck,
   Stethoscope,
 } from "lucide-react"
-import { buildData, normalize } from "../../data/swineKnowledge"
+import { buildData, normalize } from "../../data/catalog"
 import "./Bulario.css"
 
 const emptyValue = "Informação não preenchida na base atual."

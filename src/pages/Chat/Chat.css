@@ -27,7 +27,7 @@
 
 .chat-sidebar {
   display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto;
   gap: 18px;
   min-height: 0;
   padding: 20px;
@@ -62,7 +62,8 @@
   text-transform: uppercase;
 }
 
-.chat-new {
+.chat-new,
+.chat-compare {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
@@ -75,6 +76,13 @@
   font-size: 17px;
   font-weight: 900;
   cursor: pointer;
+}
+
+.chat-compare {
+  margin-top: -10px;
+  border: 1px solid rgba(244, 245, 238, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  text-decoration: none;
 }
 
 .chat-history {
@@ -384,6 +392,24 @@
     gap: 10px;
     padding: 12px 12px 10px;
     background: rgba(18, 18, 18, 0.96);
+    flex-wrap: wrap;
+  }
+
+  .chat-header .inference-switch {
+    order: 3;
+    width: 100%;
+  }
+
+  .chat-header .inference-switch legend {
+    display: none;
+  }
+
+  .chat-header .inference-switch > div {
+    width: 100%;
+  }
+
+  .chat-header .inference-switch button {
+    flex: 1;
   }
 
   .chat-header div {

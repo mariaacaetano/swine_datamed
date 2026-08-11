@@ -117,6 +117,11 @@
   padding: 14px;
 }
 
+.floating-compass__model {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(244, 245, 238, 0.1);
+}
+
 .floating-compass__message {
   margin: 0;
   white-space: pre-wrap;
@@ -135,6 +140,23 @@
 .floating-compass__message--user {
   border-left: 4px solid #f3bacb;
   background: rgba(243, 186, 203, 0.12);
+}
+
+.floating-compass__message--pending {
+  color: rgba(244, 245, 238, 0.66);
+  font-style: italic;
+  animation: floating-thinking 1.1s ease-in-out infinite;
+}
+
+@keyframes floating-thinking {
+  0%,
+  100% {
+    opacity: 0.62;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 .floating-compass__panel footer {

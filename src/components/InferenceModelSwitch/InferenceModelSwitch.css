@@ -1,0 +1,63 @@
+.inference-switch {
+  min-width: 0;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.inference-switch legend {
+  margin-bottom: 7px;
+  color: rgba(244, 245, 238, 0.64);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.inference-switch > div {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid rgba(244, 245, 238, 0.14);
+  border-radius: 9px;
+  background: rgba(0, 0, 0, 0.34);
+}
+
+.inference-switch button {
+  min-height: 34px;
+  border: 0;
+  border-radius: 7px;
+  padding: 6px 12px;
+  color: rgba(244, 245, 238, 0.66);
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.inference-switch button.is-active {
+  color: #f4f5ee;
+  background: #19381f;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
+}
+
+.inference-switch:disabled {
+  opacity: 0.72;
+}
+
+.inference-switch:disabled button {
+  cursor: not-allowed;
+}
+
+.inference-switch--compact {
+  width: 100%;
+}
+
+.inference-switch--compact > div {
+  width: 100%;
+}
+
+.inference-switch--compact button {
+  flex: 1;
+  padding-inline: 7px;
+}
