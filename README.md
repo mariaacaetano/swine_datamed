@@ -34,6 +34,35 @@ A seção correspondente da API é:
 - `GET /api/casos-clinicos/?geracao=<id>`: consulta os casos;
 - `GET /api/vacinas/`: consulta as vacinas importadas.
 
+## Mecanismos de inferência
+
+Os mecanismos são executados exclusivamente no backend e compartilham a base
+importada de `base_data`:
+
+- `config/regras/`: cobertura determinística das relações doença-sintoma;
+- `config/semantica/`: travessia do grafo Sintoma → Doença → Fármaco;
+- `config/machine/`: Bernoulli Naive Bayes sobre as combinações de sintomas.
+
+Cada mecanismo possui um endpoint próprio (`/api/regras/inferir/`,
+`/api/semantica/inferir/` e `/api/machine-learning/inferir/`). O endpoint
+`POST /api/triagem/` recebe `texto` e, opcionalmente, `mecanismo`; o padrão é
+`regras`. O frontend não executa inferência nem lê a base clínica para triar.
+
+### Treinamento de machine learning
+
+Após gerar `treino.csv`, `validacao.csv` e `teste.csv`, execute:
+
+```bash
+./venv/bin/python config/manage.py train_ml
+```
+
+O comando ajusta o pré-processamento somente no treino, compara Bernoulli Naive
+Bayes, regressão logística por SGD, árvore de decisão e Random Forest pela macro-F1
+de validação, reajusta o vencedor com treino+validação e avalia uma única vez no
+teste. O modelo fica em `config/machine/artifacts/model.joblib` e as métricas em
+`config/machine/artifacts/metrics.json`. A API expõe o estado em
+`GET /api/machine-learning/status/`.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
