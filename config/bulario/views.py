@@ -195,17 +195,22 @@ def _next_clinical_question(result):
 
 
 class ComparacaoInferenciaView(APIView):
-    """Executa a mesma entrada nos três motores e mede o custo da inferência."""
+    """Executa a mesma entrada nos quatro motores e mede o custo da inferência."""
 
     def post(self, request):
-        from machine.engine import MotorMachineLearning
+        from machine.engine import MotorMachineLearningK10, MotorMachineLearningK100
         from regras.engine import MotorRegras
         from semantica.engine import MotorSemantico
 
         texto = request.data.get("texto", "").strip()
         if not texto:
             return Response({"erro": "Informe um texto para comparação."}, status=400)
-        motores = [MotorRegras(), MotorSemantico(), MotorMachineLearning()]
+        motores = [
+            MotorRegras(),
+            MotorSemantico(),
+            MotorMachineLearningK10(),
+            MotorMachineLearningK100(),
+        ]
         resultados = []
         for motor in motores:
             inicio = perf_counter()

@@ -6,7 +6,8 @@ import "./Comparacao.css"
 const names = {
   regras: "Regras",
   semantica: "Semântica",
-  machine_learning: "Machine Learning",
+  machine_learning_k10: "Machine Learning (k=10)",
+  machine_learning_k100: "Machine Learning (k≈100)",
 }
 
 function formatSeconds(value) {
@@ -41,7 +42,7 @@ function Comparacao() {
       <header className="comparison-hero">
         <span><GitCompareArrows size={18} /> Experimentos</span>
         <h1>Painel comparativo</h1>
-        <p>Execute o mesmo caso nos três motores e compare métricas operacionais e hipóteses.</p>
+        <p>Execute o mesmo caso nos quatro motores e compare métricas operacionais e hipóteses.</p>
       </header>
 
       <form className="comparison-form" onSubmit={runComparison}>

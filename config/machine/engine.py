@@ -163,3 +163,21 @@ class MotorMachineLearning:
                 for item in farmacos
             ],
         }
+
+
+class MotorMachineLearningK10(MotorMachineLearning):
+    """Variante treinada com 10 observações por combinação clínica."""
+
+    nome = "machine_learning_k10"
+    artifact_path = Path(settings.BASE_DIR) / "machine" / "artifacts_k10" / "model.joblib"
+    _artifact = None
+    _artifact_mtime = None
+
+
+class MotorMachineLearningK100(MotorMachineLearning):
+    """Variante histórica de alta amostragem (96, apresentada como k≈100)."""
+
+    nome = "machine_learning_k100"
+    artifact_path = Path(settings.BASE_DIR) / "machine" / "artifacts" / "model.joblib"
+    _artifact = None
+    _artifact_mtime = None

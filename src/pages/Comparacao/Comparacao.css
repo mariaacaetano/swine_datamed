@@ -14,7 +14,7 @@
 .comparison-summary span, .comparison-summary strong { display: block; }
 .comparison-summary span { color: rgba(244,245,238,.62); font-size: 13px; }
 .comparison-summary strong { margin-top: 3px; font-size: 21px; }
-.comparison-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.comparison-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .comparison-card { min-width: 0; padding: 18px; border: 1px solid rgba(244,245,238,.13); border-radius: 10px; background: rgba(255,255,255,.07); }
 .comparison-card header, .comparison-card header div { display: flex; align-items: center; justify-content: space-between; gap: 9px; }
 .comparison-card h2 { margin: 0; font-size: 21px; }
