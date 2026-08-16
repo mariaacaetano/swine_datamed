@@ -56,6 +56,14 @@ Após gerar `treino.csv`, `validacao.csv` e `teste.csv`, execute:
 ./venv/bin/python config/manage.py train_ml
 ```
 
+Versões com valores diferentes de `k` podem coexistir usando diretórios próprios.
+Por exemplo, para gerar e treinar a variante `k=10` sem substituir a versão atual:
+
+```bash
+./venv/bin/python config/manage.py generate_ml_dataset --k 10 --output generated_data/machine_learning_k10
+./venv/bin/python config/manage.py train_ml --data-dir generated_data/machine_learning_k10 --artifact-dir config/machine/artifacts_k10
+```
+
 O comando ajusta o pré-processamento somente no treino, compara Bernoulli Naive
 Bayes, regressão logística por SGD, árvore de decisão e Random Forest pela macro-F1
 de validação, reajusta o vencedor com treino+validação e avalia uma única vez no
