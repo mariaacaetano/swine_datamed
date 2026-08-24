@@ -6,8 +6,10 @@ import "./Comparacao.css"
 const names = {
   regras: "Regras",
   semantica: "Semântica",
-  machine_learning_k10: "Machine Learning (k=10)",
-  machine_learning_k100: "Machine Learning (k≈100)",
+  machine_learning_k10: "Random Forest (k=10)",
+  machine_learning_k100: "Random Forest (k≈100)",
+  rede_bayesiana: "Rede Bayesiana",
+  fuzzy: "Lógica Fuzzy",
 }
 
 function formatSeconds(value) {
@@ -42,7 +44,7 @@ function Comparacao() {
       <header className="comparison-hero">
         <span><GitCompareArrows size={18} /> Experimentos</span>
         <h1>Painel comparativo</h1>
-        <p>Execute o mesmo caso nos quatro motores e compare métricas operacionais e hipóteses.</p>
+        <p>Execute o mesmo caso nos seis motores e compare métricas operacionais e hipóteses.</p>
       </header>
 
       <form className="comparison-form" onSubmit={runComparison}>
@@ -72,7 +74,8 @@ function Comparacao() {
             {comparison.resultados.map((result) => (
               <article className="comparison-card" key={result.mecanismo}>
                 <header>
-                  <div><Activity size={20} /><h2>{names[result.mecanismo]}</h2></div>
+                  <div><Activity size={20} /><h2>{names[result.mecanismo] || result.mecanismo}</h2></div>
+                  <span className="comparison-model-tag">{result.mecanismo}</span>
                   <strong><Clock3 size={16} /> {formatSeconds(result.metricas_sistema.tempo_resposta_s)} s</strong>
                 </header>
                 <dl>
@@ -81,6 +84,16 @@ function Comparacao() {
                   <div><dt>Fármacos</dt><dd>{result.metricas_sistema.farmacos_retornados}</dd></div>
                   <div><dt>Variáveis</dt><dd>{result.metricas_sistema.variaveis_reconhecidas}</dd></div>
                 </dl>
+                {result.avaliacao && <div className="comparison-evaluation">
+                  <span>Classificação: <strong>{result.avaliacao.classificacao_sintomas}</strong></span>
+                  <span>Confiança: <strong>{result.avaliacao.confianca_diagnostica}</strong></span>
+                  <span>Tratamento: <strong>{result.avaliacao.recomendacao_tratamento}</strong></span>
+                  <span>Fase: <strong>{result.avaliacao.criterios_modelo.fase_mais_adequada}</strong></span>
+                  <span>Finalidade: <strong>{result.avaliacao.criterios_modelo.finalidade}</strong></span>
+                  <span>Incerteza: <strong>{result.avaliacao.criterios_modelo.tratamento_incerteza}</strong></span>
+                  <span>Interpretabilidade: <strong>{result.avaliacao.criterios_modelo.interpretabilidade}</strong></span>
+                  <span>Adequação clínica: <strong>{result.avaliacao.criterios_modelo.adequacao_clinica}</strong></span>
+                </div>}
                 <h3>Ranking</h3>
                 {result.hipoteses.length ? (
                   <ol>{result.hipoteses.map((item) => <li key={item.id}><span>{item.nome}</span><strong>{(item.score * 100).toFixed(1)}%</strong></li>)}</ol>

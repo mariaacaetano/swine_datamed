@@ -4,6 +4,7 @@ import './App.css'
 
 import Header from './components/Header/Header.jsx'
 import FloatingCompass from './components/FloatingCompass/FloatingCompass.jsx'
+import ThemeToggle from './components/ThemeToggle/ThemeToggle.jsx'
 
 import Home from "./pages/Home/Home.jsx"
 import Login from "./pages/Login/Login.jsx"
@@ -81,6 +82,7 @@ function App() {
     <BrowserRouter>
       <ScrollToTop />
       <Header />
+      <ThemeToggle />
       <main className="app-main">
         <Routes>
           <Route path="/" element={<Home />} />

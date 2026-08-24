@@ -18,11 +18,15 @@
 .comparison-card { min-width: 0; padding: 18px; border: 1px solid rgba(244,245,238,.13); border-radius: 10px; background: rgba(255,255,255,.07); }
 .comparison-card header, .comparison-card header div { display: flex; align-items: center; justify-content: space-between; gap: 9px; }
 .comparison-card h2 { margin: 0; font-size: 21px; }
+.comparison-model-tag { display: inline-flex; align-items: center; border: 1px solid rgba(243,186,203,.45); border-radius: 999px; padding: 4px 8px; color: #f3bacb; background: rgba(243,186,203,.08); font-size: 10px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
 .comparison-card header > strong { display: inline-flex; align-items: center; gap: 5px; color: #f3bacb; font-size: 13px; }
 .comparison-card dl { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin: 18px 0; }
 .comparison-card dl div { padding: 10px 6px; border-radius: 7px; text-align: center; background: rgba(0,0,0,.3); }
 .comparison-card dt { color: rgba(244,245,238,.58); font-size: 12px; }
 .comparison-card dd { margin: 3px 0 0; font-size: 20px; font-weight: 900; }
+.comparison-evaluation { display: flex; flex-wrap: wrap; gap: 7px; margin: 4px 0 18px; }
+.comparison-evaluation span { border-radius: 999px; padding: 6px 9px; color: rgba(244,245,238,.72); background: rgba(101,143,109,.12); font-size: 11px; }
+.comparison-evaluation strong { color: #9ed8a8; text-transform: capitalize; }
 .comparison-card h3 { font-size: 14px; text-transform: uppercase; letter-spacing: .08em; }
 .comparison-card ol { margin: 0; padding-left: 22px; }
 .comparison-card li { padding: 7px 0; color: rgba(244,245,238,.8); }

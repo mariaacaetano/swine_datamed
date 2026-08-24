@@ -1,72 +1,304 @@
-html, body {
-  height: 100%;
+html, body { height: 100%; }
+#root { min-height: 100vh; display: flex; flex-direction: column; }
+.app-main, .footer { margin-left: 0; }
+.app-main { flex: 1; }
+
+:root[data-theme="light"] :is(.home,.bulario,.calc,.chat-page,.comparison-page,.compass,.services-page,.about-page,.cadastro-page,.login-page,.perfil-page,.suinos-page,.error-page) { background: var(--theme-bg) !important; color: var(--theme-text) !important; }
+:root[data-theme="light"] .app-main :is(h1,h2,h3,h4,h5,h6,p,label,legend,dt,dd,li) { color: var(--theme-text) !important; }
+:root[data-theme="light"] .app-main :is([class*="kicker"],[class*="eyebrow"],[class*="error"],.comparison-hero>span,.package-copy>span,.compass-copy>span,.calc-copy>span,.services-feature>span,.services-cards a>span,.about-hero__content>span) { color: var(--theme-accent) !important; }
+:root[data-theme="light"] .app-main :is([class*="subtitle"],[class*="description"],[class*="meta"],[class*="caption"],[class*="empty"],[class*="note"]) { color: var(--theme-muted) !important; }
+
+/* Imagens continuam presentes; o branco funciona apenas como véu de leitura. */
+:root[data-theme="light"] .swine-hero { background: var(--theme-bg) !important; }
+:root[data-theme="light"] .swine-hero__layer--fundo { opacity: .78; filter: saturate(.9) contrast(.94) brightness(1.04); }
+:root[data-theme="light"] .swine-hero__depth { background: linear-gradient(90deg,rgba(246,249,245,.9),rgba(246,249,245,.66) 44%,rgba(246,249,245,.12) 78%),linear-gradient(180deg,transparent 46%,var(--theme-bg)); }
+:root[data-theme="light"] .swine-hero::after { background: rgba(246,249,245,.05); }
+:root[data-theme="light"] .swine-hero__fade { height: 44vh; background: linear-gradient(180deg,transparent,var(--theme-bg)) !important; }
+:root[data-theme="light"] :is(.package-hero,.compass-card,.calc-card,.about-hero) { background: var(--theme-bg) !important; box-shadow: none !important; }
+:root[data-theme="light"] .package-hero::before,
+:root[data-theme="light"] .compass-card::before,
+:root[data-theme="light"] .calc-card::before,
+:root[data-theme="light"] .about-hero::before { opacity: .44 !important; filter: saturate(.78) brightness(1.3) !important; }
+:root[data-theme="light"] .package-hero::before {
+  opacity: .72 !important;
+  filter: saturate(.82) contrast(1.02) brightness(.98) !important;
+}
+:root[data-theme="light"] .package-hero::after,
+:root[data-theme="light"] .compass-card::after,
+:root[data-theme="light"] .calc-card::after,
+:root[data-theme="light"] .about-hero::after { background: linear-gradient(90deg,rgba(246,249,245,.9),rgba(246,249,245,.68) 44%,rgba(246,249,245,.12) 76%),linear-gradient(180deg,transparent 48%,var(--theme-bg)) !important; }
+:root[data-theme="light"] .package-hero::after {
+  background:
+    linear-gradient(90deg, rgba(246,249,245,.96), rgba(246,249,245,.78) 42%, rgba(246,249,245,.14) 74%),
+    linear-gradient(180deg, rgba(246,249,245,.04) 52%, var(--theme-bg) 100%) !important;
+}
+:root[data-theme="light"] :is(.package-hero__fade,.compass-card__fade,.calc-card__fade) { height: 42vh; background: linear-gradient(180deg,transparent,var(--theme-bg)) !important; }
+:root[data-theme="light"] .about-hero::before { background: url("/swine_pinterest/about_hero.png") center/cover !important; }
+:root[data-theme="light"] :is(.swine-hero h1,.swine-hero p,.swine-hero__center>span,.package-copy h1,.package-copy p,.compass-copy h1,.compass-copy p,.calc-copy h1,.calc-copy p,.about-hero h1,.about-hero p) { color: var(--theme-text) !important; text-shadow: none !important; }
+:root[data-theme="light"] .services-feature {
+  background:
+    linear-gradient(90deg, rgba(244,247,242,.96) 0%, rgba(244,247,242,.82) 30%, rgba(244,247,242,.28) 68%, rgba(244,247,242,.04) 100%),
+    linear-gradient(180deg, transparent 42%, rgba(244,247,242,.12) 58%, rgba(244,247,242,.46) 74%, rgba(244,247,242,.82) 88%, var(--theme-bg) 100%),
+    url("/swine_pinterest/services_hero.png") center/cover !important;
+  box-shadow: none !important;
 }
 
-#root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+/* Uma superfície, uma borda e uma sombra para todos os componentes. */
+:root[data-theme="light"] .app-main :is([class$="-card"],[class*="__card"],[class$="-panel"],[class*="__panel"],[class$="-form"],[class*="__form"],[class$="-detail"],[class*="__detail"],.services-cards a,.compass-info article,.calc-info article,.perfil-dashboard-grid article,.perfil-recent-list article,.perfil-item,.suinos-stats article,.package-detail__grid section,.about-author,.about-text,.about-topics) { border-color: var(--theme-border) !important; background: var(--theme-surface) !important; color: var(--theme-text) !important; box-shadow: 0 5px 16px rgba(23,68,37,.07) !important; }
+:root[data-theme="light"] .app-main :is(span,strong,small):not(button *,a *) { color: var(--theme-text) !important; }
+:root[data-theme="light"] .app-main :is(.package-copy>span,.package-results__head span,.package-detail__headline>span) {
+  color: var(--theme-accent) !important;
+}
+:root[data-theme="light"] .app-main :is(.perfil-dashboard-grid span,.perfil-recent-list span,.perfil-public-lines span,.perfil-photo-field small,.perfil-field span,.perfil-item span,.suinos-pig-card span,.suinos-med-list span,.suinos-med-list small,.suinos-photo-field small,.suinos-timeline small,.chat-brand span,.chat-history>span,.nature-frame figcaption,.nature-frame figcaption small) { color: var(--theme-muted) !important; }
+:root[data-theme="light"] .nature-frame figcaption span { color: rgba(47,104,66,.14) !important; }
+
+:root[data-theme="light"] .app-main :is(input,textarea,select) { border-color: rgba(47,104,66,.22) !important; background: #fff !important; color: var(--theme-text) !important; box-shadow: none !important; }
+:root[data-theme="light"] .app-main :is(input,textarea)::placeholder { color: #718078 !important; opacity: 1; }
+:root[data-theme="light"] .app-main :is(input,textarea,select):focus { border-color: var(--theme-green) !important; box-shadow: 0 0 0 3px rgba(47,104,66,.12) !important; }
+
+/* Botões mantêm a linguagem do dark; Compass e Calc continuam sublinhados. */
+:root[data-theme="light"] .app-main button:not(.perfil-tab):not(.is-active) { color: #fff !important; background-color: var(--theme-green-deep) !important; box-shadow: none !important; }
+:root[data-theme="light"] .app-main button :is(span,strong,svg) { color: inherit !important; }
+:root[data-theme="light"] :is(.swine-hero__actions a:first-child,.services-feature a) { background: var(--theme-green-deep) !important; color: #fff !important; box-shadow: none !important; }
+:root[data-theme="light"] .swine-hero__actions a:nth-child(2) { border: 1px solid rgba(47,104,66,.28) !important; background: var(--theme-green-soft) !important; color: var(--theme-green-deep) !important; box-shadow: none !important; }
+:root[data-theme="light"] :is(.compass-main-action,.calc-main-action) { min-height: 46px; border: 0 !important; border-radius: 8px !important; padding: 0 18px !important; background: var(--theme-green-deep) !important; color: #fff !important; box-shadow: none !important; }
+:root[data-theme="light"] :is(.compass-main-action,.calc-main-action) svg { color: inherit !important; }
+:root[data-theme="light"] .inference-switch>div { border-color: rgba(47,104,66,.22) !important; background: var(--theme-green-soft) !important; }
+:root[data-theme="light"] .inference-switch legend { color: var(--theme-muted) !important; }
+:root[data-theme="light"] .inference-switch button { background: transparent !important; color: var(--theme-green-deep) !important; }
+:root[data-theme="light"] .inference-switch button.is-active { background: var(--theme-green) !important; color: #fff !important; }
+
+/* O chat usa branco e verde, sem grandes blocos cinzentos. */
+:root[data-theme="light"] :is(.chat-sidebar,.chat-main) { border-color: var(--theme-border) !important; background: var(--theme-surface) !important; box-shadow: 0 5px 16px rgba(23,68,37,.07) !important; }
+:root[data-theme="light"] :is(.chat-history article,.chat-message--assistant p,.chat-note) { border-color: rgba(47,104,66,.18) !important; background: var(--theme-green-soft) !important; }
+:root[data-theme="light"] .chat-message--user p { background: #f9edf2 !important; }
+:root[data-theme="light"] .chat-input { border-color: var(--theme-border) !important; background: #edf2ed !important; }
+:root[data-theme="light"] .chat-history article>button { background: transparent !important; color: var(--theme-text) !important; }
+:root[data-theme="light"] .chat-compare { color: var(--theme-green-deep) !important; background: var(--theme-green-soft) !important; }
+:root[data-theme="light"] .package-search { border-color: rgba(47,104,66,.22) !important; background: #fff !important; box-shadow: 0 5px 16px rgba(23,68,37,.07) !important; }
+:root[data-theme="light"] :is(.comparison-card dl div,.comparison-error,.comparison-note) { border-color: rgba(47,104,66,.18) !important; background: var(--theme-green-soft) !important; color: var(--theme-green-deep) !important; }
+:root[data-theme="light"] :is(.comparison-card dt,.comparison-card li,.comparison-summary span,.comparison-hero p) { color: var(--theme-muted) !important; }
+
+:root[data-theme="light"] .login-page::before,
+:root[data-theme="light"] .cadastro-page::before {
+  opacity: 1;
+  background:
+    linear-gradient(90deg, rgba(244,247,242,.38), rgba(244,247,242,.5)),
+    url("/swine_pinterest/auth_profile_background.png") center / cover;
+  filter: saturate(.88) contrast(1.05) brightness(.96);
+}
+:root[data-theme="light"] :is(.login-page__fade,.cadastro-page__fade) {
+  height: 22vh;
+  background: linear-gradient(180deg,transparent,rgba(244,247,242,.72) 100%) !important;
+}
+:root[data-theme="light"] :is(.login-brand h1,.login-title,.login-brand p,.login-forgot,.login-register) { color: var(--theme-text) !important; }
+:root[data-theme="light"] .reveal { opacity: 1 !important; transform: none !important; }
+
+/* Light mode: base visual unificada para todas as areas da aplicacao. */
+:root[data-theme="light"] body,
+:root[data-theme="light"] .app-main,
+:root[data-theme="light"] :is(.home,.bulario,.calc,.chat-page,.comparison-page,.compass,.services-page,.about-page,.cadastro-page,.login-page,.perfil-page,.suinos-page,.error-page) {
+  background-color: var(--theme-bg) !important;
+  color: var(--theme-text) !important;
 }
 
-.app-main,
-.footer {
-  margin-left: 0;
+/* Home: remove a secao preta que permanecia entre o hero e o rodape. */
+:root[data-theme="light"] .nature-section {
+  background: var(--theme-bg) !important;
+}
+:root[data-theme="light"] .nature-frame img {
+  border: 1px solid var(--theme-border);
+  box-shadow: 0 14px 30px var(--theme-shadow) !important;
+}
+:root[data-theme="light"] .nature-frame figcaption strong,
+:root[data-theme="light"] .nature-section>p {
+  color: var(--theme-text) !important;
+}
+:root[data-theme="light"] .nature-frame figcaption small {
+  color: var(--theme-muted) !important;
 }
 
-.app-main {
-  flex: 1;
+/* Remove contornos residuais dos heróis no light mode. */
+:root[data-theme="light"] :is(.compass-card, .calc-card, .services-feature) {
+  border: 0 !important;
+  outline: 0 !important;
+}
+:root[data-theme="light"] .services-page {
+  overflow-x: hidden;
 }
 
-#root :is(p, dd, li) {
-  font-size: 17px !important;
+/* Heroes: mesma leitura clara, sem faixas cinzas nem imagens estouradas. */
+:root[data-theme="light"] :is(.compass-card,.calc-card)::before {
+  opacity: .68 !important;
+  filter: saturate(.82) contrast(1.02) brightness(.98) !important;
+}
+:root[data-theme="light"] :is(.compass-card,.calc-card)::after {
+  background:
+    linear-gradient(90deg, rgba(244,247,242,.96), rgba(244,247,242,.78) 44%, rgba(244,247,242,.12) 76%),
+    linear-gradient(180deg, transparent 54%, var(--theme-bg) 100%) !important;
+}
+:root[data-theme="light"] :is(.package-hero__fade,.compass-card__fade,.calc-card__fade) {
+  height: 54vh;
+  background: linear-gradient(180deg, transparent 0%, rgba(244,247,242,.3) 38%, var(--theme-bg) 100%) !important;
+}
+:root[data-theme="light"] .about-hero {
+  background: var(--theme-bg) !important;
+}
+:root[data-theme="light"] .about-hero::before {
+  opacity: .7 !important;
+  filter: saturate(.82) contrast(1.02) brightness(.96) !important;
+}
+:root[data-theme="light"] .about-hero::after {
+  top: 0;
+  bottom: 0;
+  height: auto;
+  background:
+    linear-gradient(90deg, rgba(244,247,242,.94), rgba(244,247,242,.66) 47%, rgba(244,247,242,.08) 78%),
+    linear-gradient(180deg, transparent 58%, var(--theme-bg) 100%) !important;
+}
+:root[data-theme="light"] :is(.services-cards,.calc-info,.compass-info,.about-body) {
+  position: relative;
+  z-index: 3;
+  /* Mesmo encaixe visual da lista de fármacos: sem faixa divisória entre hero e conteúdo. */
+  margin-top: -16vh;
+}
+:root[data-theme="light"] .about-topics {
+  position: relative;
+  z-index: 3;
 }
 
-#root :is(small, dt, label) {
-  font-size: 17px !important;
+/* Swine Package: lista e detalhe passam a usar o mesmo fundo/superficies. */
+:root[data-theme="light"] .package-detail {
+  background:
+    radial-gradient(circle at 90% 18%, rgba(182,64,108,.07), transparent 28%),
+    radial-gradient(circle at 18% 74%, rgba(49,107,67,.08), transparent 30%),
+    var(--theme-bg) !important;
+}
+:root[data-theme="light"] .package-detail__nav a,
+:root[data-theme="light"] .package-back,
+:root[data-theme="light"] .package-detail__headline p {
+  border-color: var(--theme-border) !important;
+  color: var(--theme-muted) !important;
+}
+:root[data-theme="light"] .package-back,
+:root[data-theme="light"] .package-detail__grid dt,
+:root[data-theme="light"] .package-detail__grid section>svg {
+  color: var(--theme-accent) !important;
+}
+:root[data-theme="light"] .package-detail__grid section {
+  border-color: var(--theme-border) !important;
+  background: var(--theme-surface) !important;
+  box-shadow: 0 10px 26px var(--theme-shadow) !important;
 }
 
-#root :is(input, textarea, select) {
-  font-size: 17px !important;
+/* Sobre e Servicos: cards deixam de misturar transparencias do dark. */
+:root[data-theme="light"] :is(.about-author,.about-text,.about-topics article,.services-cards a) {
+  border-color: var(--theme-border) !important;
+  background: var(--theme-surface) !important;
+  box-shadow: 0 10px 26px var(--theme-shadow) !important;
+}
+:root[data-theme="light"] :is(.about-author p,.about-text p,.about-topics p,.services-cards p) {
+  color: var(--theme-muted) !important;
+}
+:root[data-theme="light"] :is(.about-topics strong,.services-cards h2,.services-cards strong) {
+  color: var(--theme-text) !important;
+}
+:root[data-theme="light"] .services-cards a>span {
+  color: var(--theme-accent) !important;
+}
+:root[data-theme="light"] .app-main :is(.swine-hero__center>span,.package-copy>span,.package-results__head span,.package-detail__headline>span,.compass-copy>span,.calc-copy>span,.services-feature>span,.about-hero__content>span,.perfil-kicker,.suinos-kicker) {
+  color: var(--theme-accent) !important;
 }
 
-#root :is(a, button) {
-  font-size: max(17px, 1em);
+/* Formularios, perfil e suinos compartilham borda, raio e sombra discretos. */
+:root[data-theme="light"] :is(.login-brand,.login-form,.cadastro-brand,.cadastro-form,.perfil-card,.suinos-shell,.suinos-panel,.suinos-stats article) {
+  border-color: var(--theme-border) !important;
+  background: var(--theme-surface) !important;
+  box-shadow: 0 10px 28px var(--theme-shadow) !important;
+}
+:root[data-theme="light"] .perfil-page {
+  background:
+    linear-gradient(90deg, rgba(244,247,242,.34), rgba(244,247,242,.46)),
+    url("/swine_pinterest/auth_profile_background.png") center / cover !important;
+}
+:root[data-theme="light"] .perfil-card {
+  background: rgba(255,255,255,.94) !important;
+  backdrop-filter: blur(10px);
+}
+:root[data-theme="light"] .perfil-tabs {
+  border-color: var(--theme-border) !important;
+  background: var(--theme-surface-soft) !important;
+}
+:root[data-theme="light"] .perfil-tab {
+  border: 1px solid transparent !important;
+  background: transparent !important;
+  color: var(--theme-muted) !important;
+}
+:root[data-theme="light"] .perfil-tab:hover:not(.perfil-tab-active) {
+  border-color: var(--theme-border) !important;
+  background: var(--theme-surface) !important;
+  color: var(--theme-green-deep) !important;
+}
+:root[data-theme="light"] .perfil-tab.perfil-tab-active {
+  border-color: var(--theme-green-deep) !important;
+  background: var(--theme-green-deep) !important;
+  color: #fff !important;
+}
+:root[data-theme="light"] .perfil-tab svg {
+  color: currentColor !important;
+}
+:root[data-theme="light"] :is(.suinos-pig-card,.suinos-med-list article,.perfil-recent-list article) {
+  border-color: var(--theme-border) !important;
+  background: var(--theme-surface-soft) !important;
+  color: var(--theme-text) !important;
 }
 
-#root :is(h2, h3, strong) {
-  text-wrap: balance;
+/* Compass flutuante acompanha o tema em vez de permanecer preto. */
+:root[data-theme="light"] .floating-compass__panel {
+  border-color: var(--theme-border);
+  background: color-mix(in srgb, var(--theme-surface) 96%, transparent);
+  color: var(--theme-text);
+  box-shadow: 0 22px 54px var(--theme-shadow);
+}
+:root[data-theme="light"] .floating-compass__panel :is(header,.floating-compass__model,footer) {
+  border-color: var(--theme-border);
+}
+:root[data-theme="light"] .floating-compass__panel header span,
+:root[data-theme="light"] .floating-compass__message--pending {
+  color: var(--theme-muted);
+}
+:root[data-theme="light"] .floating-compass__panel button {
+  color: var(--theme-text);
+}
+:root[data-theme="light"] .floating-compass__message--assistant {
+  border-left-color: var(--theme-green);
+  background: var(--theme-green-soft);
+}
+:root[data-theme="light"] .floating-compass__message--user {
+  border-left-color: var(--theme-accent);
+  background: #faedf2;
+}
+:root[data-theme="light"] .floating-compass__panel textarea {
+  border-color: var(--theme-border);
+  background: var(--theme-surface);
+  color: var(--theme-text);
+}
+:root[data-theme="light"] .floating-compass__panel textarea::placeholder {
+  color: var(--theme-muted);
+}
+:root[data-theme="light"] .floating-compass__panel footer button {
+  color: #fff;
+  background: var(--theme-green-deep);
+}
+:root[data-theme="light"] .floating-compass__hint {
+  border-color: var(--theme-border);
+  background: var(--theme-surface);
+  color: var(--theme-text);
+  box-shadow: 0 10px 24px var(--theme-shadow);
 }
 
-.footer {
-  background-color: #19381f;
-  color: white;
-  padding: 40px 80px;
-  margin-top: auto; /* empurra o footer para o bottom */
-}
-
-@media (max-width: 760px) {
-  .app-main,
-  .footer {
-    margin-left: 0;
-  }
-
-  .footer {
-    padding-bottom: 100px;
-  }
-
-  #root :is(p, dd, li) {
-    font-size: 14px !important;
-  }
-
-  #root :is(small, dt, label) {
-    font-size: 14px !important;
-  }
-
-  #root :is(input, textarea, select) {
-    font-size: 14px !important;
-  }
-
-  #root :is(a, button) {
-    font-size: max(14px, 1em);
-  }
-}
+#root :is(p,dd,li),#root :is(small,dt,label),#root :is(input,textarea,select) { font-size: 17px !important; }
+#root :is(a,button) { font-size: max(17px,1em); }
+#root :is(h2,h3,strong) { text-wrap: balance; }
+.footer { background-color: #19381f; color: white; padding: 40px 80px; margin-top: auto; }
+@media (max-width:760px) { .app-main,.footer { margin-left:0; } .footer { padding-bottom:100px; } #root :is(p,dd,li),#root :is(small,dt,label),#root :is(input,textarea,select) { font-size:14px !important; } #root :is(a,button) { font-size:max(14px,1em); } }
