@@ -9,7 +9,7 @@ class MotorSemantico:
 
     nome = "semantica"
 
-    def inferir(self, texto, limite=4):
+    def inferir(self, texto, limite=5):
         caso = extract_clinical_case(texto)
         sintomas = caso["sintomas"]
         caminhos = defaultdict(list)

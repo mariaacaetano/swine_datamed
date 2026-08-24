@@ -123,11 +123,14 @@ class TriagemView(APIView):
         from machine.engine import MotorMachineLearning
         from regras.engine import MotorRegras
         from semantica.engine import MotorSemantico
+        from .knowledge_engines import MotorBayesiano, MotorFuzzy
 
         mecanismos = {
             "regras": MotorRegras,
             "semantica": MotorSemantico,
             "machine_learning": MotorMachineLearning,
+            "rede_bayesiana": MotorBayesiano,
+            "fuzzy": MotorFuzzy,
         }
         nome = request.data.get("mecanismo", "regras")
         if nome not in mecanismos:
@@ -137,6 +140,7 @@ class TriagemView(APIView):
         sintoma_perguntado = request.data.get("sintoma_perguntado", "").strip()
         texto_clinico = _compose_clinical_text(contexto, texto, sintoma_perguntado)
         resultado = mecanismos[nome]().inferir(texto_clinico)
+        _adicionar_graus_avaliacao(resultado)
         pergunta = _next_clinical_question(resultado)
         resultado["contexto_clinico"] = texto_clinico
         resultado["pergunta_complementar"] = pergunta
@@ -201,6 +205,7 @@ class ComparacaoInferenciaView(APIView):
         from machine.engine import MotorMachineLearningK10, MotorMachineLearningK100
         from regras.engine import MotorRegras
         from semantica.engine import MotorSemantico
+        from .knowledge_engines import MotorBayesiano, MotorFuzzy
 
         texto = request.data.get("texto", "").strip()
         if not texto:
@@ -210,11 +215,14 @@ class ComparacaoInferenciaView(APIView):
             MotorSemantico(),
             MotorMachineLearningK10(),
             MotorMachineLearningK100(),
+            MotorBayesiano(),
+            MotorFuzzy(),
         ]
         resultados = []
         for motor in motores:
             inicio = perf_counter()
             resultado = motor.inferir(texto)
+            _adicionar_graus_avaliacao(resultado)
             tempo_s = perf_counter() - inicio
             resultados.append({
                 **resultado,
@@ -283,3 +291,45 @@ def _formatar_resposta(resultado):
         + question_block
         + "\n\nAtenção: apoio à triagem; valide a decisão com médico-veterinário."
     )
+
+
+def _adicionar_graus_avaliacao(resultado):
+    """Adiciona níveis interpretáveis sem substituir as métricas numéricas."""
+    def grau(score):
+        if score >= 0.70:
+            return "alto"
+        if score >= 0.40:
+            return "moderado"
+        return "baixo"
+
+    hypotheses = resultado.get("hipoteses", [])
+    for hypothesis in hypotheses:
+        score = float(hypothesis.get("score", 0) or 0)
+        hypothesis["grau_correspondencia"] = grau(score)
+    top_score = float(hypotheses[0].get("score", 0) or 0) if hypotheses else 0
+    resultado["avaliacao"] = {
+        "classificacao_sintomas": grau(min(1, len(resultado.get("sintomas_reconhecidos", [])) / 3)),
+        "confianca_diagnostica": grau(top_score),
+        "recomendacao_tratamento": (
+            "adequada" if resultado.get("farmacos_relacionados") and top_score >= 0.40
+            else "parcial" if resultado.get("farmacos_relacionados") else "indisponível"
+        ),
+    }
+    perfis = {
+        "regras": ("Tratamento", "recomendação", "baixo", "alta", "moderada"),
+        "semantica": ("Organização e integração", "sintomas e tratamento", "moderado", "alta", "alta"),
+        "machine_learning_k10": ("Classificação", "diagnóstico", "moderado", "moderada", "moderada"),
+        "machine_learning_k100": ("Classificação", "diagnóstico", "moderado", "moderada", "moderada"),
+        "rede_bayesiana": ("Inferência probabilística", "diagnóstico", "alto", "alta", "alta"),
+        "fuzzy": ("Classificação gradual", "sintomas", "alto", "alta", "alta"),
+    }
+    finalidade, fase, incerteza, interpretabilidade, adequacao = perfis.get(
+        resultado.get("mecanismo"), ("Inferência", "diagnóstico", "moderado", "moderada", "moderada")
+    )
+    resultado["avaliacao"]["criterios_modelo"] = {
+        "fase_mais_adequada": fase,
+        "finalidade": finalidade,
+        "tratamento_incerteza": incerteza,
+        "interpretabilidade": interpretabilidade,
+        "adequacao_clinica": adequacao,
+    }

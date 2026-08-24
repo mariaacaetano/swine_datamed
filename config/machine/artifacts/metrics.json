@@ -1,5 +1,5 @@
 {
-  "criado_em": "2026-08-11T13:25:22.807358+00:00",
+  "criado_em": "2026-08-22T02:06:27.405972+00:00",
   "semente": 42,
   "modelo_selecionado": "Random Forest",
   "criterio_selecao": "f1_macro_validacao",
@@ -18,32 +18,32 @@
       "precisao_macro": 0.5670069827800776,
       "recall_macro": 0.5449418674690907,
       "f1_macro": 0.5342086157151231,
-      "acuracia_top_4": 0.9907258064516129,
-      "tempo_treinamento_s": 2.303
+      "acuracia_top_5": 0.9910618279569893,
+      "tempo_treinamento_s": 1.994
     },
     "Regressão Logística (SGD)": {
       "acuracia": 0.9019153225806451,
       "precisao_macro": 0.5221365078785191,
       "recall_macro": 0.5435016440845157,
       "f1_macro": 0.5273505528322828,
-      "acuracia_top_4": 0.9873655913978494,
-      "tempo_treinamento_s": 20.134
+      "acuracia_top_5": 0.9898185483870968,
+      "tempo_treinamento_s": 17.005
     },
     "Árvore de Decisão": {
       "acuracia": 0.811861559139785,
       "precisao_macro": 0.45867008564772843,
       "recall_macro": 0.44156703575014983,
       "f1_macro": 0.42474077386345954,
-      "acuracia_top_4": 0.8519153225806452,
-      "tempo_treinamento_s": 3.427
+      "acuracia_top_5": 0.8648185483870968,
+      "tempo_treinamento_s": 3.462
     },
     "Random Forest": {
       "acuracia": 0.8976814516129032,
       "precisao_macro": 0.5572043276133435,
       "recall_macro": 0.5475116386127467,
       "f1_macro": 0.5372154498328559,
-      "acuracia_top_4": 0.9903225806451613,
-      "tempo_treinamento_s": 28.624
+      "acuracia_top_5": 0.9920698924731183,
+      "tempo_treinamento_s": 29.878
     }
   },
   "resultado_teste": {
@@ -51,7 +51,7 @@
     "precisao_macro": 0.5075284512456395,
     "recall_macro": 0.49958658747035933,
     "f1_macro": 0.49232541495473137,
-    "acuracia_top_4": 0.9931451612903226
+    "acuracia_top_5": 0.9987231182795699
   },
   "classes_teste": [
     "Actinobacilose",
@@ -4218,5 +4218,5 @@
     "pandas": "2.3.3",
     "numpy": "2.3.5"
   },
-  "tempo_pipeline_s": 108.554
+  "tempo_pipeline_s": 108.027
 }

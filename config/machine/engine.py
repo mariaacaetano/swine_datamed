@@ -19,7 +19,7 @@ class MotorMachineLearning:
     _artifact = None
     _artifact_mtime = None
 
-    def inferir(self, texto, limite=4):
+    def inferir(self, texto, limite=5):
         caso = extract_clinical_case(texto)
         artifact = self._load_artifact()
         if artifact is not None:

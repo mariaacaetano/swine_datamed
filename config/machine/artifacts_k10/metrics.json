@@ -1,5 +1,5 @@
 {
-  "criado_em": "2026-08-16T23:25:09.905823+00:00",
+  "criado_em": "2026-08-22T02:06:44.488273+00:00",
   "semente": 42,
   "modelo_selecionado": "Random Forest",
   "criterio_selecao": "f1_macro_validacao",
@@ -18,32 +18,32 @@
       "precisao_macro": 0.49402900972884906,
       "recall_macro": 0.5334879533950742,
       "f1_macro": 0.49774658338096933,
-      "acuracia_top_4": 0.96,
-      "tempo_treinamento_s": 0.187
+      "acuracia_top_5": 0.9632258064516129,
+      "tempo_treinamento_s": 0.156
     },
     "Regressão Logística (SGD)": {
       "acuracia": 0.8987096774193548,
       "precisao_macro": 0.5221495422112387,
       "recall_macro": 0.5001574429139103,
       "f1_macro": 0.4908819346187019,
-      "acuracia_top_4": 0.9712903225806452,
-      "tempo_treinamento_s": 2.118
+      "acuracia_top_5": 0.9732258064516129,
+      "tempo_treinamento_s": 2.696
     },
     "Árvore de Decisão": {
       "acuracia": 0.8087096774193548,
       "precisao_macro": 0.45846700175717475,
       "recall_macro": 0.4455155818840029,
       "f1_macro": 0.4307565925962317,
-      "acuracia_top_4": 0.8529032258064516,
-      "tempo_treinamento_s": 0.201
+      "acuracia_top_5": 0.8529032258064516,
+      "tempo_treinamento_s": 0.21
     },
     "Random Forest": {
       "acuracia": 0.8990322580645161,
       "precisao_macro": 0.5605866437387086,
       "recall_macro": 0.5581639976564788,
       "f1_macro": 0.5462174680064463,
-      "acuracia_top_4": 0.9887096774193549,
-      "tempo_treinamento_s": 2.022
+      "acuracia_top_5": 0.9903225806451613,
+      "tempo_treinamento_s": 2.14
     }
   },
   "resultado_teste": {
@@ -51,7 +51,7 @@
     "precisao_macro": 0.5416833818889114,
     "recall_macro": 0.5417856329134524,
     "f1_macro": 0.5301075502720923,
-    "acuracia_top_4": 0.9912903225806452
+    "acuracia_top_5": 0.9974193548387097
   },
   "classes_teste": [
     "Actinobacilose",
@@ -3718,5 +3718,5 @@
     "pandas": "2.3.3",
     "numpy": "2.3.5"
   },
-  "tempo_pipeline_s": 7.665
+  "tempo_pipeline_s": 8.214
 }

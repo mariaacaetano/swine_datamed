@@ -42,7 +42,8 @@ class DataPipelineTests(TestCase):
         payload = response.json()
         self.assertEqual(
             {item["mecanismo"] for item in payload["resultados"]},
-            {"regras", "semantica", "machine_learning_k10", "machine_learning_k100"},
+            {"regras", "semantica", "machine_learning_k10", "machine_learning_k100",
+             "rede_bayesiana", "fuzzy"},
         )
         self.assertTrue(all(item["metricas_sistema"]["tempo_resposta_s"] >= 0 for item in payload["resultados"]))
 

@@ -48,9 +48,9 @@ def _metrics(model, x, y):
         scores = model.predict_proba(x)
     elif hasattr(model, "decision_function"):
         scores = model.decision_function(x)
-    if scores is not None and len(model.classes_) >= 4:
-        result["acuracia_top_4"] = float(top_k_accuracy_score(
-            y, scores, k=4, labels=model.classes_,
+    if scores is not None and len(model.classes_) >= 5:
+        result["acuracia_top_5"] = float(top_k_accuracy_score(
+            y, scores, k=5, labels=model.classes_,
         ))
     return result, prediction
 

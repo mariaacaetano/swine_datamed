@@ -1,0 +1,17 @@
+{
+  "conjunto": "k10",
+  "arquivo_teste": "generated_data/machine_learning_k10/teste.csv",
+  "registros_teste": 3100,
+  "modelos": {
+    "rede_bayesiana": {
+      "acuracia_top_1": 0.0064516129032258064,
+      "acuracia_top_5": 0.016129032258064516,
+      "registros_teste": 3100
+    },
+    "fuzzy": {
+      "acuracia_top_1": 0.2645161290322581,
+      "acuracia_top_5": 0.5870967741935483,
+      "registros_teste": 3100
+    }
+  }
+}
