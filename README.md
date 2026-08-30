@@ -21,8 +21,9 @@ para abertura correta no Excel, e também nas tabelas `GeracaoDataset` e
 `--clinical-output`.
 
 Um terceiro conjunto, específico para aprendizado de máquina, é gerado em
-`generated_data/machine_learning/`. Com 96 variações por combinação, possui
-200.064 registros divididos por combinação-base antes da expansão. Os arquivos
+`generated_data/machine_learning/`. Com 100 variações por combinação, possui
+208.400 registros divididos por combinação-base antes da expansão: 146.400 para
+treino, 31.000 para validação e 31.000 para teste. Os arquivos
 `treino.csv`, `validacao.csv` e `teste.csv` não contêm campos que revelem
 diretamente o diagnóstico; `metadados.json` registra a divisão e a semente.
 O comando aceita também `--ml-variations` e `--ml-output`.
@@ -41,7 +42,8 @@ importada de `base_data`:
 
 - `config/regras/`: cobertura determinística das relações doença-sintoma;
 - `config/semantica/`: travessia do grafo Sintoma → Doença → Fármaco;
-- `config/machine/`: Bernoulli Naive Bayes sobre as combinações de sintomas.
+- `config/machine/`: modelos supervisionados sobre as combinações de sintomas,
+  com seleção pelo F1-macro de validação e persistência do modelo vencedor.
 
 Cada mecanismo possui um endpoint próprio (`/api/regras/inferir/`,
 `/api/semantica/inferir/` e `/api/machine-learning/inferir/`). O endpoint
@@ -68,7 +70,15 @@ O comando ajusta o pré-processamento somente no treino, compara Bernoulli Naive
 Bayes, regressão logística por SGD, árvore de decisão e Random Forest pela macro-F1
 de validação, reajusta o vencedor com treino+validação e avalia uma única vez no
 teste. O modelo fica em `config/machine/artifacts/model.joblib` e as métricas em
-`config/machine/artifacts/metrics.json`. A API expõe o estado em
+`config/machine/artifacts/metrics.json`. Para comparar regras, grafo, ML, Rede
+Bayesiana e Lógica Fuzzy no mesmo conjunto de teste, execute:
+
+```bash
+./venv/bin/python config/manage.py evaluate_all_models
+```
+
+As métricas comparativas são gravadas em
+`config/machine/artifacts/comparative_metrics.json`. A API expõe o estado em
 `GET /api/machine-learning/status/`.
 
 # React + Vite
