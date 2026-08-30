@@ -2,8 +2,8 @@ Cadastro de Vacinas,,,,,,,,,,,,,,,,,,
 ID,Nome comercial,Tipo,Doenças prevenidas,Agente(s)-alvo,Categoria,Fase indicada,Idade recomendada,Dose,Via,Número de doses,Intervalo/Reforço,Início da imunidade,Duração da imunidade,Carência,Armazenamento,Contraindicações,Reações adversas,Observações
 1,Flusure Pandemic,Vacina inativada,Influenza suína,Influenza A,Viral,"Matrizes, Reprodutores",Conforme protocolo,Conforme bula,IM,2,3-4 semanas (quando aplicável),Conforme bula,Conforme bula,Conforme bula,2–8 °C,Animais doentes ou febris,"Edema local, reação transitória",Seguir protocolo da granja
 2,Fostera Gold,Vacina,Circovirose suína + Micoplasmose,PCV2; Mycoplasma hyopneumoniae,Viral/Bacteriana,Leitões e reposição,Conforme protocolo,Conforme bula,IM,1 ou 2,Conforme fabricante,Conforme bula,Conforme bula,Conforme bula,2–8 °C,Animais doentes ou febris,Dor local leve,Não congelar
-3,,,,,,,,,,,,,,,,,,
-4,,,,,,,,,,,,,,,,,,
+3,Vivax,Vacina anti-GnRF,Controle do odor de macho inteiro; castração imunológica,GnRF,Reprodutiva/biológica,Suínos machos inteiros,1ª dose a partir de 8–9 semanas; 2ª dose 4–5 semanas antes do abate,2 mL,Subcutânea na base da orelha,2,Mínimo de 4 semanas,Resposta efetiva após a 2ª dose; eliminação dos compostos em cerca de 2 semanas,"Até o abate, conforme protocolo",Sem período de carência,,,Possíveis reações locais; seguir bula,Usar aplicador de segurança; risco em caso de autoinjeção. Fonte: https://www.improvac.com/br/informa%C3%A7%C3%B5es-t%C3%A9cnicas.aspx
+4,Suigen,Vacina inativada,Circovirose suína / doenças associadas ao PCV2 (PCVAD),Circovírus suíno tipo 2d (PCV2d),Viral,Leitões; porcas e marrãs prenhes,Leitões a partir de 21 dias; fêmeas entre 6 e 3 semanas antes do parto,1 mL em leitões; 2 mL em porcas/marrãs,Intramuscular profunda,1,Dose única,Conforme bula,Imunidade passiva dos leitões via colostro por até 6 semanas após o parto,Conforme bula,2–8 °C; não congelar; proteger da luz,Vacinar somente animais sadios,Raras reações de hipersensibilidade,Uso sob supervisão do médico-veterinário. Fonte: https://br.virbac.com/products/antiparasitarios-injetaveis/suigen
 5,,,,,,,,,,,,,,,,,,
 6,,,,,,,,,,,,,,,,,,
 7,,,,,,,,,,,,,,,,,,

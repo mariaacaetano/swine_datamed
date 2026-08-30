@@ -175,7 +175,7 @@ class MotorMachineLearningK10(MotorMachineLearning):
 
 
 class MotorMachineLearningK100(MotorMachineLearning):
-    """Variante histórica de alta amostragem (96, apresentada como k≈100)."""
+    """Variante histórica de alta amostragem (100 variações por combinação)."""
 
     nome = "machine_learning_k100"
     artifact_path = Path(settings.BASE_DIR) / "machine" / "artifacts" / "model.joblib"

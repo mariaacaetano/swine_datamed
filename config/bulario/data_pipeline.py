@@ -372,9 +372,10 @@ def _stratified_combination_split(base_rows, rng):
         if count == 1:
             assigned["treino"].extend(rows)
             continue
-        if count == 2:
-            assigned["treino"].append(rows[0])
-            assigned["teste"].append(rows[1])
+        if count <= 2:
+            # A classe precisa aparecer no treinamento para que o modelo
+            # consiga representá-la durante a validação e o teste.
+            assigned["treino"].extend(rows)
             continue
         validation_count = max(1, round(count * 0.15))
         test_count = max(1, round(count * 0.15))
@@ -387,7 +388,7 @@ def _stratified_combination_split(base_rows, rng):
     return assigned
 
 
-def generate_ml_dataset(output_dir, variations_per_combination=96, seed=42):
+def generate_ml_dataset(output_dir, variations_per_combination=100, seed=42):
     """Gera arquivos para ML sem atributos derivados diretamente do diagnóstico."""
     if variations_per_combination < 1:
         raise ValueError("O número de variações para machine learning deve ser positivo.")

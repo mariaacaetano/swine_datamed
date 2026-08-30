@@ -1,0 +1,55 @@
+{
+  "arquivo_teste": "generated_data/machine_learning_k10/teste.csv",
+  "modelos": {
+    "regras": {
+      "tempo_total_s": 11.001792008006305,
+      "registros_teste": 3100,
+      "acuracia_top_1": 0.29354838709677417,
+      "acuracia_top_5": 0.6870967741935484,
+      "tempo_medio_por_caso_s": 0.003548965163873002,
+      "precisao_top_5": 0.13741935483870968,
+      "recall_top_5": 0.6870967741935484,
+      "f1_top_5": 0.22903225806451613
+    },
+    "semantica": {
+      "tempo_total_s": 7.085220083044987,
+      "registros_teste": 3100,
+      "acuracia_top_1": 0.4483870967741935,
+      "acuracia_top_5": 0.7870967741935484,
+      "tempo_medio_por_caso_s": 0.002285554865498383,
+      "precisao_top_5": 0.15741935483870967,
+      "recall_top_5": 0.7870967741935484,
+      "f1_top_5": 0.26236559139784943
+    },
+    "machine_learning": {
+      "tempo_total_s": 12.226804777990765,
+      "registros_teste": 3100,
+      "acuracia_top_1": 0.0935483870967742,
+      "acuracia_top_5": 0.1935483870967742,
+      "tempo_medio_por_caso_s": 0.003944130573545408,
+      "precisao_top_5": 0.03870967741935484,
+      "recall_top_5": 0.1935483870967742,
+      "f1_top_5": 0.06451612903225808
+    },
+    "rede_bayesiana": {
+      "tempo_total_s": 11.020517189979728,
+      "registros_teste": 3100,
+      "acuracia_top_1": 0.0,
+      "acuracia_top_5": 0.0032258064516129032,
+      "tempo_medio_por_caso_s": 0.0035550055451547507,
+      "precisao_top_5": 0.0006451612903225806,
+      "recall_top_5": 0.0032258064516129032,
+      "f1_top_5": 0.001075268817204301
+    },
+    "fuzzy": {
+      "tempo_total_s": 10.63761635600531,
+      "registros_teste": 3100,
+      "acuracia_top_1": 0.15483870967741936,
+      "acuracia_top_5": 0.5,
+      "tempo_medio_por_caso_s": 0.0034314891470984873,
+      "precisao_top_5": 0.1,
+      "recall_top_5": 0.5,
+      "f1_top_5": 0.16666666666666669
+    }
+  }
+}

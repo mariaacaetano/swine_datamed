@@ -15,7 +15,7 @@ class Command(BaseCommand):
         parser.add_argument("--output", default="generated_data/dataset_combinacoes_sintomas.csv")
         parser.add_argument("--clinical-output", default="generated_data/dataset_clinico_ampliado.csv")
         parser.add_argument("--variations", type=int, default=10, help="Observações clínicas por combinação de sintomas.")
-        parser.add_argument("--ml-variations", type=int, default=96, help="Observações por combinação para machine learning.")
+        parser.add_argument("--ml-variations", type=int, default=100, help="Observações por combinação para machine learning.")
         parser.add_argument("--ml-output", default="generated_data/machine_learning")
 
     def handle(self, *args, **options):
