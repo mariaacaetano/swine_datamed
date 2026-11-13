@@ -1,4 +1,3 @@
-Cadastro de Doenças,,,,,
 TIPO,ID,DOENÇA PADRONIZADA,AGENTE ETIOLÓGICO,SINTOMAS PADRONIZADOS,FASE COMUM
 Bacteriana,0,Brucelose,Brucella suis,Abortos; Infertilidade; Retenção de placenta; Leitões fracos ao nascimento; Perda de apetite,Reprodutores (adultos)
 Bacteriana,1,Colibacilose pós-desmame,"Escherichia coli (ETEC, EPEC, STEC)",Diarreia aquosa; Desidratação; Perda de peso; Apatia; Letargia; Perda de apetite; Diarreia,Creche (pós-desmame)
@@ -12,21 +11,21 @@ Bacteriana,8,Pleuropneumonia,Actinobacillus pleuropneumoniae,Dispneia; Tosse; Fe
 Bacteriana,9,Pneumonia bacteriana secundária,"Pasteurella multocida, Trueperella pyogenes, Streptococcus suis e outras bactérias oportunistas",Tosse; Dispneia; Febre; Secreção nasal; Secreção ocular; Letargia; Baixo desempenho,Crescimento
 Bacteriana,10,Rinite atrófica,Bordetella bronchiseptica e Pasteurella multocida toxigênica,Espirros; Secreção nasal; Secreção ocular; Deformação do focinho; Retardo de crescimento; Rinite,Maternidade e creche
 Bacteriana,11,Pneumonia enzoótica suína,Mycoplasma hyopneumoniae,Tosse crônica; Dispneia; Retardo de crescimento; Letargia; Pneumonia; Sinais respiratórios,Crescimento e terminação
-Infecciosas,12,Doença de Glässer,Glaesserella parasuis (antigo Haemophilus parasuis),Febre; Dispneia; Claudicação; Artrite; Edema articular; Letargia,Creche
-Infecciosas,13,Meningite,"Diversos agentes (Streptococcus suis, Glaesserella parasuis, Escherichia coli, entre outros)",Convulsões; Desorientação; Rigidez muscular; Sinais neurológicos; Morte súbita,Creche
-Infecciosas,14,Septicemia,"Diversos agentes bacterianos (Streptococcus suis, Escherichia coli, Salmonella spp., Glaesserella parasuis, entre outros)",Morte súbita; Febre alta; Apatia intensa; Letargia; Extremidades cianóticas,Maternidade e creche
-Infecciosas,15,Artrite,"Streptococcus suis, Mycoplasma hyosynoviae, Erysipelothrix rhusiopathiae, Glaesserella parasuis",Edema articular; Claudicação,Creche e crescimento
-Infecciosas,16,Endocardite,"Erysipelothrix rhusiopathiae, Streptococcus suis, Trueperella pyogenes",Dispneia; Fraqueza; Retardo de crescimento; Letargia; Assintomático,Terminação
-Virais,17,Circovirose suína,Circovírus suíno tipo 2 (Porcine circovirus type 2 – PCV2),Emagrecimento; Diarreia; Palidez; Linfonodos aumentados; Letargia; Perda de apetite; Dermatite,Creche e crescimento
-Virais,18,Doença de Aujeszky,Herpesvírus suíno tipo 1 (Suid herpesvirus 1 – SuHV-1),Sinais neurológicos; Tremores musculares; Convulsões; Desorientação; Alta mortalidade em leitões,Todas as fases
-Virais,19,Parvovirose suína,Parvovírus suíno (Porcine parvovirus – PPV1),Falhas reprodutivas; Fetos mumificados; Retorno ao cio; Abortos,Reprodutores (gestação)
-Virais,20,Peste suína clássica,Vírus da Peste Suína Clássica (Classical swine fever virus – CSFV),Febre alta; Hemorragias cutâneas; Apatia; Letargia; Perda de apetite; Alta mortalidade,Todas as fases
-Virais,21,Rotavirose suína,"Rotavírus (principalmente grupos A, B e C)",Diarreia; Desidratação; Fraqueza; Letargia,Maternidade
-Parasitárias,22,Cisticercose,Taenia solium (forma larval: Cysticercus cellulosae),Assintomático; Leve perda de peso,Terminação
-Parasitárias,23,Sarna,Sarcoptes scabiei var. suis,Coceira intensa; Lesões cutâneas; Baixo desempenho; Inquietação; Edema,Todas as fases
-Parasitárias,24,Toxoplasmose,Toxoplasma gondii,Abortos; Leitões fracos ao nascimento; Letargia; Assintomático,Todas as fases
-Outros,25,Coccidiose suína,Cystoisospora suis (antigo Isospora suis),Diarreia; Desidratação; Retardo de crescimento; Letargia,Maternidade
-Outros,26,Febre aftosa,Vírus da Febre Aftosa (Foot-and-mouth disease virus – Aphthovirus),Febre; Vesículas orais e podais; Claudicação; Salivação intensa; Lesões cutâneas; Perda de apetite,Todas as fases
+Bacteriana,12,Doença de Glässer,Glaesserella parasuis (antigo Haemophilus parasuis),Febre; Dispneia; Claudicação; Artrite; Edema articular; Letargia,Creche
+Bacteriana,13,Meningite,"Diversos agentes (Streptococcus suis, Glaesserella parasuis, Escherichia coli, entre outros)",Convulsões; Desorientação; Rigidez muscular; Sinais neurológicos; Morte súbita,Creche
+Bacteriana,14,Septicemia,"Diversos agentes bacterianos (Streptococcus suis, Escherichia coli, Salmonella spp., Glaesserella parasuis, entre outros)",Morte súbita; Febre alta; Apatia intensa; Letargia; Extremidades cianóticas,Maternidade e creche
+Bacteriana,15,Artrite,"Streptococcus suis, Mycoplasma hyosynoviae, Erysipelothrix rhusiopathiae, Glaesserella parasuis",Edema articular; Claudicação,Creche e crescimento
+Bacteriana,16,Endocardite,"Erysipelothrix rhusiopathiae, Streptococcus suis, Trueperella pyogenes",Dispneia; Fraqueza; Retardo de crescimento; Letargia; Assintomático,Terminação
+Viral,17,Circovirose suína,Circovírus suíno tipo 2 (Porcine circovirus type 2 – PCV2),Emagrecimento; Diarreia; Palidez; Linfonodos aumentados; Letargia; Perda de apetite; Dermatite,Creche e crescimento
+Viral,18,Doença de Aujeszky,Herpesvírus suíno tipo 1 (Suid herpesvirus 1 – SuHV-1),Sinais neurológicos; Tremores musculares; Convulsões; Desorientação; Alta mortalidade em leitões,Todas as fases
+Viral,19,Parvovirose suína,Parvovírus suíno (Porcine parvovirus – PPV1),Falhas reprodutivas; Fetos mumificados; Retorno ao cio; Abortos,Reprodutores (gestação)
+Viral,20,Peste suína clássica,Vírus da Peste Suína Clássica (Classical swine fever virus – CSFV),Febre alta; Hemorragias cutâneas; Apatia; Letargia; Perda de apetite; Alta mortalidade,Todas as fases
+Viral,21,Rotavirose suína,"Rotavírus (principalmente grupos A, B e C)",Diarreia; Desidratação; Fraqueza; Letargia,Maternidade
+Parasitária,22,Cisticercose,Taenia solium (forma larval: Cysticercus cellulosae),Assintomático; Leve perda de peso,Terminação
+Parasitária,23,Sarna,Sarcoptes scabiei var. suis,Coceira intensa; Lesões cutâneas; Baixo desempenho; Inquietação; Edema,Todas as fases
+Parasitária,24,Toxoplasmose,Toxoplasma gondii,Abortos; Leitões fracos ao nascimento; Letargia; Assintomático,Todas as fases
+Parasitária,25,Coccidiose suína,Cystoisospora suis (antigo Isospora suis),Diarreia; Desidratação; Retardo de crescimento; Letargia,Maternidade
+Viral,26,Febre aftosa,Vírus da Febre Aftosa (Foot-and-mouth disease virus – Aphthovirus),Febre; Vesículas orais e podais; Claudicação; Salivação intensa; Lesões cutâneas; Perda de apetite,Todas as fases
 Bacteriana,27,Actinobacilose,Actinobacillus suis,Artrite; Pneumonia,Todas as fases
 Bacteriana,28,Antraz/Carbúnculo Hemático,Bacillus anthracis,Morte súbita,Não informado no documento
 Bacteriana,29,Artrite por Mycoplasma,Mycoplasma hyosynoviae e Mycoplasma hyorhinis,Artrite,Não informado no documento
@@ -73,13 +72,13 @@ Viral,69,Raiva,Rabies lyssavirus,Não informado no documento,Não informado no d
 Viral,70,Senecavirus A,Senecavirus A,Não informado no documento,Não informado no documento
 Viral,71,Torque Teno Virus (TTV),Torque teno sus virus,Não informado no documento,Não informado no documento
 Viral,72,Varíola suína,Swinepox virus,Não informado no documento,Não informado no documento
-Parasitárias,73,Ascaridíase,Ascaris suum,Não informado no documento,Não informado no documento
-Parasitárias,74,Criptosporidiose,Cryptosporidium spp.,Diarreia,Não informado no documento
-Parasitárias,75,Hyostrongilose,Hyostrongylus rubidus,Não informado no documento,Não informado no documento
-Parasitárias,76,Infestação por piolhos,Haematopinus suis,Anemia,Não informado no documento
-Parasitárias,77,Metastrongilose,Metastrongylus spp.,Pneumonia,Não informado no documento
-Parasitárias,78,Tricuríase,Trichuris suis,Diarreia,Não informado no documento
-Parasitárias,79,Triquinelose,Trichinella spp.,Não informado no documento,Não informado no documento
+Parasitária,73,Ascaridíase,Ascaris suum,Não informado no documento,Não informado no documento
+Parasitária,74,Criptosporidiose,Cryptosporidium spp.,Diarreia,Não informado no documento
+Parasitária,75,Hyostrongilose,Hyostrongylus rubidus,Não informado no documento,Não informado no documento
+Parasitária,76,Infestação por piolhos,Haematopinus suis,Anemia,Não informado no documento
+Parasitária,77,Metastrongilose,Metastrongylus spp.,Pneumonia,Não informado no documento
+Parasitária,78,Tricuríase,Trichuris suis,Diarreia,Não informado no documento
+Parasitária,79,Triquinelose,Trichinella spp.,Não informado no documento,Não informado no documento
 Deficiência Nutricional,80,Anemia Ferropriva,Não informado no documento,Anemia; Palidez,Não informado no documento
 Deficiência Nutricional,81,Deficiência de biotina,Não informado no documento,Claudicação; Alopecia; Fissuras nos cascos,Não informado no documento
 Deficiência Nutricional,82,Deficiência de vitamina E e selênio,Não informado no documento,Morte súbita,Creche
