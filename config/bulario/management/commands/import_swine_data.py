@@ -2,6 +2,8 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 
 from bulario.data_pipeline import generate_clinical_dataset, generate_dataset, generate_ml_dataset, import_base_data
+from bulario.data_pipeline import FILES, read_structured_csv
+from bulario.medication_quality import audit_medication_rows
 
 
 class Command(BaseCommand):
@@ -22,6 +24,9 @@ class Command(BaseCommand):
         try:
             summary = import_base_data(settings.BASE_DIR.parent / "base_data", clear=options["clear"])
             self.stdout.write(self.style.SUCCESS("Importação concluída: " + ", ".join(f"{v} {k}" for k, v in summary.items())))
+            filename, marker = FILES["farmacos"]
+            quality = audit_medication_rows(read_structured_csv(settings.BASE_DIR.parent / "base_data" / filename, marker))
+            self.stdout.write(f"Fármacos incompletos bloqueados: {quality['total_farmacos_bloqueados']}. Link da bula opcional.")
             if options["generate"]:
                 output = settings.BASE_DIR.parent / options["output"]
                 generation = generate_dataset(output, total=options["total"], seed=options["seed"])

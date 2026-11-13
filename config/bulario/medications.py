@@ -1,9 +1,11 @@
 from .models import Farmaco, Indicacao
+from .medication_quality import complete_medication_condition
 
 
 def select_medications(hypotheses, limit=3):
     positions = {hypothesis["id"]: index for index, hypothesis in enumerate(hypotheses)}
     indications = Indicacao.objects.filter(
+        complete_medication_condition("farmaco__"),
         doenca_id__in=positions, farmaco__isnull=False,
     ).select_related("doenca", "farmaco")
     candidates = {}
@@ -24,7 +26,7 @@ def select_medications(hypotheses, limit=3):
             item["doencas_associadas"].append(indication.doenca.nome)
         item["evidencias_associacao"].append({"indicacao_id": indication.id,
             "doenca": indication.doenca.nome, "tipo": indication.tipo, "prioridade": indication.prioridade})
-    linked = Farmaco.objects.filter(doencas_relacionadas__id__in=positions).prefetch_related("doencas_relacionadas").distinct()
+    linked = Farmaco.objects.completos().filter(doencas_relacionadas__id__in=positions).prefetch_related("doencas_relacionadas").distinct()
     for medication in linked:
         if medication.id in candidates:
             continue

@@ -3,7 +3,7 @@ from .models import Farmaco
 
 def inference_result(caso, hipoteses, mecanismo, incluir_indicacoes=True, **metadata):
     disease_ids = [item["id"] for item in hipoteses]
-    medications = (Farmaco.objects.filter(doencas_relacionadas__id__in=disease_ids).distinct()[:3]
+    medications = (Farmaco.objects.completos().filter(doencas_relacionadas__id__in=disease_ids).distinct()[:3]
                    if incluir_indicacoes else [])
     return {
         "mecanismo": mecanismo,

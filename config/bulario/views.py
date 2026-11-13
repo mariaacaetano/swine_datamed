@@ -39,6 +39,9 @@ class FarmacoViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = FarmacoSerializer
     lookup_field = "id"
 
+    def get_queryset(self):
+        return super().get_queryset().completos()
+
     @action(detail=False, methods=["get"])
     def buscar(self, request):
         query = request.query_params.get("q", "")
@@ -105,7 +108,7 @@ class PreparacaoDadosView(APIView):
         latest = GeracaoDataset.objects.first()
         return Response({
             "base": {"doencas": Doenca.objects.count(), "sintomas": Sintoma.objects.count(),
-                     "variaveis": Variavel.objects.count(), "farmacos": Farmaco.objects.count(), "vacinas": Vacina.objects.count()},
+                     "variaveis": Variavel.objects.count(), "farmacos": Farmaco.objects.completos().count(), "vacinas": Vacina.objects.count()},
             "ultima_geracao": GeracaoDatasetSerializer(latest).data if latest else None,
         })
 
@@ -147,7 +150,7 @@ class PipelineStatusView(APIView):
 class CatalogoView(APIView):
     def get(self, request):
         return Response({
-            "farmacos": FarmacoSerializer(Farmaco.objects.prefetch_related("doencas_relacionadas__sintomas"), many=True).data,
+            "farmacos": FarmacoSerializer(Farmaco.objects.completos().prefetch_related("doencas_relacionadas__sintomas"), many=True).data,
             "sintomas": SintomaSerializer(Sintoma.objects.all(), many=True).data,
             "doencas": DoencaSerializer(Doenca.objects.prefetch_related("sintomas"), many=True).data,
             "variaveis": VariavelSerializer(Variavel.objects.all(), many=True).data,
