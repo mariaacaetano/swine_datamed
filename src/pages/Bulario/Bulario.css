@@ -257,7 +257,7 @@
 .package-card small {
   display: block;
   margin-top: 10px;
-  color: rgba(244, 245, 238, 0.66);
+  color: var(--theme-muted);
   font-size: 17px;
   font-weight: 700;
   line-height: 1.45;

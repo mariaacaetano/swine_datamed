@@ -8,9 +8,13 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+.vite/
 dist
 dist-ssr
 *.local
+.env
+.env.*
+!.env.example
 .venv/
 venv*/
 __pycache__/
@@ -20,6 +24,7 @@ config/media/
 config/config/local_email_settings.py
 generated_data/
 config/machine/artifacts/*.joblib
+config/machine/artifacts_states/*.joblib
 
 # Editor directories and files
 .vscode/*

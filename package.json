@@ -7,6 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
+    "test": "node --test src/components/FloatingCompass/voiceRecognition.test.mjs",
+    "test:backend": "python3 config/manage.py test --noinput",
+    "test:browser": "node scripts/browser-smoke.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

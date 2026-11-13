@@ -10,6 +10,7 @@ from django.db import transaction
 
 from .models import CasoClinico, Doenca, Farmaco, GeracaoDataset, Indicacao, Sintoma, Vacina, Variavel
 from .utils import clean_text, is_filled, normalize, split_list
+from .provenance import base_version
 
 
 FILES = {
@@ -74,6 +75,7 @@ def import_base_data(base_dir, clear=False):
         Variavel.objects.all().delete()
 
     disease_map = {}
+    symptom_links = {}
     for row in tables["doencas"]:
         name = row["DOENÇA PADRONIZADA"]
         if not is_filled(name):
@@ -84,9 +86,10 @@ def import_base_data(base_dir, clear=False):
             "fase_comum": row.get("FASE COMUM", ""), "sintomas_texto": row.get("SINTOMAS PADRONIZADOS", ""),
         })
         disease_map[normalize(name)] = disease
+        symptom_links[disease.id] = set()
         for symptom_name in split_list(row.get("SINTOMAS PADRONIZADOS")):
             symptom, _ = Sintoma.objects.get_or_create(nome=symptom_name)
-            disease.sintomas.add(symptom)
+            symptom_links[disease.id].add(symptom.id)
 
     for row in tables["sintomas"]:
         name = row["SINTOMA PADRONIZADO"]
@@ -96,7 +99,10 @@ def import_base_data(base_dir, clear=False):
         for disease_name in split_list(row.get("DOENÇAS ASSOCIADAS PADRONIZADAS")):
             disease = _best_disease(disease_name, disease_map)
             if disease:
-                disease.sintomas.add(symptom)
+                symptom_links[disease.id].add(symptom.id)
+
+    for disease in disease_map.values():
+        disease.sintomas.set(symptom_links[disease.id])
 
     for row in tables["variaveis"]:
         name = row["Variável"]
@@ -436,6 +442,7 @@ def generate_ml_dataset(output_dir, variations_per_combination=100, seed=42):
 
     total = sum(counts.values())
     summary = {"tipo": "machine_learning", "total": total, "semente": seed,
+               "versao_base": base_version(),
                "variacoes_por_combinacao": variations_per_combination,
                "combinacoes": combination_counts, "registros": counts,
                "atributos_sintomas": len(all_symptoms), "atributos_clinicos": len(variables),

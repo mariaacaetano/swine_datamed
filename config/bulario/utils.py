@@ -3,6 +3,7 @@ import unicodedata
 
 
 EMPTY_VALUES = {"", "-", "completar", "na", "n/a", "null", "none"}
+MISSING_SYMPTOM_NAMES = {"nao informado no documento", "nao informado", "nao especificado", "sem informacao"}
 
 
 def clean_text(value):
@@ -23,6 +24,15 @@ def normalize(value):
 
 def is_filled(value):
     return normalize(value) not in EMPTY_VALUES
+
+
+def is_clinical_symptom(value):
+    """Marcadores de informação faltante não são sinais clínicos."""
+    return is_filled(value) and normalize(value).replace('_', ' ') not in MISSING_SYMPTOM_NAMES
+
+
+def clinical_symptoms(disease):
+    return [s for s in disease.sintomas.all() if is_clinical_symptom(s.nome)]
 
 
 def split_list(value):

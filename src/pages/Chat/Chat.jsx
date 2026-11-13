@@ -3,56 +3,33 @@ import { Link } from "react-router-dom"
 import { BarChart3, Bot, Check, Clock3, Mic, Pencil, Plus, Send, ShieldCheck, Sparkles, Trash2, UserRound, X } from "lucide-react"
 import InferenceModelSwitch from "../../components/InferenceModelSwitch/InferenceModelSwitch"
 import { useInferenceModel } from "../../components/InferenceModelSwitch/useInferenceModel"
-import { inferir } from "../../services/inferencia"
+import { useTriage, initialMessage, createConversation as createChat } from "../../hooks/useTriage"
+import { useAuthScope } from "../../hooks/useAuthScope"
+import ClinicalContext from "../../components/ClinicalContext/ClinicalContext"
 import "./Chat.css"
 
-const storageKey = "swine-datamed-chats"
-const minimumThinkingTimeMs = 1200
-const initialMessage = {
-  role: "assistant",
-  text: "Olá, eu sou o Swine DataMed. Descreva os sintomas, fase produtiva, idade, temperatura e evolução do caso para eu organizar uma triagem assistida.",
-}
-
-function createPendingMessage() {
-  return {
-    id: globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(16).slice(2)}`,
-    role: "assistant",
-    text: "Pensando...",
-    pending: true,
-  }
-}
-
-function createChat(title = "Nova triagem") {
-  const now = new Date().toISOString()
-  return {
-    id: globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(16).slice(2)}`,
-    title,
-    createdAt: now,
-    updatedAt: now,
-    messages: [initialMessage],
-  }
-}
-
-function loadChats() {
+function loadChats(scope) {
   try {
-    const saved = JSON.parse(localStorage.getItem(storageKey) || "[]")
-    return Array.isArray(saved) && saved.length ? saved : [createChat()]
+    const storage = scope === "guest" ? sessionStorage : localStorage
+    const saved = JSON.parse(storage.getItem(`swine-chats-v4:${scope}`) || "[]")
+    if (!Array.isArray(saved)) return [createChat()]
+    const valid = saved.filter((chat) => chat.id && Array.isArray(chat.messages)).map((chat) => ({
+      ...chat, messages: chat.messages.filter((message) => !message.pending),
+    }))
+    return valid.length ? valid : [createChat()]
   } catch {
     return [createChat()]
   }
 }
 
-function titleFromMessage(text) {
-  return text.trim().slice(0, 42) || "Nova triagem"
-}
-
-function minimumThinkingTime() {
-  return new Promise((resolve) => window.setTimeout(resolve, minimumThinkingTimeMs))
-}
-
 function Chat() {
+  const scope = useAuthScope()
+  return <ChatSession key={scope} storageScope={scope} />
+}
+
+function ChatSession({ storageScope }) {
   const [inferenceModel, setInferenceModel] = useInferenceModel()
-  const initialChats = useMemo(() => loadChats(), [])
+  const initialChats = useMemo(() => loadChats(storageScope), [storageScope])
   const recognitionRef = useRef(null)
   const messagesRef = useRef(null)
   const [chats, setChats] = useState(initialChats)
@@ -65,11 +42,16 @@ function Chat() {
   const activeChat = chats.find((chat) => chat.id === activeChatId) || chats[0]
   const messages = activeChat?.messages || [initialMessage]
   const chatStarted = messages.some((message) => message.role === "user")
-  const activeInferenceModel = activeChat?.inferenceModel || (chatStarted ? "regras" : inferenceModel)
+  const activeInferenceModel = activeChat?.inferenceModel || (chatStarted ? "machine_learning" : inferenceModel)
 
   useEffect(() => {
-    localStorage.setItem(storageKey, JSON.stringify(chats))
-  }, [chats])
+    try {
+      const storage = storageScope === "guest" ? sessionStorage : localStorage
+      storage.setItem(`swine-chats-v4:${storageScope}`, JSON.stringify(chats))
+    } catch {
+      return
+    }
+  }, [chats, storageScope])
 
   useEffect(() => {
     const list = messagesRef.current
@@ -88,68 +70,14 @@ function Chat() {
     )
   }
 
+  const { send, busy } = useTriage(activeChat, updateActiveChat, activeInferenceModel)
   const sendMessage = async (text = input) => {
-    const content = text.trim()
-    const chatId = activeChat?.id
-    if (!content || !chatId) return
-    const pendingMessage = createPendingMessage()
-    const selectedModel = activeInferenceModel
-    const clinicalContext = activeChat?.clinicalContext || ""
-    const askedSymptom = messages[messages.length - 1]?.followUpSymptom || ""
-
-    updateActiveChat((chat) => {
-      const shouldRename = chat.title === "Nova triagem" && chat.messages.length === 1
-      return {
-        ...chat,
-        inferenceModel: chat.inferenceModel || selectedModel,
-        title: shouldRename ? titleFromMessage(content) : chat.title,
-        messages: [...chat.messages, { role: "user", text: content }, pendingMessage],
-      }
-    })
+    if (busy || !text.trim()) return
     setInput("")
-
-    try {
-      const [resultado] = await Promise.all([
-        inferir(content, selectedModel, { context: clinicalContext, askedSymptom }),
-        minimumThinkingTime(),
-      ])
-      setChats((current) =>
-        current.map((chat) =>
-          chat.id === chatId
-            ? {
-                ...chat,
-                updatedAt: new Date().toISOString(),
-                clinicalContext: resultado.contexto_clinico,
-                messages: chat.messages.map((message) =>
-                  message.id === pendingMessage.id
-                    ? {
-                        role: "assistant",
-                        text: resultado.resposta,
-                        followUpSymptom: resultado.pergunta_complementar?.sintoma || "",
-                      }
-                    : message
-                ),
-              }
-            : chat
-        )
-      )
-    } catch (error) {
-      setChats((current) =>
-        current.map((chat) =>
-          chat.id === chatId
-            ? {
-                ...chat,
-                messages: chat.messages.map((message) =>
-                  message.id === pendingMessage.id
-                    ? { role: "assistant", text: `Não foi possível consultar o servidor: ${error.message}` }
-                    : message
-                ),
-              }
-            : chat
-        )
-      )
-    }
+    await send(text)
   }
+
+  useEffect(() => () => recognitionRef.current?.stop(), [])
 
   const createNewChat = () => {
     const chat = createChat()
@@ -370,6 +298,7 @@ function Chat() {
             ))}
           </div>
 
+          <ClinicalContext key={activeChatId} onSubmit={send} disabled={busy} result={activeChat?.result} />
           <form
             className="chat-input"
             onSubmit={(event) => {
@@ -387,13 +316,14 @@ function Chat() {
                 }
               }}
               placeholder="Digite sintomas, fase, idade, temperatura, quantidade de animais afetados..."
+              disabled={busy}
               rows={3}
             />
             <div>
               <button type="button" className={listening ? "is-listening" : ""} onClick={toggleVoice} aria-label="Usar voz">
                 <Mic size={20} />
               </button>
-              <button type="submit" aria-label="Enviar mensagem">
+              <button type="submit" disabled={busy || !input.trim()} aria-label="Enviar mensagem">
                 <Send size={20} />
               </button>
             </div>

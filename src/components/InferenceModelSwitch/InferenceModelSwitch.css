@@ -16,6 +16,7 @@
 
 .inference-switch > div {
   display: inline-flex;
+  flex-wrap: wrap;
   padding: 3px;
   border: 1px solid rgba(244, 245, 238, 0.14);
   border-radius: 9px;

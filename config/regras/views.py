@@ -1,9 +1,9 @@
-from rest_framework.response import Response
-from rest_framework.views import APIView
-
-from .engine import MotorRegras
+from bulario.views import TriagemView
 
 
-class InferenciaRegrasView(APIView):
-    def post(self, request):
-        return Response(MotorRegras().inferir(request.data.get("texto", "")))
+class InferenciaRegrasView(TriagemView):
+    engine_key = "regras"
+
+
+class InferenciaRegrasEncadeadasView(TriagemView):
+    engine_key = "regras_encadeadas"

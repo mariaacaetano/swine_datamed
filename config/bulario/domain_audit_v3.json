@@ -1,0 +1,53 @@
+{
+  "criado_em": "2026-10-12T23:22:29.768138+00:00",
+  "doencas_cadastradas": 112,
+  "doencas_com_perfil_sintomatico_documentado": 80,
+  "sintomas_cadastrados": 80,
+  "sintomas_clinicos_documentados": 79,
+  "marcadores_sem_informacao": [
+    "Não informado no documento"
+  ],
+  "doencas_sem_sintomas_documentados": [
+    "Aflatoxicose",
+    "Ascaridíase",
+    "Coronavirus respiratório suíno",
+    "Doença Vesicular do Suíno",
+    "Doença de Teschen",
+    "Ebola",
+    "Encefalite Japonesa B",
+    "Enterovirus",
+    "Epiteliogênese imperfeita",
+    "Estomatite vesicular",
+    "Exantema Vesicular",
+    "Hepatite E",
+    "Hyostrongilose",
+    "Hérnias",
+    "Intoxicação por ionóforos",
+    "Intoxicação por sal",
+    "Intoxicação por zearalenona",
+    "Peste Suína Africana",
+    "Prolapso retal",
+    "Prolapso uterino",
+    "Queimadura por baixas temperaturas",
+    "Queimaduras solares",
+    "Raiva",
+    "Senecavirus A",
+    "Splay leg",
+    "Torque Teno Virus (TTV)",
+    "Triquinelose",
+    "Trombocitopenia púrpura",
+    "Tétano",
+    "Varíola suína",
+    "Vícios",
+    "Úlceras nas articulações"
+  ],
+  "sha256_fontes": {
+    "BaseDoencas.csv": "6fbdaff9c78210cbe9c2efc3bb3adea37c048789d73a216cb21fdcf0b1fde078",
+    "BaseVariaveis.csv": "afb48a18cd78123d2b7d3ea3ba915615f5dee1a0472acb44b3bf9ae8d15377c6",
+    "BularioFarmacos.csv": "b7e92ac958da0f99c4b23813412f434968a6c66e121277ec71b3923cd53297f9",
+    "BularioVacinas.csv": "cab8c95e7e80f8346d9b87f7ee663917774c99311a88cc9dca74a423efcceb77",
+    "FarmacoDoenca.csv": "b08d9fe9e47013593d7d4f1847dd22048a12d8a04b5e118e2a5a538e4c664bab",
+    "SintomasDoencas.csv": "aab96e0fef157eec302670ae365a2be0b7a04a9ffa5824e6dddc63c96fbf6fd8"
+  },
+  "interpretacao": "Marcadores de informação faltante são preservados na origem, mas não fornecem sinais, evidências ou perfis diagnósticos. As lacunas não autorizam inventar associações; esta auditoria não valida a completude ou a correção clínica dos demais vínculos."
+}

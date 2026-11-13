@@ -39,8 +39,8 @@
   border: 0;
   color: white;
   background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0%, #000000 100%),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.56)),
+    linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.28) 78%, #000000 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.84) 0%, rgba(0, 0, 0, 0.72) 35%, rgba(0, 0, 0, 0.3) 68%, rgba(0, 0, 0, 0.08) 100%),
     url("/swine_pinterest/services_hero.png");
   background-size: cover;
   background-position: center;

@@ -57,8 +57,8 @@ html, body { height: 100%; }
 :root[data-theme="light"] .app-main :is(input,textarea,select):focus { border-color: var(--theme-green) !important; box-shadow: 0 0 0 3px rgba(47,104,66,.12) !important; }
 
 /* Botões mantêm a linguagem do dark; Compass e Calc continuam sublinhados. */
-:root[data-theme="light"] .app-main button:not(.perfil-tab):not(.is-active) { color: #fff !important; background-color: var(--theme-green-deep) !important; box-shadow: none !important; }
-:root[data-theme="light"] .app-main button :is(span,strong,svg) { color: inherit !important; }
+:root[data-theme="light"] .app-main button:not(.perfil-tab):not(.suinos-pig-card):not(.is-active):not(.is-listening) { color: #fff !important; background-color: var(--theme-green-deep) !important; box-shadow: none !important; }
+:root[data-theme="light"] .app-main button:not(.suinos-pig-card) :is(span,strong,svg) { color: inherit !important; }
 :root[data-theme="light"] :is(.swine-hero__actions a:first-child,.services-feature a) { background: var(--theme-green-deep) !important; color: #fff !important; box-shadow: none !important; }
 :root[data-theme="light"] .swine-hero__actions a:nth-child(2) { border: 1px solid rgba(47,104,66,.28) !important; background: var(--theme-green-soft) !important; color: var(--theme-green-deep) !important; box-shadow: none !important; }
 :root[data-theme="light"] :is(.compass-main-action,.calc-main-action) { min-height: 46px; border: 0 !important; border-radius: 8px !important; padding: 0 18px !important; background: var(--theme-green-deep) !important; color: #fff !important; box-shadow: none !important; }
@@ -211,10 +211,20 @@ html, body { height: 100%; }
 }
 
 /* Formularios, perfil e suinos compartilham borda, raio e sombra discretos. */
-:root[data-theme="light"] :is(.login-brand,.login-form,.cadastro-brand,.cadastro-form,.perfil-card,.suinos-shell,.suinos-panel,.suinos-stats article) {
+:root[data-theme="light"] :is(.login-brand,.login-form,.cadastro-brand,.cadastro-form,.perfil-card,.suinos-panel,.suinos-stats article) {
   border-color: var(--theme-border) !important;
   background: var(--theme-surface) !important;
   box-shadow: 0 10px 28px var(--theme-shadow) !important;
+}
+:root[data-theme="light"] .suinos-page {
+  background:
+    linear-gradient(90deg, rgba(244,247,242,.9), rgba(244,247,242,.72) 46%, rgba(244,247,242,.38)),
+    url("/swine_pinterest/services_hero.png") center / cover !important;
+}
+:root[data-theme="light"] .suinos-header-icon {
+  border-color: var(--theme-border);
+  background: rgba(255,255,255,.88);
+  color: var(--theme-accent);
 }
 :root[data-theme="light"] .perfil-page {
   background:
@@ -247,10 +257,26 @@ html, body { height: 100%; }
 :root[data-theme="light"] .perfil-tab svg {
   color: currentColor !important;
 }
-:root[data-theme="light"] :is(.suinos-pig-card,.suinos-med-list article,.perfil-recent-list article) {
+:root[data-theme="light"] :is(.suinos-med-list article,.perfil-recent-list article) {
   border-color: var(--theme-border) !important;
   background: var(--theme-surface-soft) !important;
   color: var(--theme-text) !important;
+}
+:root[data-theme="light"] .app-main button.suinos-pig-card {
+  border-color: var(--theme-border) !important;
+  background: var(--theme-surface-soft) !important;
+  color: var(--theme-text) !important;
+}
+:root[data-theme="light"] .app-main .suinos-pig-card strong {
+  color: var(--theme-text) !important;
+}
+:root[data-theme="light"] .app-main .suinos-pig-card small {
+  color: var(--theme-accent) !important;
+}
+:root[data-theme="light"] .app-main .suinos-pig-card.suinos-pig-card-active {
+  border-color: var(--theme-accent) !important;
+  background: var(--theme-green-soft) !important;
+  box-shadow: inset 3px 0 0 var(--theme-accent) !important;
 }
 
 /* Compass flutuante acompanha o tema em vez de permanecer preto. */
@@ -289,6 +315,10 @@ html, body { height: 100%; }
 :root[data-theme="light"] .floating-compass__panel footer button {
   color: #fff;
   background: var(--theme-green-deep);
+}
+:root[data-theme="light"] :is(.chat-input,.floating-compass__panel) button.is-listening {
+  color: #19381f !important;
+  background: #f3bacb !important;
 }
 :root[data-theme="light"] .floating-compass__hint {
   border-color: var(--theme-border);

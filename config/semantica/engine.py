@@ -1,32 +1,43 @@
 from collections import defaultdict
 
 from bulario.clinical_input import context_adjustment, extract_clinical_case
-from bulario.models import Doenca, Farmaco
+from bulario.models import Doenca
+from bulario.contracts import inference_result
+from bulario.utils import clinical_symptoms
 
 
 class MotorSemantico:
-    """Percorre o grafo Sintoma -> Doença -> Fármaco mantido pelo ORM."""
+    """Consulta arestas diretas Sintoma -> Doença e ranqueia por Jaccard.
+
+    Obtém a mesma interseção do motor heurístico por consulta inversa.
+    Não executa inferência multissalto nem propagação; os fármacos são
+    recuperados após o ranking. A comparação muda consulta e métrica,
+    portanto não isola o efeito da representação em grafo.
+    """
 
     nome = "semantica"
 
-    def inferir(self, texto, limite=5):
-        caso = extract_clinical_case(texto)
+    def inferir(self, texto, limite=5, incluir_indicacoes=True):
+        return self.inferir_caso(extract_clinical_case(texto), limite, incluir_indicacoes)
+
+    def inferir_caso(self, caso, limite=5, incluir_indicacoes=True):
         sintomas = caso["sintomas"]
-        caminhos = defaultdict(list)
+        correspondencias = defaultdict(list)
         for sintoma in sintomas:
             for doenca in sintoma.doencas.all():
-                caminhos[doenca.id].append(sintoma.nome)
+                correspondencias[doenca.id].append(sintoma.nome)
 
         doencas = {
             item.id: item
-            for item in Doenca.objects.prefetch_related("sintomas").filter(id__in=caminhos)
+            for item in Doenca.objects.prefetch_related("sintomas").filter(id__in=correspondencias)
         }
         hipoteses = []
-        for doenca_id, evidencias in caminhos.items():
+        for doenca_id, evidencias in correspondencias.items():
             doenca = doencas[doenca_id]
-            total_doenca = doenca.sintomas.count()
+            total_doenca = len(clinical_symptoms(doenca))
             uniao = len(sintomas) + total_doenca - len(evidencias)
-            similaridade = len(evidencias) / max(uniao, 1)
+            # Uma candidata tem ao menos uma aresta, logo a união é positiva.
+            similaridade = len(evidencias) / uniao
             score = max(0, min(1, similaridade + (0.25 * context_adjustment(doenca, caso))))
             hipoteses.append({
                 "id": doenca.id,
@@ -35,28 +46,14 @@ class MotorSemantico:
                 "fase_comum": doenca.fase_comum,
                 "score": round(score, 6),
                 "evidencias": evidencias,
-                "caminhos_semanticos": [f"{nome} -> {doenca.nome}" for nome in evidencias],
+                "arestas_semanticas": [f"{nome} -> {doenca.nome}" for nome in evidencias],
             })
+
+        # Alias legado: cada entrada representa uma única aresta.
+        for hipotese in hipoteses:
+            hipotese["caminhos_semanticos"] = hipotese["arestas_semanticas"]
 
         hipoteses.sort(key=lambda item: (-item["score"], item["nome"]))
         hipoteses = hipoteses[:limite]
-        ids = [item["id"] for item in hipoteses]
-        farmacos = Farmaco.objects.filter(doencas_relacionadas__id__in=ids).distinct()[:3]
-        return {
-            "mecanismo": self.nome,
-            "sintomas_reconhecidos": [item.nome for item in sintomas],
-            "sintomas_negados": caso["sintomas_negados"],
-            "sintomas_incertos": caso["sintomas_incertos"],
-            "variaveis_reconhecidas": caso["variaveis"],
-            "alertas": caso["alertas"],
-            "hipoteses": hipoteses,
-            "farmacos_relacionados": [
-                {
-                    "nome_comercial": item.nome_comercial,
-                    "principio_ativo": item.principio_ativo,
-                    "via_administracao": item.via_administracao,
-                    "carencia": item.carencia,
-                }
-                for item in farmacos
-            ],
-        }
+        return inference_result(caso, hipoteses, self.nome, incluir_indicacoes,
+                                tipo_score="similaridade_ajustada", calibracao_clinica=False)

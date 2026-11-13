@@ -1,4 +1,4 @@
-from django.db.models import Count
+from django.db.models import Count, Prefetch
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
@@ -7,9 +7,11 @@ from rest_framework.response import Response
 
 from .models import MedicationApplication, Pig
 from .serializers import MedicationApplicationSerializer, PigSerializer
+from bulario.pagination import StandardPagination
 
 
 class PigViewSet(viewsets.ModelViewSet):
+    pagination_class = StandardPagination
     serializer_class = PigSerializer
     permission_classes = [IsAuthenticated]
     parser_classes = [JSONParser, FormParser, MultiPartParser]
@@ -18,7 +20,8 @@ class PigViewSet(viewsets.ModelViewSet):
         return (
             Pig.objects.filter(owner=self.request.user)
             .annotate(medications_count=Count("medications"))
-            .prefetch_related("medications")
+            .prefetch_related(Prefetch("medications", queryset=MedicationApplication.objects.order_by("-applied_at", "-created_at"), to_attr="ordered_medications"))
+            .order_by("name", "tag", "id")
         )
 
     def perform_create(self, serializer):
@@ -46,6 +49,7 @@ class PigViewSet(viewsets.ModelViewSet):
 
 
 class MedicationApplicationViewSet(viewsets.ModelViewSet):
+    pagination_class = StandardPagination
     serializer_class = MedicationApplicationSerializer
     permission_classes = [IsAuthenticated]
 

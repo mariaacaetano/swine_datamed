@@ -1,4 +1,5 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api"
+import { requestJson } from "./api"
+export { requestJson } from "./api"
 const AUTH_STORAGE_KEY = "swine_auth"
 const AUTH_CHANGED_EVENT = "swine-auth-changed"
 
@@ -12,32 +13,6 @@ function parseAuthStorage() {
 
 function notifyAuthChanged() {
   window.dispatchEvent(new Event(AUTH_CHANGED_EVENT))
-}
-
-export async function requestJson(path, options = {}) {
-  const isFormData = options.body instanceof FormData
-  const headers = {
-    ...(!isFormData ? { "Content-Type": "application/json" } : {}),
-    ...options.headers,
-  }
-
-  const response = await fetch(`${API_BASE_URL}${path}`, {
-    ...options,
-    headers,
-  })
-  const hasBody = response.status !== 204
-  const data = hasBody ? await response.json().catch(() => ({})) : null
-
-  if (!response.ok) {
-    const message =
-      data?.detail ||
-      data?.non_field_errors?.[0] ||
-      Object.values(data || {}).flat().join(" ") ||
-      "Nao foi possivel completar a solicitacao."
-    throw new Error(message)
-  }
-
-  return data
 }
 
 export function getAuth() {

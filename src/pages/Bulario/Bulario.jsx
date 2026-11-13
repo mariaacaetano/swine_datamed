@@ -12,7 +12,8 @@ import {
   ShieldCheck,
   Stethoscope,
 } from "lucide-react"
-import { buildData, normalize } from "../../data/catalog"
+import { useCatalog, normalize, medicationForDisplay } from "../../data/catalog"
+import { requestJson } from "../../services/api"
 import "./Bulario.css"
 
 const emptyValue = "Informação não preenchida na base atual."
@@ -23,66 +24,10 @@ function slugify(value) {
     .replace(/^-|-$/g, "")
 }
 
-function splitList(value) {
-  return String(value || "")
-    .split(",")
-    .map((item) => item.trim())
-    .filter(Boolean)
-}
-
 function getField(item, field) {
   const value = item?.[field]
   if (!value || ["—", "-", "completar"].includes(normalize(value).trim())) return emptyValue
   return value
-}
-
-function scoreMedicine(farmaco, query, diseaseHints) {
-  const normalizedQuery = normalize(query)
-  const searchable = normalize(
-    [
-      farmaco["Nome comercial"],
-      farmaco["Princípio ativo"],
-      farmaco.Classe,
-      farmaco["Indicações principais"],
-      farmaco["Mecanismo de ação"],
-    ].join(" ")
-  )
-  let score = 0
-
-  if (!normalizedQuery) return 1
-  if (normalize(farmaco["Nome comercial"]).includes(normalizedQuery)) score += 8
-  if (normalize(farmaco["Princípio ativo"]).includes(normalizedQuery)) score += 7
-  if (normalize(farmaco.Classe).includes(normalizedQuery)) score += 4
-  if (normalize(farmaco["Indicações principais"]).includes(normalizedQuery)) score += 5
-  if (searchable.includes(normalizedQuery)) score += 2
-
-  diseaseHints.forEach((disease) => {
-    if (normalize(farmaco["Indicações principais"]).includes(normalize(disease))) score += 5
-  })
-
-  return score
-}
-
-function findDiseaseHints(query, sintomas, doencas) {
-  const normalizedQuery = normalize(query)
-  if (!normalizedQuery) return []
-
-  const hints = new Set()
-
-  sintomas.forEach((row) => {
-    const symptom = normalize(row.SINTOMA)
-    if (symptom && (symptom.includes(normalizedQuery) || normalizedQuery.includes(symptom))) {
-      splitList(row["DOENÇAS ASSOCIADAS"]).forEach((disease) => hints.add(disease))
-    }
-  })
-
-  doencas.forEach((row) => {
-    const disease = row["DOENÇA"]
-    const diseaseText = normalize([disease, row.SINTOMAS, row.TIPO, row["FASE COMUM"]].join(" "))
-    if (diseaseText.includes(normalizedQuery)) hints.add(disease)
-  })
-
-  return [...hints]
 }
 
 function pdfText(value) {
@@ -325,7 +270,7 @@ function buildBulaPdf(farmaco, pigLogo) {
 }
 
 function Bulario() {
-  const data = useMemo(() => buildData(), [])
+  const { data, loading: catalogLoading, error: catalogError } = useCatalog()
   const navigate = useNavigate()
   const { slug } = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -335,19 +280,22 @@ function Bulario() {
     [data.farmacos, slug]
   )
 
-  const diseaseHints = useMemo(
-    () => findDiseaseHints(busca, data.sintomas, data.doencas),
-    [busca, data.sintomas, data.doencas]
-  )
+  const [search, setSearch] = useState({ results: [], diseaseHints: [], error: "" })
+  const results = busca.trim() ? search.results : data.farmacos
+  const diseaseHints = search.diseaseHints
 
-  const results = useMemo(() => {
-    const scored = data.farmacos
-      .map((farmaco) => ({ farmaco, score: scoreMedicine(farmaco, busca, diseaseHints) }))
-      .filter((item) => item.score > 0)
-      .sort((a, b) => b.score - a.score || a.farmaco["Nome comercial"].localeCompare(b.farmaco["Nome comercial"]))
-
-    return scored.map((item) => item.farmaco)
-  }, [busca, data.farmacos, diseaseHints])
+  useEffect(() => {
+    const controller = new AbortController()
+    const timer = window.setTimeout(() => {
+      requestJson(`/farmacos/buscar/?q=${encodeURIComponent(busca)}`, { signal: controller.signal })
+        .then((payload) => setSearch({ results: payload.results.map(medicationForDisplay),
+          diseaseHints: payload.disease_hints.map((disease) => disease.nome), error: "" }))
+        .catch((error) => {
+          if (!controller.signal.aborted) setSearch({ results: [], diseaseHints: [], error: error.message })
+        })
+    }, 250)
+    return () => { window.clearTimeout(timer); controller.abort() }
+  }, [busca])
 
   useEffect(() => {
     const root = document.querySelector(".bulario")
@@ -457,6 +405,8 @@ function Bulario() {
     if (!activeMedicine) {
       return (
         <main className="bulario">
+          {catalogLoading && <p role="status">Carregando o bulário...</p>}
+          {(catalogError || search.error) && <p role="alert">{catalogError || search.error}</p>}
           <section className="package-detail package-detail--empty">
             <Link to="/bulario" className="package-back">
               <ArrowLeft size={18} />
@@ -548,6 +498,8 @@ function Bulario() {
 
   return (
     <main className="bulario">
+      {catalogLoading && <p role="status">Carregando o bulário...</p>}
+      {(catalogError || search.error) && <p role="alert">{catalogError || search.error}</p>}
       <section className="package-hero reveal">
         <div className="package-copy">
           <span>Swine Package</span>

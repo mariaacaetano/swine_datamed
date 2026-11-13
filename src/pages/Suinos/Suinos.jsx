@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { ArrowLeft, CalendarDays, ClipboardList, ImagePlus, Pencil, Plus, Save, Syringe, UserRound, X } from "lucide-react"
-import { buildData, normalize } from "../../data/catalog"
+import { useCatalog, normalize } from "../../data/catalog"
 import { getAuth } from "../../services/auth"
 import { createMedication, createPig, listMedications, listPigs, updatePig } from "../../services/suinos"
 import "./Suinos.css"
@@ -119,7 +119,7 @@ function displayOption(value, labels, fallback = "Não informado") {
 }
 
 function Suinos() {
-  const swineData = useMemo(() => buildData(), [])
+  const { data: swineData, error: catalogError } = useCatalog()
   const availableMedications = swineData.farmacos
   const { pigId } = useParams()
   const [pigs, setPigs] = useState([])
@@ -448,7 +448,7 @@ function Suinos() {
             )}
           </header>
 
-          {message && <p className="suinos-message">{message}</p>}
+          {(message || catalogError) && <p className="suinos-message">{message || catalogError}</p>}
 
           <div className="suinos-detail-layout">
             <section className="suinos-panel">

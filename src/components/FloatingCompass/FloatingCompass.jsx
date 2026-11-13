@@ -3,24 +3,14 @@ import { useLocation } from "react-router-dom"
 import { Mic, Send, X } from "lucide-react"
 import InferenceModelSwitch from "../InferenceModelSwitch/InferenceModelSwitch"
 import { useInferenceModel } from "../InferenceModelSwitch/useInferenceModel"
-import { inferir } from "../../services/inferencia"
+import { useTriage, createConversation } from "../../hooks/useTriage"
+import { useAuthScope } from "../../hooks/useAuthScope"
+import ClinicalContext from "../ClinicalContext/ClinicalContext"
+import { createVoiceRecognition } from "./voiceRecognition"
 import "./FloatingCompass.css"
 
 const hiddenRoutes = new Set(["/login", "/cadastro", "/recuperar-senha"])
-const minimumThinkingTimeMs = 1200
-
-function minimumThinkingTime() {
-  return new Promise((resolve) => window.setTimeout(resolve, minimumThinkingTimeMs))
-}
-
-function createPendingMessage() {
-  return {
-    id: globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(16).slice(2)}`,
-    role: "assistant",
-    text: "Pensando...",
-    pending: true,
-  }
-}
+const voicePreferenceKey = "swine-voice-enabled"
 
 function normalize(value) {
   return String(value || "")
@@ -44,42 +34,34 @@ function isWakePhrase(value) {
 }
 
 function FloatingCompass() {
+  const scope = useAuthScope()
+  return <FloatingConversation key={scope} />
+}
+
+function FloatingConversation() {
   const [inferenceModel, setInferenceModel] = useInferenceModel()
   const { pathname } = useLocation()
-  const recognitionRef = useRef(null)
-  const listeningRef = useRef(false)
-  const wakeEnabledRef = useRef(false)
+  const voiceRef = useRef(null)
   const openRef = useRef(false)
-  const restartTimerRef = useRef(0)
+  const wakeResultRef = useRef(-1)
   const [open, setOpen] = useState(false)
   const [input, setInput] = useState("")
-  const [listening, setListening] = useState(false)
-  const [wakeEnabled, setWakeEnabled] = useState(false)
-  const [conversationModel, setConversationModel] = useState("")
-  const [clinicalContext, setClinicalContext] = useState("")
-  const [askedSymptom, setAskedSymptom] = useState("")
-  const [messages, setMessages] = useState([
-    {
-      role: "assistant",
-      text: 'Fale ou digite os sinais observados. Você também pode dizer "ei, datamed" para abrir este painel.',
-    },
-  ])
+  const [voiceState, setVoiceState] = useState({ status: "idle", enabled: false, error: "" })
+  const [conversation, setConversation] = useState(createConversation)
+  const messages = conversation.messages
   const chatStarted = messages.some((message) => message.role === "user")
-  const activeInferenceModel = conversationModel || inferenceModel
+  const activeInferenceModel = conversation.inferenceModel || inferenceModel
+  const updateConversation = (updater) => setConversation((current) => ({ ...updater(current), updatedAt: new Date().toISOString() }))
+  const setMessages = (updater) => setConversation((current) => ({ ...current, messages: updater(current.messages) }))
+  const { send, busy } = useTriage(conversation, updateConversation, activeInferenceModel)
 
   const shouldHide = hiddenRoutes.has(pathname)
+  const listening = voiceState.status === "listening"
+  const wakeEnabled = voiceState.enabled
 
   useEffect(() => {
     openRef.current = open
   }, [open])
-
-  useEffect(() => {
-    wakeEnabledRef.current = wakeEnabled
-  }, [wakeEnabled])
-
-  useEffect(() => {
-    listeningRef.current = listening
-  }, [listening])
 
   useEffect(() => {
     if (shouldHide) return undefined
@@ -87,61 +69,67 @@ function FloatingCompass() {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
     if (!SpeechRecognition) return undefined
 
-    const recognition = new SpeechRecognition()
-    recognition.lang = "pt-BR"
-    recognition.continuous = true
-    recognition.interimResults = false
+    const voice = createVoiceRecognition(SpeechRecognition, {
+      onState: (state) => {
+        setVoiceState(state)
+        if (state.status === "starting") wakeResultRef.current = -1
+        if (state.error) setOpen(true)
+      },
+      onResult: (event) => {
+        for (let index = event.resultIndex; index < event.results.length; index += 1) {
+          const result = event.results[index]
+          const transcript = result[0]?.transcript?.trim()
+          if (!transcript) continue
 
-    const restartWakeListening = () => {
-      window.clearTimeout(restartTimerRef.current)
-      if (!wakeEnabledRef.current || shouldHide) return
+          if (Array.from(result).some((alternative) => isWakePhrase(alternative.transcript))) {
+            if (wakeResultRef.current !== index) {
+              wakeResultRef.current = index
+              if (!openRef.current) {
+                openRef.current = true
+                setOpen(true)
+                setMessages((current) => [
+                  ...current,
+                  { role: "assistant", text: "Estou ouvindo. Me conte os sintomas do animal ou lote." },
+                ])
+              }
+            }
+            continue
+          }
 
-      restartTimerRef.current = window.setTimeout(() => {
-        try {
-          recognition.start()
-          setListening(true)
-        } catch {
-          setListening(false)
+          if (result.isFinal && openRef.current && wakeResultRef.current !== index) {
+            setInput((current) => `${current} ${transcript}`.trim())
+          }
         }
-      }, 450)
-    }
-
-    recognition.onresult = (event) => {
-      const transcript = Array.from(event.results)
-        .slice(event.resultIndex)
-        .map((result) => result[0]?.transcript || "")
-        .join(" ")
-        .trim()
-
-      if (!transcript) return
-
-      if (isWakePhrase(transcript)) {
-        setOpen(true)
-        setWakeEnabled(true)
-        setMessages((current) => [
-          ...current,
-          { role: "assistant", text: "Estou ouvindo. Me conte os sintomas do animal ou lote." },
-        ])
-        return
+      },
+    })
+    voiceRef.current = voice
+    let disposed = false
+    let microphonePermission
+    const syncPermission = () => {
+      if (disposed) return
+      if (microphonePermission.state === "granted" && localStorage.getItem(voicePreferenceKey) !== "off") {
+        voice.start()
+      } else {
+        voice.stop()
       }
-
-      if (openRef.current) setInput((current) => `${current} ${transcript}`.trim())
     }
 
-    recognition.onstart = () => setListening(true)
-    recognition.onend = () => {
-      setListening(false)
-      restartWakeListening()
+    if (window.isSecureContext && navigator.permissions?.query) {
+      navigator.permissions.query({ name: "microphone" }).then((permission) => {
+        if (disposed) return
+        microphonePermission = permission
+        permission.addEventListener("change", syncPermission)
+        syncPermission()
+      }).catch(() => {
+        // Browsers without microphone permission queries still support manual activation.
+      })
     }
-    recognition.onerror = () => {
-      setListening(false)
-    }
-    recognitionRef.current = recognition
 
     return () => {
-      window.clearTimeout(restartTimerRef.current)
-      recognition.stop()
-      recognitionRef.current = null
+      disposed = true
+      microphonePermission?.removeEventListener("change", syncPermission)
+      voice.dispose()
+      voiceRef.current = null
     }
   }, [shouldHide])
 
@@ -149,83 +137,61 @@ function FloatingCompass() {
 
   const submit = async () => {
     const text = input.trim()
-    if (!text) return
-    const selectedModel = activeInferenceModel
-    const pendingMessage = createPendingMessage()
-
-    setMessages((current) => [...current, { role: "user", text }, pendingMessage])
-    setConversationModel(selectedModel)
+    if (!text || busy) return
     setInput("")
-    try {
-      const [resultado] = await Promise.all([
-        inferir(text, selectedModel, { context: clinicalContext, askedSymptom }),
-        minimumThinkingTime(),
-      ])
-      setClinicalContext(resultado.contexto_clinico)
-      setAskedSymptom(resultado.pergunta_complementar?.sintoma || "")
-      setMessages((current) => current.map((message) =>
-        message.id === pendingMessage.id
-          ? { role: "assistant", text: resultado.resposta }
-          : message
-      ))
-    } catch (error) {
-      setMessages((current) => current.map((message) =>
-        message.id === pendingMessage.id
-          ? { role: "assistant", text: `Não foi possível consultar o servidor: ${error.message}` }
-          : message
-      ))
-    }
+    await send(text)
   }
 
   const startListening = ({ enableWake = false, openPanel = false } = {}) => {
-    const recognition = recognitionRef.current
-    if (!recognition) {
-      setMessages((current) => [
-        ...current,
-        { role: "assistant", text: "Reconhecimento de voz não disponível neste navegador. Você pode digitar os sintomas." },
-      ])
+    const voice = voiceRef.current
+    if (!voice || !window.isSecureContext) {
+      setVoiceState({
+        status: "error",
+        enabled: false,
+        error: !window.isSecureContext
+          ? "Para usar o microfone, abra o site por HTTPS ou localhost. Você pode digitar os sintomas."
+          : "Reconhecimento de voz não disponível neste navegador. Você pode digitar os sintomas.",
+      })
       setOpen(true)
       return
     }
 
-    if (enableWake) {
-      wakeEnabledRef.current = true
-      setWakeEnabled(true)
+    if (openPanel) {
+      openRef.current = true
+      setOpen(true)
     }
-
-    if (openPanel) setOpen(true)
-
-    try {
-      recognition.start()
-      setListening(true)
-    } catch {
-      setListening(listeningRef.current)
+    if (enableWake) {
+      localStorage.setItem(voicePreferenceKey, "on")
+      voice.start()
     }
   }
 
   const stopListening = () => {
-    window.clearTimeout(restartTimerRef.current)
-    wakeEnabledRef.current = false
-    setWakeEnabled(false)
-    recognitionRef.current?.stop()
-    setListening(false)
+    localStorage.setItem(voicePreferenceKey, "off")
+    voiceRef.current?.stop()
   }
 
   const toggleListening = () => {
-    if (listening) {
+    if (wakeEnabled) {
       stopListening()
     } else {
       startListening({ enableWake: true, openPanel: true })
     }
   }
 
+  const closePanel = () => {
+    openRef.current = false
+    setOpen(false)
+    voiceRef.current?.restart()
+  }
+
   const handleMainButton = () => {
-    if (open) {
-      setOpen(false)
+    if (openRef.current) {
+      closePanel()
       return
     }
 
-    startListening({ enableWake: true, openPanel: false })
+    startListening({ enableWake: true, openPanel: true })
   }
 
   return (
@@ -238,7 +204,7 @@ function FloatingCompass() {
               <strong>Swine Compass</strong>
               <span>Triagem assistida</span>
             </div>
-            <button type="button" onClick={() => setOpen(false)} aria-label="Fechar chat">
+            <button type="button" onClick={closePanel} aria-label="Fechar chat">
               <X size={18} />
             </button>
           </header>
@@ -263,7 +229,13 @@ function FloatingCompass() {
             ))}
           </div>
 
+          <ClinicalContext onSubmit={send} disabled={busy} result={conversation.result} />
           <footer>
+            <p className="floating-compass__voice-status" role="status">
+              {voiceState.error || (listening
+                ? "Microfone ativo. Estou ouvindo."
+                : wakeEnabled ? "Iniciando escuta..." : "Clique no microfone para ativar a voz.")}
+            </p>
             <textarea
               value={input}
               onChange={(event) => setInput(event.target.value)}
@@ -271,10 +243,10 @@ function FloatingCompass() {
               rows={3}
             />
             <div>
-              <button type="button" className={listening ? "is-listening" : ""} onClick={toggleListening} aria-label="Ativar voz">
+              <button type="button" className={listening ? "is-listening" : ""} onClick={toggleListening} aria-label={wakeEnabled ? "Desativar voz" : "Ativar voz"} aria-pressed={wakeEnabled}>
                 <Mic size={18} />
               </button>
-              <button type="button" onClick={submit} aria-label="Enviar sintomas">
+              <button type="button" disabled={busy || !input.trim()} onClick={submit} aria-label="Enviar dados da triagem">
                 <Send size={18} />
               </button>
             </div>
@@ -282,14 +254,14 @@ function FloatingCompass() {
         </section>
       )}
 
-      {wakeEnabled && !open && (
-        <span className="floating-compass__hint">
-          {listening ? 'Diga "ei, datamed"' : "Clique para reativar"}
+      {!open && (
+        <span className="floating-compass__hint" role="status">
+          {listening ? 'Diga "ei, datamed"' : wakeEnabled ? "Iniciando escuta..." : 'Clique para ativar "ei, datamed"'}
         </span>
       )}
 
       <button
-        className={`floating-compass__button ${wakeEnabled ? "is-awake" : ""}`}
+        className={`floating-compass__button ${listening ? "is-awake" : ""}`}
         type="button"
         onClick={handleMainButton}
         aria-label="Ativar Swine Compass por voz"

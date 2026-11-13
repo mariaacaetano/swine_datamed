@@ -39,8 +39,8 @@ class PigApiTests(APITestCase):
         response = self.client.get(reverse("suino-list"))
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
-        self.assertEqual(response.data[0]["name"], "Leitao 01")
+        self.assertEqual(response.data["count"], 1)
+        self.assertEqual(response.data["results"][0]["name"], "Leitao 01")
 
     def test_user_can_register_medication_for_own_pig(self):
         pig = Pig.objects.create(owner=self.user, name="Matriz 01", tag="A-01")

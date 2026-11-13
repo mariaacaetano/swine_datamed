@@ -42,8 +42,8 @@ class DataPipelineTests(TestCase):
         payload = response.json()
         self.assertEqual(
             {item["mecanismo"] for item in payload["resultados"]},
-            {"regras", "semantica", "machine_learning_k10", "machine_learning_k100",
-             "rede_bayesiana", "fuzzy"},
+            {"regras", "regras_encadeadas", "semantica", "machine_learning_k10", "machine_learning_k100",
+             "rede_bayesiana", "fuzzy", "fuzzy_sanchez"},
         )
         self.assertTrue(all(item["metricas_sistema"]["tempo_resposta_s"] >= 0 for item in payload["resultados"]))
 
@@ -68,7 +68,7 @@ class DataPipelineTests(TestCase):
         symptoms = {item.nome for item in case["sintomas"]}
         self.assertIn("Apatia", symptoms)
         self.assertIn("Perda de apetite", symptoms)
-        self.assertIn("Dispneia", symptoms)
+        self.assertNotIn("Dispneia", symptoms)
         self.assertIn("Diarreia aquosa", symptoms)
         self.assertIn("Dispneia", case["sintomas_incertos"])
 
@@ -80,7 +80,7 @@ class DataPipelineTests(TestCase):
         self.assertIn("Febre", case["sintomas_negados"])
         self.assertIn("Vômito", case["sintomas_negados"])
 
-    def test_triage_asks_discriminative_question_and_understands_short_answer(self):
+    def test_triage_collects_context_and_understands_short_age_answer(self):
         first = self.client.post(
             "/api/triagem/",
             {"texto": "leitão macho não quis a ração há 2 dias, febre de 40 e está caidinho",
@@ -88,18 +88,18 @@ class DataPipelineTests(TestCase):
             content_type="application/json",
         ).json()
         self.assertIsNotNone(first["pergunta_complementar"])
-        asked = first["pergunta_complementar"]["sintoma"]
+        self.assertEqual(first["pergunta_complementar"]["campo"], "idade_dias")
 
         second_response = self.client.post(
             "/api/triagem/",
-            {"texto": "não", "mecanismo": "regras", "contexto_clinico": first["contexto_clinico"],
-             "sintoma_perguntado": asked},
+            {"texto": "40 dias", "mecanismo": "regras", "contexto_clinico": first["contexto_clinico"],
+             "pergunta_anterior": first["pergunta_complementar"], "perguntas_realizadas": first["perguntas_realizadas"]},
             content_type="application/json",
         )
         self.assertEqual(second_response.status_code, 200)
         second = second_response.json()
-        self.assertIn(asked, second["sintomas_negados"])
-        self.assertIn(f"não apresenta {asked}", second["contexto_clinico"])
+        self.assertEqual(second["variaveis_reconhecidas"]["idade_dias"], 40)
+        self.assertNotEqual(second["pergunta_complementar"]["campo"], "idade_dias")
 
     def test_generates_all_unique_symptom_combinations(self):
         with tempfile.TemporaryDirectory() as directory:

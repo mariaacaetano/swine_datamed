@@ -1,0 +1,69 @@
+{
+  "criado_em": "2026-10-12T23:27:17.456874+00:00",
+  "arquivo": "generated_data/machine_learning_states/teste.csv",
+  "sha256_fonte": "e08596f7ac50d530180c80c63f377f5fa0d54acdb6feeee8f882119b4cb0c26d",
+  "semente": 42,
+  "entradas_distintas_avaliadas": 300,
+  "referencia": {
+    "p_associado": 0.8,
+    "p_nao_associado": 0.2
+  },
+  "cenarios": [
+    {
+      "p_associado": 0.6,
+      "p_nao_associado": 0.05,
+      "concordancia_top_1_com_referencia": 0.9733333333333334,
+      "jaccard_medio_top_5_com_referencia": 0.8891534391534391
+    },
+    {
+      "p_associado": 0.6,
+      "p_nao_associado": 0.2,
+      "concordancia_top_1_com_referencia": 0.9733333333333334,
+      "jaccard_medio_top_5_com_referencia": 0.8950264550264551
+    },
+    {
+      "p_associado": 0.6,
+      "p_nao_associado": 0.4,
+      "concordancia_top_1_com_referencia": 1.0,
+      "jaccard_medio_top_5_com_referencia": 1.0
+    },
+    {
+      "p_associado": 0.8,
+      "p_nao_associado": 0.05,
+      "concordancia_top_1_com_referencia": 0.9733333333333334,
+      "jaccard_medio_top_5_com_referencia": 0.893915343915344
+    },
+    {
+      "p_associado": 0.8,
+      "p_nao_associado": 0.2,
+      "concordancia_top_1_com_referencia": 1.0,
+      "jaccard_medio_top_5_com_referencia": 1.0
+    },
+    {
+      "p_associado": 0.8,
+      "p_nao_associado": 0.4,
+      "concordancia_top_1_com_referencia": 0.99,
+      "jaccard_medio_top_5_com_referencia": 0.9822619047619048
+    },
+    {
+      "p_associado": 0.95,
+      "p_nao_associado": 0.05,
+      "concordancia_top_1_com_referencia": 1.0,
+      "jaccard_medio_top_5_com_referencia": 0.9970370370370369
+    },
+    {
+      "p_associado": 0.95,
+      "p_nao_associado": 0.2,
+      "concordancia_top_1_com_referencia": 0.99,
+      "jaccard_medio_top_5_com_referencia": 0.9822619047619048
+    },
+    {
+      "p_associado": 0.95,
+      "p_nao_associado": 0.4,
+      "concordancia_top_1_com_referencia": 0.9566666666666667,
+      "jaccard_medio_top_5_com_referencia": 0.9653174603174602
+    }
+  ],
+  "interpretacao": "Estabilidade de ranking em observações sintéticas, sem ajuste pelo alvo.",
+  "limite": "A base de associações não identifica prevalências nem CPTs clínicas. Concordância alta não valida valores absolutos do posterior. Em casos só positivos, pares com p_associado > p_nao_associado preservam a ordenação por quantidade de associações."
+}

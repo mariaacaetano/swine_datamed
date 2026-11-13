@@ -71,7 +71,10 @@ class PigSerializer(serializers.ModelSerializer):
         return request.build_absolute_uri(url) if request else url
 
     def get_last_medication(self, pig):
-        medication = pig.medications.order_by("-applied_at", "-created_at").first()
+        if hasattr(pig, "ordered_medications"):
+            medication = next(iter(pig.ordered_medications), None)
+        else:
+            medication = pig.medications.order_by("-applied_at", "-created_at").first()
         if not medication:
             return None
         return MedicationApplicationSerializer(medication, context=self.context).data

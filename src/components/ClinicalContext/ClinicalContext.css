@@ -1,0 +1,9 @@
+.clinical-context { margin: 0.6rem 1rem; padding: 0.6rem; border: 1px solid var(--border-color, #9baebf); border-radius: 0.75rem; font-size: 0.85rem; }
+.clinical-context summary { cursor: pointer; font-weight: 600; }
+.clinical-context { flex: 0 0 auto; max-height: min(32dvh, 280px); overflow-y: auto; }
+.clinical-context select option { background: #202620; color: #f4f5ee; }
+.clinical-context fieldset { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.6rem; border: 0; padding: 0.75rem 0; margin: 0; }
+.clinical-context label { display: flex; flex-direction: column; gap: 0.25rem; }
+.clinical-context input, .clinical-context select { width: 100%; min-width: 0; padding: 0.5rem; border: 1px solid #9baebf; border-radius: 0.4rem; color: inherit; background: var(--surface, transparent); }
+.clinical-context button { padding: 0.5rem 0.8rem; cursor: pointer; border-radius: 0.4rem; }
+.clinical-context button:disabled { opacity: 0.55; cursor: wait; }

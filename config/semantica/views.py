@@ -1,9 +1,5 @@
-from rest_framework.response import Response
-from rest_framework.views import APIView
-
-from .engine import MotorSemantico
+from bulario.views import TriagemView
 
 
-class InferenciaSemanticaView(APIView):
-    def post(self, request):
-        return Response(MotorSemantico().inferir(request.data.get("texto", "")))
+class InferenciaSemanticaView(TriagemView):
+    engine_key = "semantica"

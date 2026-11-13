@@ -1,4 +1,5 @@
 import { getAuthToken, requestJson } from "./auth"
+import { requestCollection } from "./api"
 
 function authHeaders() {
   return {
@@ -7,7 +8,7 @@ function authHeaders() {
 }
 
 export function listPigs() {
-  return requestJson("/suinos/", {
+  return requestCollection("/suinos/", {
     headers: authHeaders(),
   })
 }
@@ -37,7 +38,7 @@ export function deletePig(id) {
 
 export function listMedications(pigId = "") {
   const query = pigId ? `?pig=${pigId}` : ""
-  return requestJson(`/medicacoes/${query}`, {
+  return requestCollection(`/medicacoes/${query}`, {
     headers: authHeaders(),
   })
 }

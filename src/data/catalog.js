@@ -1,66 +1,32 @@
-import sintomasCsv from "../../base_data/SintomasDoencas.csv?raw"
-import variaveisCsv from "../../base_data/BaseVariaveis.csv?raw"
-import doencasCsv from "../../base_data/BaseDoencas.csv?raw"
-import farmacosCsv from "../../base_data/BularioFarmacos.csv?raw"
-
-const emptyValues = new Set(["", "—", "-", "completar"])
-
-function parseCsv(text) {
-  const rows = []
-  let cell = ""
-  let row = []
-  let quoted = false
-  for (let i = 0; i < text.length; i += 1) {
-    const char = text[i]
-    const next = text[i + 1]
-    if (char === '"' && quoted && next === '"') {
-      cell += '"'
-      i += 1
-    } else if (char === '"') quoted = !quoted
-    else if (char === "," && !quoted) {
-      row.push(cell.trim())
-      cell = ""
-    } else if ((char === "\n" || char === "\r") && !quoted) {
-      if (char === "\r" && next === "\n") i += 1
-      row.push(cell.trim())
-      if (row.some(Boolean)) rows.push(row)
-      row = []
-      cell = ""
-    } else cell += char
-  }
-  if (cell || row.length) {
-    row.push(cell.trim())
-    if (row.some(Boolean)) rows.push(row)
-  }
-  const headerIndex = rows.findIndex((candidate) => candidate.filter(Boolean).length > 1)
-  if (headerIndex === -1) return []
-  const headers = rows[headerIndex]
-  return rows.slice(headerIndex + 1).map((values) =>
-    headers.reduce((result, header, index) => {
-      result[header] = values[index] || ""
-      return result
-    }, {})
-  )
-}
+import { useEffect, useState } from "react"
+import { requestJson } from "../services/api"
 
 export function normalize(value) {
   return String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
 }
 
-function isFilled(value) {
-  return !emptyValues.has(normalize(value).trim())
+export function medicationForDisplay(item) {
+  return {
+    id: item.id, "Nome comercial": item.nome_comercial, "Princípio ativo": item.principio_ativo,
+    Classe: item.classe, "Indicações principais": item.indicacoes_principais, Posologia: item.posologia,
+    "Via administração": item.via_administracao, Carência: item.carencia,
+    Contraindicações: item.contraindicacoes, "Reações adversas": item.reacoes_adversas,
+    "Mecanismo de ação": item.mecanismo_acao, Precauções: item.precaucoes,
+  }
 }
 
-export function buildData() {
-  const farmacos = parseCsv(farmacosCsv).filter((farmaco) => {
-    const fields = [farmaco["Princípio ativo"], farmaco.Classe, farmaco["Indicações principais"],
-      farmaco.Posologia, farmaco["Via administração"], farmaco.Carência]
-    return isFilled(farmaco["Nome comercial"]) && fields.filter(isFilled).length >= 3
-  })
-  return {
-    sintomas: parseCsv(sintomasCsv),
-    doencas: parseCsv(doencasCsv),
-    variaveis: parseCsv(variaveisCsv),
-    farmacos,
-  }
+const emptyCatalog = { farmacos: [], sintomas: [], doencas: [], variaveis: [] }
+
+export function useCatalog() {
+  const [state, setState] = useState({ data: emptyCatalog, loading: true, error: "" })
+  useEffect(() => {
+    const controller = new AbortController()
+    requestJson("/catalogo/", { signal: controller.signal }).then((catalog) => {
+      setState({ data: { ...catalog, farmacos: catalog.farmacos.map(medicationForDisplay) }, loading: false, error: "" })
+    }).catch((error) => {
+      if (!controller.signal.aborted) setState({ data: emptyCatalog, loading: false, error: error.message })
+    })
+    return () => controller.abort()
+  }, [])
+  return state
 }

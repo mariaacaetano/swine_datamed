@@ -4,12 +4,14 @@ import { compararInferencias } from "../../services/inferencia"
 import "./Comparacao.css"
 
 const names = {
-  regras: "Regras",
-  semantica: "Semântica",
-  machine_learning_k10: "Random Forest (k=10)",
-  machine_learning_k100: "Random Forest (k≈100)",
-  rede_bayesiana: "Rede Bayesiana",
-  fuzzy: "Lógica Fuzzy",
+  regras: "Regras com pontuação heurística",
+  regras_encadeadas: "Regras com encadeamento",
+  semantica: "Consulta ao grafo e similaridade",
+  machine_learning_k10: "Random Forest (estados dos sintomas)",
+  machine_learning_k100: "ML (k=100)",
+  rede_bayesiana: "Naive Bayes parametrizado",
+  fuzzy: "Fuzzy (Sugeno)",
+  fuzzy_sanchez: "Fuzzy (Sanchez)",
 }
 
 function formatSeconds(value) {
@@ -44,7 +46,7 @@ function Comparacao() {
       <header className="comparison-hero">
         <span><GitCompareArrows size={18} /> Experimentos</span>
         <h1>Painel comparativo</h1>
-        <p>Execute o mesmo caso nos seis motores e compare métricas operacionais e hipóteses.</p>
+        <p>Execute o mesmo caso nos motores disponíveis e compare métricas operacionais e hipóteses.</p>
       </header>
 
       <form className="comparison-form" onSubmit={runComparison}>
@@ -74,7 +76,7 @@ function Comparacao() {
             {comparison.resultados.map((result) => (
               <article className="comparison-card" key={result.mecanismo}>
                 <header>
-                  <div><Activity size={20} /><h2>{names[result.mecanismo] || result.mecanismo}</h2></div>
+                  <div><Activity size={20} /><h2>{result.mecanismo.startsWith("machine_learning") && result.modelo ? `${result.modelo}${result.schema_entrada === "estados_sintomas_v1" ? " (estados dos sintomas)" : result.modelo_treinado ? " (k=100)" : ""}` : names[result.mecanismo] || result.mecanismo}</h2></div>
                   <span className="comparison-model-tag">{result.mecanismo}</span>
                   <strong><Clock3 size={16} /> {formatSeconds(result.metricas_sistema.tempo_resposta_s)} s</strong>
                 </header>
@@ -85,9 +87,9 @@ function Comparacao() {
                   <div><dt>Variáveis</dt><dd>{result.metricas_sistema.variaveis_reconhecidas}</dd></div>
                 </dl>
                 {result.avaliacao && <div className="comparison-evaluation">
-                  <span>Classificação: <strong>{result.avaliacao.classificacao_sintomas}</strong></span>
-                  <span>Confiança: <strong>{result.avaliacao.confianca_diagnostica}</strong></span>
-                  <span>Tratamento: <strong>{result.avaliacao.recomendacao_tratamento}</strong></span>
+                  <span>Observações: <strong>{result.avaliacao.classificacao_sintomas}</strong></span>
+                  <span>Confiança clínica: <strong>{result.avaliacao.confianca_diagnostica}</strong></span>
+                  <span>Consulta ao bulário: <strong>{result.avaliacao.recomendacao_tratamento}</strong></span>
                   <span>Fase: <strong>{result.avaliacao.criterios_modelo.fase_mais_adequada}</strong></span>
                   <span>Finalidade: <strong>{result.avaliacao.criterios_modelo.finalidade}</strong></span>
                   <span>Incerteza: <strong>{result.avaliacao.criterios_modelo.tratamento_incerteza}</strong></span>
@@ -95,9 +97,25 @@ function Comparacao() {
                   <span>Adequação clínica: <strong>{result.avaliacao.criterios_modelo.adequacao_clinica}</strong></span>
                 </div>}
                 <h3>Ranking</h3>
+                <p>{result.descricao_score}. Os valores de motores diferentes têm significados distintos.</p>
                 {result.hipoteses.length ? (
-                  <ol>{result.hipoteses.map((item) => <li key={item.id}><span>{item.nome}</span><strong>{(item.score * 100).toFixed(1)}%</strong></li>)}</ol>
+                  <ol>{result.hipoteses.map((item) => <li key={item.id}><span>{item.nome}</span><strong>{result.tipo_score === "ordinal" ? item.categoria_suporte.replaceAll("_", " ") : Number(item.score).toLocaleString("pt-BR", { minimumFractionDigits: 3, maximumFractionDigits: 3 })}</strong></li>)}</ol>
                 ) : <p>Nenhuma hipótese encontrada.</p>}
+                {result.trilha_inferencia?.length > 0 && (
+                  <details>
+                    <summary>Regras disparadas e fatos derivados</summary>
+                    {result.trilha_inferencia.map((trace) => (
+                      <div key={trace.doenca_id}>
+                        <p>Enfermidade {trace.doenca_id}: {trace.fatos_finais.join(", ")}</p>
+                        <ul>{trace.disparos.map((step) => (
+                          <li key={step.regra}>
+                            Rodada {step.rodada} · {step.regra}: {step.fatos_derivados.join(", ")}
+                          </li>
+                        ))}</ul>
+                      </div>
+                    ))}
+                  </details>
+                )}
               </article>
             ))}
           </section>
