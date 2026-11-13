@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
-import { Activity, BarChart3, ChevronRight, ClipboardList, HeartPulse, ShieldCheck } from "lucide-react"
+import { Activity, ChevronRight, ClipboardList, HeartPulse, ShieldCheck } from "lucide-react"
 import "./Compass.css"
 
 function Compass() {
@@ -79,10 +79,6 @@ function Compass() {
               <Link to="/chat" className="compass-main-action">
                 Começar triagem
                 <ChevronRight size={22} />
-              </Link>
-              <Link to="/comparacao" className="compass-main-action compass-main-action--secondary">
-                Painel comparativo
-                <BarChart3 size={20} />
               </Link>
             </div>
           </div>

@@ -8,7 +8,7 @@ from .models import CasoClinico, Doenca, Farmaco, GeracaoDataset, Sintoma, Vacin
 from .serializers import (CasoClinicoSerializer, DoencaSerializer, FarmacoSerializer,
                           GeracaoDatasetSerializer, SintomaSerializer, VacinaSerializer, VariavelSerializer)
 from .utils import normalize, score_farmaco
-from .triage import compare, pipeline_status, triage
+from .triage import pipeline_status, triage
 from .presentation import _adicionar_graus_avaliacao
 from .serializers import TriageInputSerializer
 from .pagination import StandardPagination
@@ -126,17 +126,6 @@ class TriagemView(APIView):
         if self.engine_key:
             serializer.validated_data["mecanismo"] = self.engine_key
         return Response(triage(serializer.validated_data))
-
-
-class ComparacaoInferenciaView(APIView):
-    permission_classes = [AllowAny]
-    def post(self, request):
-        serializer = TriageInputSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        text = serializer.validated_data["texto"]
-        if not text:
-            return Response({"erro": "Informe um texto para comparação."}, status=400)
-        return Response(compare(text))
 
 
 class PipelineStatusView(APIView):

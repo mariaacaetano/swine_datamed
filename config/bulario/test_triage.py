@@ -100,10 +100,9 @@ class TriageConversationTests(TestCase):
         self.assertEqual(result["pipeline"]["farmacos"], "associacoes_relacionais")
         self.assertTrue(all("doencas_associadas" in item for item in result["farmacos_relacionados"]))
 
-    def test_extraction_happens_once_in_comparison(self):
+    def test_extraction_happens_once_in_triage(self):
         with patch("bulario.triage.extract_clinical_case", wraps=extract_clinical_case) as extractor:
-            response = self.client.post("/api/comparacao-inferencia/", {"texto": "tosse"}, content_type="application/json")
-        self.assertEqual(response.status_code, 200)
+            self.post("tosse")
         self.assertEqual(extractor.call_count, 1)
 
     def test_default_uses_supervised_naive_bayes(self):

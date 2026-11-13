@@ -15,10 +15,3 @@ export function inferir(texto, mecanismo = "machine_learning", conversation = {}
     }),
   })
 }
-
-export function compararInferencias(texto) {
-  return requestJson("/comparacao-inferencia/", {
-    method: "POST",
-    body: JSON.stringify({ texto }),
-  })
-}

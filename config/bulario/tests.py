@@ -32,20 +32,13 @@ class DataPipelineTests(TestCase):
         self.assertEqual(Vacina.objects.count(), 4)
         self.assertEqual(Indicacao.objects.count(), 86)
 
-    def test_comparison_endpoint_runs_all_inference_engines(self):
+    def test_comparison_endpoint_is_not_available(self):
         response = self.client.post(
             "/api/comparacao-inferencia/",
             {"texto": "tosse e febre"},
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 200)
-        payload = response.json()
-        self.assertEqual(
-            {item["mecanismo"] for item in payload["resultados"]},
-            {"regras", "regras_encadeadas", "semantica", "machine_learning_k10", "machine_learning_k100",
-             "rede_bayesiana", "fuzzy", "fuzzy_sanchez"},
-        )
-        self.assertTrue(all(item["metricas_sistema"]["tempo_resposta_s"] >= 0 for item in payload["resultados"]))
+        self.assertEqual(response.status_code, 404)
 
     def test_extracts_clinical_variables_and_tolerates_small_typos(self):
         case = extract_clinical_case(

@@ -3,7 +3,8 @@
 O sistema mantém React/Vite e Django/DRF em um monólito modular. A API valida a
 entrada; o serviço `bulario.triage` coordena extração, inferência e consulta ao
 bulário. Os motores aceitam `inferir_caso(caso)` e preservam `inferir(texto)` para
-os experimentos existentes. A comparação extrai o relato uma única vez.
+os experimentos existentes. O painel comparativo e sua API estão preservados na
+branch `engines`; a branch principal `main` mantém o fluxo de triagem.
 
 ## Escolha das três etapas
 

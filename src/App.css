@@ -3,9 +3,9 @@ html, body { height: 100%; }
 .app-main, .footer { margin-left: 0; }
 .app-main { flex: 1; }
 
-:root[data-theme="light"] :is(.home,.bulario,.calc,.chat-page,.comparison-page,.compass,.services-page,.about-page,.cadastro-page,.login-page,.perfil-page,.suinos-page,.error-page) { background: var(--theme-bg) !important; color: var(--theme-text) !important; }
+:root[data-theme="light"] :is(.home,.bulario,.calc,.chat-page,.compass,.services-page,.about-page,.cadastro-page,.login-page,.perfil-page,.suinos-page,.error-page) { background: var(--theme-bg) !important; color: var(--theme-text) !important; }
 :root[data-theme="light"] .app-main :is(h1,h2,h3,h4,h5,h6,p,label,legend,dt,dd,li) { color: var(--theme-text) !important; }
-:root[data-theme="light"] .app-main :is([class*="kicker"],[class*="eyebrow"],[class*="error"],.comparison-hero>span,.package-copy>span,.compass-copy>span,.calc-copy>span,.services-feature>span,.services-cards a>span,.about-hero__content>span) { color: var(--theme-accent) !important; }
+:root[data-theme="light"] .app-main :is([class*="kicker"],[class*="eyebrow"],[class*="error"],.package-copy>span,.compass-copy>span,.calc-copy>span,.services-feature>span,.services-cards a>span,.about-hero__content>span) { color: var(--theme-accent) !important; }
 :root[data-theme="light"] .app-main :is([class*="subtitle"],[class*="description"],[class*="meta"],[class*="caption"],[class*="empty"],[class*="note"]) { color: var(--theme-muted) !important; }
 
 /* Imagens continuam presentes; o branco funciona apenas como véu de leitura. */
@@ -74,10 +74,7 @@ html, body { height: 100%; }
 :root[data-theme="light"] .chat-message--user p { background: #f9edf2 !important; }
 :root[data-theme="light"] .chat-input { border-color: var(--theme-border) !important; background: #edf2ed !important; }
 :root[data-theme="light"] .chat-history article>button { background: transparent !important; color: var(--theme-text) !important; }
-:root[data-theme="light"] .chat-compare { color: var(--theme-green-deep) !important; background: var(--theme-green-soft) !important; }
 :root[data-theme="light"] .package-search { border-color: rgba(47,104,66,.22) !important; background: #fff !important; box-shadow: 0 5px 16px rgba(23,68,37,.07) !important; }
-:root[data-theme="light"] :is(.comparison-card dl div,.comparison-error,.comparison-note) { border-color: rgba(47,104,66,.18) !important; background: var(--theme-green-soft) !important; color: var(--theme-green-deep) !important; }
-:root[data-theme="light"] :is(.comparison-card dt,.comparison-card li,.comparison-summary span,.comparison-hero p) { color: var(--theme-muted) !important; }
 
 :root[data-theme="light"] .login-page::before,
 :root[data-theme="light"] .cadastro-page::before {
@@ -97,7 +94,7 @@ html, body { height: 100%; }
 /* Light mode: base visual unificada para todas as areas da aplicacao. */
 :root[data-theme="light"] body,
 :root[data-theme="light"] .app-main,
-:root[data-theme="light"] :is(.home,.bulario,.calc,.chat-page,.comparison-page,.compass,.services-page,.about-page,.cadastro-page,.login-page,.perfil-page,.suinos-page,.error-page) {
+:root[data-theme="light"] :is(.home,.bulario,.calc,.chat-page,.compass,.services-page,.about-page,.cadastro-page,.login-page,.perfil-page,.suinos-page,.error-page) {
   background-color: var(--theme-bg) !important;
   color: var(--theme-text) !important;
 }

@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react"
-import { Link } from "react-router-dom"
-import { BarChart3, Bot, Check, Clock3, Mic, Pencil, Plus, Send, ShieldCheck, Sparkles, Trash2, UserRound, X } from "lucide-react"
+import { Bot, Check, Clock3, Mic, Pencil, Plus, Send, ShieldCheck, Sparkles, Trash2, UserRound, X } from "lucide-react"
 import InferenceModelSwitch from "../../components/InferenceModelSwitch/InferenceModelSwitch"
 import { useInferenceModel } from "../../components/InferenceModelSwitch/useInferenceModel"
 import { useTriage, initialMessage, createConversation as createChat } from "../../hooks/useTriage"
@@ -178,11 +177,6 @@ function ChatSession({ storageScope }) {
             <Plus size={18} />
             Nova conversa
           </button>
-
-          <Link to="/comparacao" className="chat-compare">
-            <BarChart3 size={18} />
-            Painel comparativo
-          </Link>
 
           <div className="chat-history">
             <span>Conversas</span>

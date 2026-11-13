@@ -1,5 +1,4 @@
 import re
-from time import perf_counter
 from pickle import UnpicklingError
 
 from .clinical_input import extract_clinical_case
@@ -177,28 +176,6 @@ def triage(data):
                    "aviso": "Resultados experimentais em base sintética; adequação clínica não estimada."})
     result["resposta"] = format_response(result, data["texto"])
     return result
-
-
-def compare(text):
-    case = extract_clinical_case(text)
-    results = []
-    for key in engine_registry():
-        if key == DEFAULT_ENGINE:
-            continue
-        started = perf_counter()
-        result = run_engine(case, key, require_trained=False)
-        result["metricas_sistema"] = {
-            "tempo_resposta_s": round(perf_counter() - started, 5),
-            "sintomas_reconhecidos": len(result["sintomas_reconhecidos"]),
-            "hipoteses_retornadas": len(result["hipoteses"]),
-            "farmacos_retornados": len(result["farmacos_relacionados"]),
-            "variaveis_reconhecidas": sum(value not in (None, "") for value in result["variaveis_reconhecidas"].values()),
-        }
-        results.append(result)
-    first = [item["hipoteses"][0]["nome"] for item in results if item["hipoteses"]]
-    return {"entrada": text, "resultados": results,
-            "concordancia_top_1": len(first) == len(results) and len(set(first)) == 1,
-            "observacao_metricas_preditivas": "Precisão, recall e acurácia exigem casos rotulados. O tempo mostrado mede classificação e consulta ao bulário após a extração compartilhada."}
 
 
 def pipeline_status():

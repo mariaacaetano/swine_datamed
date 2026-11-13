@@ -7,6 +7,13 @@ O fluxo padrão usa extração clínica compartilhada → Naive Bayes supervisio
 correções e campos estruturados do animal e do ambiente. Consulte
 [a arquitetura v4, a escolha dos motores e os limites dos ensaios](docs/arquitetura-v4.md).
 
+## Branches
+
+A branch principal é `main`. O painel comparativo de motores de inferência e sua
+API foram removidos desta versão. A branch `engines` preserva a versão com a tela
+de comparativos de IA. A triagem e a seleção individual de motores continuam
+disponíveis na `main`.
+
 ## Execução local
 
 Em terminais separados, execute:
@@ -138,7 +145,7 @@ If you are developing a production application, we recommend using TypeScript wi
 
 `MotorRegrasEncadeadas` (`config/regras/chaining.py`) deriva fatos por encadeamento progressivo: evidência → candidata → admissível → suporte → hipótese. As regras E1–E8 são explícitas, disparam uma vez por enfermidade e encerram no ponto fixo. A restrição gestacional para macho bloqueia a candidata. Negar um sintoma associado não exclui a doença, pois associação não implica obrigatoriedade; divergência de fase deriva uma categoria restrita. Sintomas não mencionados não são negações; sintomas incertos não são tratados como confirmados. A saída contém `trilha_inferencia`, inclusive os bloqueios, e categorias ordinais sem probabilidades. As regras ainda não possuem validação clínica específica.
 
-O motor está disponível na seleção da conversa, no painel comparativo, em `/api/regras/encadeadas/inferir/` e em `/api/triagem/` com `mecanismo: "regras_encadeadas"`. O comando `evaluate_all_models` inclui ambos os motores em novas execuções; métricas anteriores não avaliam o motor novo.
+O motor está disponível na seleção da conversa, em `/api/regras/encadeadas/inferir/` e em `/api/triagem/` com `mecanismo: "regras_encadeadas"`. O painel comparativo está preservado na branch `engines`. O comando `evaluate_all_models` inclui ambos os motores em novas execuções; métricas anteriores não avaliam o motor novo.
 
 
 ## Inferência corrigida (v2, registro histórico)
@@ -186,8 +193,8 @@ Veja [a descrição matemática e as limitações](docs/inferencia-v2.md).
 Sanchez (`fuzzy_sanchez`) calcula a composição max–min paciente → sintoma → doença,
 com trilha dos mínimos e contagem de empates. A relação sintoma–doença é binária
 porque a base só contém vínculos; não foram inventados graus clínicos. Sugeno
-permanece uma alternativa própria. Os oito motores estão na seleção da conversa
-e no painel de comparação.
+permanece uma alternativa própria. Os oito motores estão na seleção da conversa;
+o painel de comparação está preservado na branch `engines`.
 
 A extração preserva listas negadas/incertas, atributos negados, medições negadas
 e a última correção de fase. Nomes de sintomas com hífen são preservados na
