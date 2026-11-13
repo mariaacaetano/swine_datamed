@@ -4,6 +4,8 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from .models import MedicationApplication, Pig
+from bulario.models import Farmaco
+from bulario.tests_support import complete_medication_data
 
 User = get_user_model()
 
@@ -21,6 +23,7 @@ class PigApiTests(APITestCase):
             password="SenhaForte123!",
         )
         self.client.force_authenticate(user=self.user)
+        Farmaco.objects.create(**complete_medication_data(nome_comercial="Ferro"))
 
     def test_user_can_create_pig(self):
         response = self.client.post(
@@ -74,3 +77,22 @@ class PigApiTests(APITestCase):
         )
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_both_medication_routes_reject_incomplete_and_unknown_products(self):
+        pig = Pig.objects.create(owner=self.user, name="Matriz 03", tag="C-01")
+        Farmaco.objects.create(nome_comercial="Ficha incompleta")
+        for endpoint in [reverse("medicacao-list"), reverse("suino-medications", args=[pig.id])]:
+            for name in ["Ficha incompleta", "Produto sem cadastro"]:
+                with self.subTest(endpoint=endpoint, medicine=name):
+                    response = self.client.post(endpoint, {"pig": pig.id, "medicine_name": name,
+                        "applied_at": "2026-06-02"}, format="json")
+                    self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+                    self.assertIn("medicine_name", response.data)
+        self.assertFalse(MedicationApplication.objects.exists())
+
+    def test_nested_medication_route_accepts_complete_product(self):
+        pig = Pig.objects.create(owner=self.user, name="Matriz 04", tag="D-01")
+        response = self.client.post(reverse("suino-medications", args=[pig.id]),
+            {"medicine_name": "Ferro", "applied_at": "2026-06-02"}, format="json")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(MedicationApplication.objects.get().medicine_name, "Ferro")

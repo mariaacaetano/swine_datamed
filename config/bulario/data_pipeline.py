@@ -11,6 +11,7 @@ from django.db import transaction
 from .models import CasoClinico, Doenca, Farmaco, GeracaoDataset, Indicacao, Sintoma, Vacina, Variavel
 from .utils import clean_text, is_filled, normalize, split_list
 from .provenance import base_version
+from .medication_quality import MEDICATION_FIELDS, complete_medication_condition, missing_medication_fields
 
 
 FILES = {
@@ -111,20 +112,21 @@ def import_base_data(base_dir, clear=False):
             Variavel.objects.update_or_create(nome=name, defaults={"descricao": raw_options, "opcoes": parse_options(raw_options)})
 
     farmaco_map = {}
-    farmaco_fields = {
-        "principio_ativo": "Princípio ativo", "classe": "Classe", "indicacoes_principais": "Indicações principais",
-        "posologia": "Posologia", "via_administracao": "Via administração", "carencia": "Carência",
-        "contraindicacoes": "Contraindicações", "reacoes_adversas": "Reações adversas",
-        "mecanismo_acao": "Mecanismo de ação", "precaucoes": "Precauções",
-    }
+    farmaco_fields = {field: column for field, column in MEDICATION_FIELDS.items() if field != "nome_comercial"}
     for row in tables["farmacos"]:
         name = row["Nome comercial"]
-        if not is_filled(name):
+        if missing_medication_fields(row, csv_row=True):
+            # Se a fonte ficou incompleta, uma ficha antiga não pode continuar ativa.
+            Farmaco.objects.filter(nome_comercial__iexact=name).delete()
             continue
         defaults = {field: (row.get(column, "") if is_filled(row.get(column, "")) else "") for field, column in farmaco_fields.items()}
         defaults["source_id"] = _int(row.get("ID"))
         item, _ = Farmaco.objects.update_or_create(nome_comercial=name, defaults=defaults)
         farmaco_map[normalize(name)] = item
+
+    # Também retira do catálogo registros incompletos importados por versões anteriores.
+    # As linhas originais permanecem nos CSVs; não são inventados dados para aprová-las.
+    Farmaco.objects.exclude(complete_medication_condition()).delete()
 
     vacina_map = {}
     vaccine_fields = {

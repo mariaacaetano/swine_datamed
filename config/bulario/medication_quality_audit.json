@@ -1,0 +1,884 @@
+{
+  "criterio": "Todos os campos da ficha farmacológica preenchidos; link da bula opcional.",
+  "campos_obrigatorios": [
+    "Nome comercial",
+    "Princípio ativo",
+    "Classe",
+    "Indicações principais",
+    "Posologia",
+    "Via administração",
+    "Carência",
+    "Contraindicações",
+    "Reações adversas",
+    "Mecanismo de ação",
+    "Precauções"
+  ],
+  "aprovados": [
+    {
+      "id_origem": "1",
+      "nome_comercial": "Draxxin 100mg/ml"
+    },
+    {
+      "id_origem": "4",
+      "nome_comercial": "Roflin"
+    },
+    {
+      "id_origem": "5",
+      "nome_comercial": "Pangram 10%"
+    },
+    {
+      "id_origem": "8",
+      "nome_comercial": "Lactofur"
+    },
+    {
+      "id_origem": "9",
+      "nome_comercial": "Jofatox Injetável"
+    },
+    {
+      "id_origem": "10",
+      "nome_comercial": "Biofen"
+    },
+    {
+      "id_origem": "16",
+      "nome_comercial": "Flunixina"
+    },
+    {
+      "id_origem": "17",
+      "nome_comercial": "Diclofenaco 50"
+    },
+    {
+      "id_origem": "18",
+      "nome_comercial": "Aliv V"
+    },
+    {
+      "id_origem": "19",
+      "nome_comercial": "Diuzon"
+    },
+    {
+      "id_origem": "20",
+      "nome_comercial": "Buscofin"
+    },
+    {
+      "id_origem": "22",
+      "nome_comercial": "Dectomax"
+    },
+    {
+      "id_origem": "23",
+      "nome_comercial": "Flunixin"
+    },
+    {
+      "id_origem": "24",
+      "nome_comercial": "Hepavet"
+    },
+    {
+      "id_origem": "25",
+      "nome_comercial": "Perical B12"
+    }
+  ],
+  "bloqueados": [
+    {
+      "id_origem": "2",
+      "nome_comercial": "Resolutor",
+      "campos_ausentes": [
+        "Contraindicações",
+        "Reações adversas"
+      ]
+    },
+    {
+      "id_origem": "3",
+      "nome_comercial": "Solucef PPU",
+      "campos_ausentes": [
+        "Contraindicações",
+        "Reações adversas"
+      ]
+    },
+    {
+      "id_origem": "6",
+      "nome_comercial": "Kinetomax",
+      "campos_ausentes": [
+        "Contraindicações",
+        "Reações adversas"
+      ]
+    },
+    {
+      "id_origem": "7",
+      "nome_comercial": "Agroplus",
+      "campos_ausentes": [
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas"
+      ]
+    },
+    {
+      "id_origem": "11",
+      "nome_comercial": "E.C.P.",
+      "campos_ausentes": [
+        "Indicações principais",
+        "Posologia",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação"
+      ]
+    },
+    {
+      "id_origem": "12",
+      "nome_comercial": "Dornil",
+      "campos_ausentes": [
+        "Posologia",
+        "Contraindicações",
+        "Reações adversas"
+      ]
+    },
+    {
+      "id_origem": "13",
+      "nome_comercial": "Pulmodrazin Plus",
+      "campos_ausentes": [
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "14",
+      "nome_comercial": "Pulmodrazin Plus",
+      "campos_ausentes": [
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "15",
+      "nome_comercial": "Tetroxy 200",
+      "campos_ausentes": [
+        "Contraindicações",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "21",
+      "nome_comercial": "Dipirex",
+      "campos_ausentes": [
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação"
+      ]
+    },
+    {
+      "id_origem": "26",
+      "nome_comercial": "Ripercol L",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "27",
+      "nome_comercial": "Estrogin",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "28",
+      "nome_comercial": "Fenilbutazona Syntec",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "29",
+      "nome_comercial": "Agrosil 5 mega",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "30",
+      "nome_comercial": "Analgex V",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "31",
+      "nome_comercial": "Flucortan",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "32",
+      "nome_comercial": "Pencivet Plus PPU",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "33",
+      "nome_comercial": "Pradotectum",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "34",
+      "nome_comercial": "Ourotreta Premium",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "35",
+      "nome_comercial": "Turbovit",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "36",
+      "nome_comercial": "Zelotril",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "37",
+      "nome_comercial": "Zoovit",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "38",
+      "nome_comercial": "Lectron",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "39",
+      "nome_comercial": "Dexaforce",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "40",
+      "nome_comercial": "Fosfosal",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "41",
+      "nome_comercial": "Maxflor",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "42",
+      "nome_comercial": "Shotapen",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "43",
+      "nome_comercial": "Tulissin",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "44",
+      "nome_comercial": "Enrofloxacina Fabiani",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "45",
+      "nome_comercial": "Isacort",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "46",
+      "nome_comercial": "Cortvet",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "47",
+      "nome_comercial": "Fenilvet",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "48",
+      "nome_comercial": "Xilazin",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "49",
+      "nome_comercial": "Calfoz",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "50",
+      "nome_comercial": "Lidovet",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "51",
+      "nome_comercial": "Zoletil",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "52",
+      "nome_comercial": "Anestesico Bravet",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "53",
+      "nome_comercial": "Agemoxi",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "54",
+      "nome_comercial": "Minoxel Plus",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "55",
+      "nome_comercial": "Penfort PPU",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "56",
+      "nome_comercial": "Finador",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "57",
+      "nome_comercial": "Cursotrat",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "58",
+      "nome_comercial": "Dopalen",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "59",
+      "nome_comercial": "Gentatec",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "60",
+      "nome_comercial": "Chemitril",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "61",
+      "nome_comercial": "Dexium",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "62",
+      "nome_comercial": "Zalix",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "63",
+      "nome_comercial": "Enro Flec 10%",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "64",
+      "nome_comercial": "Tylan 200",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "65",
+      "nome_comercial": "Fortlozin",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "66",
+      "nome_comercial": "Agrovet Plus",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "67",
+      "nome_comercial": "Prolise",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "68",
+      "nome_comercial": "Microflud CEFT",
+      "campos_ausentes": [
+        "Princípio ativo",
+        "Classe",
+        "Indicações principais",
+        "Posologia",
+        "Via administração",
+        "Carência",
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    },
+    {
+      "id_origem": "69",
+      "nome_comercial": "Clamoxyl",
+      "campos_ausentes": [
+        "Contraindicações",
+        "Reações adversas",
+        "Mecanismo de ação",
+        "Precauções"
+      ]
+    }
+  ],
+  "total_aprovados": 15,
+  "total_bloqueados": 54,
+  "total_farmacos_aprovados": 15,
+  "total_farmacos_bloqueados": 53,
+  "fonte": "base_data/BularioFarmacos.csv",
+  "sha256_fonte": "489f8206d58c247541a6f41a19465d76b281d3a1816e2bee87339b2b7a526e24"
+}

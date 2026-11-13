@@ -15,6 +15,7 @@ from .data_pipeline import import_base_data
 from .medications import select_medications
 from .models import Doenca, Farmaco, Indicacao, Sintoma
 from .triage import next_question
+from .tests_support import complete_medication_data
 from suinos.models import MedicationApplication, Pig
 
 
@@ -141,7 +142,7 @@ class TriageConversationTests(TestCase):
         self.assertEqual(Doenca.objects.count(), before)
 
     def test_catalog_comes_from_database(self):
-        medication = Farmaco.objects.create(nome_comercial="Novo registro da API")
+        medication = Farmaco.objects.create(**complete_medication_data(nome_comercial="Novo registro da API"))
         response = self.client.get("/api/catalogo/")
         self.assertIn(medication.id, [item["id"] for item in response.json()["farmacos"]])
 
@@ -159,7 +160,7 @@ class ArchitectureRegressionTests(TestCase):
         disease = Doenca.objects.create(nome="Hipótese principal")
         other = Doenca.objects.create(nome="Outra hipótese")
         for name, priority, linked in [("A", 2, disease), ("B", 1, disease), ("C", 1, other)]:
-            medication = Farmaco.objects.create(nome_comercial=name)
+            medication = Farmaco.objects.create(**complete_medication_data(nome_comercial=name))
             Indicacao.objects.create(medicamento=name, farmaco=medication, doenca=linked,
                                      doenca_indicacao=linked.nome, tipo="associacao", prioridade=priority)
         result = select_medications([{"id": disease.id}, {"id": other.id}])

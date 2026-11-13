@@ -25,10 +25,10 @@ class DataPipelineTests(TestCase):
 
     def test_imports_updated_spreadsheets(self):
         self.assertEqual(self.summary, {"doencas": 112, "sintomas": 80, "variaveis": 52,
-                                        "farmacos": 68, "vacinas": 4, "indicacoes": 86})
+                                        "farmacos": 15, "vacinas": 4, "indicacoes": 86})
         self.assertTrue(Doenca.objects.filter(nome="Doença de Glässer").exists())
         self.assertTrue(Sintoma.objects.filter(nome="Icterícia").exists())
-        self.assertEqual(Farmaco.objects.count(), 68)
+        self.assertEqual(Farmaco.objects.count(), 15)
         self.assertEqual(Vacina.objects.count(), 4)
         self.assertEqual(Indicacao.objects.count(), 86)
 

@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from .models import MedicationApplication, Pig
+from bulario.models import Farmaco
 
 
 class MedicationApplicationSerializer(serializers.ModelSerializer):
@@ -30,6 +31,12 @@ class MedicationApplicationSerializer(serializers.ModelSerializer):
         if request and pig.owner != request.user:
             raise serializers.ValidationError("Este suino nao pertence ao usuario autenticado.")
         return pig
+
+    def validate_medicine_name(self, value):
+        medication = Farmaco.objects.completos().filter(nome_comercial__iexact=value.strip()).first()
+        if medication is None:
+            raise serializers.ValidationError("Selecione um fármaco com ficha completa no catálogo.")
+        return medication.nome_comercial
 
 
 class PigSerializer(serializers.ModelSerializer):

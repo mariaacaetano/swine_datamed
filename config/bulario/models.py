@@ -1,4 +1,7 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+
+from .medication_quality import MEDICATION_FIELDS, complete_medication_condition, missing_medication_fields
 
 
 class TimeStampedModel(models.Model):
@@ -47,7 +50,13 @@ class Variavel(TimeStampedModel):
         return self.nome
 
 
+class FarmacoQuerySet(models.QuerySet):
+    def completos(self):
+        return self.filter(complete_medication_condition())
+
+
 class Farmaco(TimeStampedModel):
+    objects = FarmacoQuerySet.as_manager()
     source_id = models.PositiveIntegerField(null=True, blank=True, db_index=True)
     nome_comercial = models.CharField(max_length=220, unique=True)
     principio_ativo = models.CharField(max_length=260, blank=True)
@@ -61,6 +70,13 @@ class Farmaco(TimeStampedModel):
     mecanismo_acao = models.TextField(blank=True)
     precaucoes = models.TextField(blank=True)
     doencas_relacionadas = models.ManyToManyField(Doenca, related_name="farmacos", blank=True)
+
+    def clean(self):
+        super().clean()
+        missing = missing_medication_fields({field: getattr(self, field) for field in MEDICATION_FIELDS})
+        if missing:
+            raise ValidationError({field: "Preencha este campo para disponibilizar o fármaco."
+                                   for field in missing})
 
     class Meta:
         ordering = ["nome_comercial"]
